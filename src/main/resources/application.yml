@@ -9,10 +9,11 @@ spring:
     content-type: text/html
     cache: false
   datasource:
-    url: jdbc:mysql://120.77.66.66:3306/nie?useUnicode=true&characterEncoding=UTF-8
-    username: canko
-    password: cankosql
+    url: jdbc:mysql://127.0.0.1:3306/azonebuy?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    
+    initialize: true
+
 

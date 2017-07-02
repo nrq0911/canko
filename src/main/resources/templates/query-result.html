@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>訂單查詢</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		<link href="http://fast-place.com/static/uploads/favicon.ico" type="image/x-icon" rel="icon" />
+		<link rel="dns-prefetch" type="image/png" href="http://fast-place.com/static/images/btn-totop.png" />
+		<style type="text/css">
+			body {
+				background: #856d35 none repeat scroll 0 0;
+				font-family: Helvetica, Arial, san-serif;
+				font-size: 16px;
+				margin: 0;
+				padding: 0;
+			}
+			#page {
+				background: #f9f9f9 none repeat scroll 0 0;
+				height: auto;
+				margin: 0 auto;
+				max-width: 550px;
+				min-height: 100%;
+				padding: 0 0 50px;
+				width: 100%;
+			}
+			h1 {
+				text-align: center;
+				background: #000;
+				color: #fff;
+				font-size: 18px;
+				padding: 10px;
+			}
+			h2 {
+				clear: both;
+				color: #999;
+				font-size: 18px;
+				line-height: 30px;
+				margin: 0;
+				padding: 5px 10px;
+				text-align: left;
+				border-bottom: 1px solid #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="page">
+            <div th:if="${order != null}" style="padding:10px;">
+                <h1>訂單查詢</h1>
+                <h2>你的訂單信息</h2>
+                <p>訂單編號：<span th:text="${order.displayId}"></span></p>
+                <p>訂單產品名：<span th:text="${goods.name}"></span></p>
+                <p>訂單手機號：<span th:text="${member.mobilephone}"></span></p>
+                <p>訂單產品顏色：<span th:text="${order.color}"></span> </p>
+                <p>訂單產品規格：<span th:text="${order.goodsSpec}"></span></p>
+                <p>訂單邮箱：<span th:text="${member.email}"></span></p>
+                <p>訂單地址：<span th:text="${member.address}"></span></p>
+                <p>訂單留言：<span th:text="${order.orderRemark}"></span></p>
+                <p>發貨：<span style="color:#ff0000;font-weight:bold" th:text="${orderState}"> 未發貨</span></p>
+                <p>快遞信息：<span th:text="${order.orderInformation}">未查到相關信息</span></p>
+                <p></p>
+				<hr/>
+                    貨物到達時間為5-7個工作日,有問題請諮詢客服
+                <p></p>
+            </div>
+            <div th:if="${order == null}">
+                <p>親,您查詢的訂單不存在...</p>
+            </div>
+        </div>
+	</body>
+</html>

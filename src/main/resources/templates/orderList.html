@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订单列表</title>
+</head>
+<body>
+    <div>
+        <form action="/order/orderList" name="order" method="post">
+            <span>订单号</span>
+            <input type="text" name="displayId" value="" th:value="${displayId}" />
+
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+    <table>
+        <thead>
+            <th>订单号</th>
+            <th>商品ID</th>
+            <th>商品名称</th>
+            <th>商品链接</th>
+            <th>收货人信息</th>
+            <th>订单状态</th>
+            <th>物流单号</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+            <tr th:each="order:${orderList}">
+                <td th:text="${order.displayId}"></td>
+                <td th:text="${order.goods.id}"></td>
+                <td th:text="${order.order.goods.name}"></td>
+                <td th:text="'http://azonebuy.com/goods/'+ ${order.goods.id}"></td>
+                <td th:text="${order.member}"></td>
+                <td th:text="${order.orderState}"></td>
+                <td th:text="${order.orderInformation}"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

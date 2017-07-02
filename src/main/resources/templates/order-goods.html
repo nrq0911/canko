@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+	<head>
+		<title th:text="${goods.name}"></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="apple-touch-fullscreen" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link href="http://basissonline.com/uploads/favicon.ico" type="image/x-icon" rel="icon" />
+		<link th:href="@{/static/css/buy.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/static/js/not3.js}" ></script>
+		<style type="text/css">
+			.item_wrap img {
+				height: auto;
+				margin: 0 10px 10px 0;
+				width: 100%;
+			}
+			#pagess{
+				background: #f9f9f9 none repeat scroll 0 0;
+				margin: 0 auto;
+				max-width: 650px;
+				padding: 0 0 50px;
+				width: 100%;	
+				}
+			.size {
+				/*border: 1px solid rgb(217, 217, 217);*/
+				font-size: 14px;
+				height: 30px;
+				line-height: 30px;
+				text-indent: 6px;
+				vertical-align: middle;
+				width: 100%;
+			}
+
+			.comment-title {
+				background-color: #e8373c;
+				color: #ffffff;
+				font-size: 14px;
+				height: 32px;
+				line-height: 32px;
+				text-align: center;
+				width: 100%;
+			}	
+			@media screen and (max-width:768px){.sku_ul li{width:46% !important;}}
+		</style>
+	</head>
+	<body style=" background: #856d35 none repeat scroll 0 0;">
+		<div id="pagess">
+			<p class="comment-title">訂單信息查詢</p>
+			<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
+				<section class="item_sec">
+					<div class="item_wrap add">
+                        <p class="row">
+                            <label style="float:left">查詢信息 </label>
+                            <input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
+                        </p>
+					</div>
+				</section>                    
+                <footer style="text-align:center;">
+					<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
+                </footer>
+			   <br style="clear:both"/>  
+			   <br style="clear:both"/>  
+			</form> 
+			<p class="comment-title">在線訂購，請輸入您的收貨資料</p>
+			<form class="registerform" id="form" name="form" action="/order/buyProduct" method="post" onsubmit="return checkBuy()">
+				<input type="hidden" name="goodsId" value="1" th:value="${goods.id}" />
+				<section class="item_sec">
+					<div class="item_wrap rel">
+						<table width="100%" border="0">
+						  <tbody><tr><td width="100%"><p><strong th:text="${goods.name}">【戶外野營外折疊刀 限時特惠！/買大贈小】</strong></p><p></p></td></tr></tbody>
+						</table>
+						<ul class="sku_ul">
+							<li>
+								<span th:text="${goods.firstLevelName}">型號</span>&nbsp;
+									<a style="text-align:center" th:each="fl:${firstLevel}" th:text="${fl}"></a>
+								<input type="hidden" id="spec" name="spec" value="" />
+							</li>  
+						</ul>
+						<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="${goods.marketPrice}">NT$1350</span></p>
+						<p class="row"></p>
+						<p class="row">
+							<label>數　量</label>
+							<input id="item_num" class="block input" type="tel" value="1" maxlength="3" name="number" required="required" />
+						</p>
+						<input id="price" name="price" tabindex="7" type="hidden" value="1350" th:value="${goods.marketPrice}"  />
+						<input id="currency" name="currency" tabindex="7" type="hidden" value="NT$" />
+					</div>
+				</section>
+				<footer style="text-align:center;">
+					<button type="submit" class="c_txt orange_bg" id="buy_now">加入購物車</button>
+					<br style="clear:both" />
+					<div class="c_txt orange_bg" id="buy_now" style="margin:5px 0;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
+						<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
+					</div>
+				</footer>
+			</form>
+			<span class="STYLE1"></span>
+			<div style="text-align:center;width: 100%; padding: 10px 0;">
+				如有問題，請隨時聯繫:<a href="mailto:basissonline@bszmail.com"><font color="red">basissonline@bszmail.com</font></a>。
+				同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){ 
+		$(".sku_ul a").bind("click",function(){
+			var o = $(this);
+			$(".sku_cur").removeClass("sku_cur");
+			o.addClass("sku_cur");
+			$("#spec").val(o.html());
+		});
+	});
+	function checkSearch(){
+        var search = $("#order_search").val();
+        if('' == search){
+			alert("請輸入訂單號或者訂單姓名或手機號！");
+            return false;
+		}
+		return true;
+	}
+	function checkBuy(){
+	    var num = $("#item_num").val();
+	    if('' == num){
+            alert("請輸入購買商品數量！");
+            return false;
+        }
+        var spec = $("#spec").val();
+        if('' == num){
+            alert("請選擇規格！！");
+            return false;
+        }
+        return true;
+	}
+</script>

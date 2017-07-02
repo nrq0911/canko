@@ -5,4 +5,36 @@
     <select id="getOrderById" resultType="com.canko.domain.GoodsOrder">
         select * from goods_order where id = #{id}
     </select>
+    <select id="getOrderByDisplayId" resultType="com.canko.domain.GoodsOrder">
+        select * from goods_order where display_id = #{displayId}
+    </select>
+    <select id="getOrderBy" resultType="com.canko.domain.GoodsOrder" parameterType="map">
+        select o.*
+        from goods_order o left join member m on o.member_id = m.id
+        where (o.display_id = #{str} or m.name = #{str} or m.mobilephone = #{str}) and o.order_state >= 12
+    </select>
+    <insert id="addOrder" parameterType="com.canko.domain.GoodsOrder">
+        <selectKey order="AFTER" resultType="java.lang.Integer" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into goods_order(display_id,goods_id,goods_spec,num,order_price,order_currency,create_time,order_state)
+        values(#{displayId},#{goods.id},#{goodsSpec},#{num},#{orderPrice},#{orderCurrency},#{createTime},#{orderState})
+    </insert>
+    <update id="updateOrder" parameterType="com.canko.domain.GoodsOrder">
+        update goods_order
+          set order_state = #{orderState},update_time = now(),num = #{num},order_price = #{orderPrice}
+          <if test="memberId != null">
+              ,member_id = #{memberId}
+          </if>
+          <if test="orderRemark != null and orderRemark != ''">
+              ,order_remark = #{orderRemark}
+          </if>
+        where id = #{id}
+    </update>
+    <update id="updateOrderStatus" parameterType="map">
+        update goods_order set order_state = #{status},update_time = now() where id = #{id}
+    </update>
+    <update id="updateOrderInformation" parameterType="map">
+        update goods_order set order_information = #{information},update_time = now() where id = #{id}
+    </update>
 </mapper>        

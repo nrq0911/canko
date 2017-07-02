@@ -5,4 +5,20 @@
     <select id="getGoodsById" resultType="com.canko.domain.Goods">
         select * from goods where id = #{id}
     </select>
+    <insert id="addGoods" parameterType="com.canko.domain.Goods">
+        <selectKey order="AFTER" resultType="java.lang.Integer" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into goods(display_id,goods_url,prime_price,market_price,discount,deadline_time,
+        sales_volume,stock,goods_information,goods_images,buy_information,remark)
+        values(#{displayId},#{goodsUrl},#{primePrice},#{marketPrice}, #{discount},#{deadlineTime},
+          #{salesVolume},{stock},#{goodsInformation},#{goodsImages},#{buyInformation},#{remark})
+    </insert>
+    <update id="updateGoods" parameterType="com.canko.domain.Goods">
+        update goods set goods_url = #{goodsUrl},prime_price = #{primePrice},market_price = #{marketPrice},
+        discount = #{discount},deadline_time = #{deadlineTime},sales_volume = #{salesVolume},stock = {stock},
+        goods_information = #{goodsInformation},goods_images = #{goodsImages},buy_information = #{buyInformation},
+        remark = #{remark}
+        where id = #{id}
+    </update>
 </mapper>

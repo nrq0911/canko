@@ -10,6 +10,9 @@ public class Goods {
 
     private int id;
 
+    /**商品名称*/
+    private String name;
+
     /**商品ID*/
     private String displayId;
 
@@ -39,6 +42,24 @@ public class Goods {
 
     /**商品图片*/
     private String goodsImages;
+
+    /**一级菜单名称*/
+    private String firstLevelName;
+
+    /**一级菜单属性*/
+    private String firstLevel;
+
+    /**二级菜单名称*/
+    private String secondLevelName;
+
+    /**二级菜单属性*/
+    private String secondLevel;
+
+    /**三级菜单名称*/
+    private String thirdLevelName;
+
+    /**三级菜单属性*/
+    private String thirdLevel;
 
     /**抢购描述*/
     private String buyInformation;
@@ -150,10 +171,66 @@ public class Goods {
         this.remark = remark;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFirstLevelName() {
+        return firstLevelName;
+    }
+
+    public void setFirstLevelName(String firstLevelName) {
+        this.firstLevelName = firstLevelName;
+    }
+
+    public String getFirstLevel() {
+        return firstLevel;
+    }
+
+    public void setFirstLevel(String firstLevel) {
+        this.firstLevel = firstLevel;
+    }
+
+    public String getSecondLevelName() {
+        return secondLevelName;
+    }
+
+    public void setSecondLevelName(String secondLevelName) {
+        this.secondLevelName = secondLevelName;
+    }
+
+    public String getSecondLevel() {
+        return secondLevel;
+    }
+
+    public void setSecondLevel(String secondLevel) {
+        this.secondLevel = secondLevel;
+    }
+
+    public String getThirdLevelName() {
+        return thirdLevelName;
+    }
+
+    public void setThirdLevelName(String thirdLevelName) {
+        this.thirdLevelName = thirdLevelName;
+    }
+
+    public String getThirdLevel() {
+        return thirdLevel;
+    }
+
+    public void setThirdLevel(String thirdLevel) {
+        this.thirdLevel = thirdLevel;
+    }
+
     @Override
     public String toString() {
         return "GoodsMapper{" +
-                "id=" + id +
+                "id=" + id + ",name=" + name +
                 ", displayId='" + displayId + '\'' +
                 ", goodsUrl='" + goodsUrl + '\'' +
                 ", primePrice=" + primePrice +

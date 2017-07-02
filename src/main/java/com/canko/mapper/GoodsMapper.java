@@ -12,4 +12,8 @@ public interface GoodsMapper {
 
     Goods getGoodsById(@Param("id")int id);
 
+    void addGoods(Goods goods);
+
+    void updateGoods(Goods goods);
+
 }

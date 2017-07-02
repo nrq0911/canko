@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>確認訂單</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		<meta content="no-cache" http-equiv="Cache-Control" />                
+		<link href="http://fast-place.com/static/uploads/favicon.ico" type="image/x-icon" rel="icon" />
+		<link rel="dns-prefetch" type="image/png" href="http://fast-place.com/static/images/btn-totop.png" />
+	</head>
+	<style type="text/css">
+    body {
+        background: #856d35 none repeat scroll 0 0;
+        font-family: Helvetica, Arial, san-serif;
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+    }
+
+    #page {
+        background: #f9f9f9 none repeat scroll 0 0;
+        height: auto;
+        margin: 0 auto;
+        max-width: 550px;
+        min-height: 100%;
+        padding: 0 0 50px;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+        background: #000;
+        color: #fff;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    h2 {
+        clear: both;
+        color: #999;
+        font-size: 18px;
+        line-height: 30px;
+        margin: 0;
+        padding: 5px 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .btn-style {
+        background-color: rgb(153, 222, 44);
+        border: 0 none currentcolor;
+        border-radius: 3px;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        display: block;
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 auto;
+        text-align: center;
+        width: 60%;
+        text-decoration: none;
+    }
+	</style>
+<body>
+	<div id="page">
+        <div style="padding:10px;">
+            <h1>恭喜您，下單成功</h1>
+			<h2>你的訂單信息</h2>
+			<p>訂單編號:<span th:text="${order.displayId}"></span></p>
+			<hr/>
+				訂單數量:<span th:text="${order.num}">1</span><br/><br/>
+			<hr/>
+			<p>訂單邮箱:<span th:text="${order.member.email}"></span></p>
+			<p>訂單地址:<span th:text="${order.member.address}"></span></p>
+			<p>訂單留言:<span th:text="${order.member.remark}"></span></p>
+			<p>訂單手機號:<span th:text="${order.member.mobilephone}"></span></p>
+			<p>貨物到達時間為5-7個工作日,有問題請諮詢客服</p>            
+			<p><a style="background:#0C3;color:#fff;" class="btn-style" href="/goods/1" th:href="@{/goods/${order.goodsId}}">返回首頁</a></p>
+        </div>
+    </div>
+</body>
+</html>

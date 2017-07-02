@@ -19,8 +19,18 @@ public class GoodsOrder {
     /**商品规格*/
     private String goodsSpec;
 
+    private String color;
+
+    private String size;
+
     /**商品数量*/
     private int num;
+
+    /**订单货币种类*/
+    private int orderCurrency;
+
+    /**订单价格*/
+    private double orderPrice;
 
     /**订单状态*/
     private int orderState;
@@ -36,6 +46,29 @@ public class GoodsOrder {
 
     /**用户信息*/
     private Member member;
+
+    /**订单更新时间*/
+    private Date updateTime;
+
+    private Integer goodsId;
+
+    private Integer memberId;
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
+    }
 
     public int getId() {
         return id;
@@ -115,6 +148,46 @@ public class GoodsOrder {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public int getOrderCurrency() {
+        return orderCurrency;
+    }
+
+    public void setOrderCurrency(int orderCurrency) {
+        this.orderCurrency = orderCurrency;
+    }
+
+    public double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
     @Override

@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.canko.mapper.MemberMapper">
-    <select id="getOrderById" resultType="com.canko.domain.Member">
+    <select id="getMemberById" resultType="com.canko.domain.Member">
         select * from member where id = #{id}
     </select>
+    <insert id="addMember" parameterType="com.canko.domain.Member">
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into member(name,mobilephone,email,region,address,remark)
+        value(#{name},#{mobilephone},#{email},#{region},#{address},#{remark})
+    </insert>
 </mapper>
