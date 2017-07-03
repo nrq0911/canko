@@ -1,0 +1,37 @@
+.gradle
+/build/
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### webpack
+out/
+
+### MacOS
+.DS_Store
+
+### ybd
+*.log
+doc
+*/application-develop.properties

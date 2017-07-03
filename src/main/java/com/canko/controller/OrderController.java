@@ -184,6 +184,7 @@ public class OrderController {
             model.addAttribute("msg","系統繁忙，請稍後重試！");
             return "order-center";
         }
+        model.addAttribute("goodsId",order.getGoodsId());
         model.addAttribute("order",order);
         return "confirm-order";
     }

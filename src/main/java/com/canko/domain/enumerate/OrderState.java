@@ -8,10 +8,10 @@ public enum OrderState {
 
     placeOrder(11,"下單"),
     confirmOrder(12,"已下單"),
-    notShipped(21,"未發貨"),
-    Shipping(22,"發貨中"),
+    notShipped(21,"待發貨"),
+    Shipping(22,"運輸中"),
     checkedOrder(31,"已驗收"),
-    returnOrder(32,"未验收"),
+    returnOrder(32,"未驗收"),
     orderFailure(-1,"下單失敗"),
     other(0,"其他");
 

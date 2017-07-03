@@ -9,7 +9,7 @@
 		<meta name="apple-touch-fullscreen" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<link href="http://basissonline.com/uploads/favicon.ico" type="image/x-icon" rel="icon" />
+		<link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
 		<link th:href="@{/static/css/buy.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/static/js/diqu.js}"></script>
 		<script type="text/javascript" th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
@@ -49,6 +49,7 @@
 			/*.sku_ul li{width:45%;}*/
 		</style>
 		<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{https://connect.facebook.net/en_US/fbevents.js}"></script>
 		<style type="text/css">
 			body {
 				background: #856d35 none repeat scroll 0 0;
@@ -97,7 +98,7 @@
         </thead>
 		<tbody>
             <tr th:if="${order != null}">
-				<td><img width="50px;" height="auto" th:src="@{${goods.goodsUrl}}" src="../static/images/first-title.jpg"/></td>
+				<td><img width="30px;" height="auto" th:src="@{${goods.goodsUrl}}" src="../static/images/first-title.jpg"/></td>
                 <td th:text="${order.goodsSpec}"></td>
                 <td>
 					<form id="fom" class="registerform" onsubmit="return checkUpdate()" method="post" action="/order/updateOrder" name="fom">
@@ -199,6 +200,20 @@
 	</form>
 </div>
 <script th:src="@{/static/js/not3.js}" type="text/javascript"></script>
+<!-- Facebook Pixel Code -->
+<script type="text/javascript">
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '485087101840922');
+    fbq('track', 'PageView');
+</script>
+<!-- End Facebook Pixel Code -->
 </body>
 </html>
 <script type="text/javascript">

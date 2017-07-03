@@ -8,10 +8,11 @@
 		<meta name="apple-touch-fullscreen" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<link href="http://basissonline.com/uploads/favicon.ico" type="image/x-icon" rel="icon" />
+		<link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
 		<link th:href="@{/static/css/buy.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
 		<script type="text/javascript" th:src="@{/static/js/not3.js}" ></script>
+		<script type="text/javascript" th:src="@{https://connect.facebook.net/en_US/fbevents.js}"></script>
 		<style type="text/css">
 			.item_wrap img {
 				height: auto;
@@ -74,11 +75,26 @@
 						  <tbody><tr><td width="100%"><p><strong th:text="${goods.name}">【戶外野營外折疊刀 限時特惠！/買大贈小】</strong></p><p></p></td></tr></tbody>
 						</table>
 						<ul class="sku_ul">
-							<li>
+							<li id="first-li">
 								<span th:text="${goods.firstLevelName}">型號</span>&nbsp;
-									<a style="text-align:center" th:each="fl:${firstLevel}" th:text="${fl}"></a>
+								<input type="hidden" id="first-level" th:value="${goods.firstLevelName}" />
+								<a style="text-align:center" th:each="firstl:${firstLevel}" th:text="${firstl}"></a>
 								<input type="hidden" id="spec" name="spec" value="" />
-							</li>  
+							</li>
+							<br/>
+							<li id="second-li" th:if="${goods.secondLevelName != null}">
+								<span th:text="${goods.secondLevelName}"></span>&nbsp;
+								<input type="hidden" id="second-level" th:value="${goods.secondLevelName}" />
+								<a style="text-align:center" th:each="secondl:${secondLevel}" th:text="${secondl}"></a>
+								<input type="hidden" id="spec2" value="" />
+							</li>
+							<br/>
+							<li id="third-li" th:if="${goods.thirdLevelName != null}">
+								<span th:text="${goods.thirdLevelName}"></span>&nbsp;
+								<input type="hidden" id="third-level" th:value="${goods.thirdLevelName}" />
+								<a style="text-align:center" th:each="thirdl:${thirdLevel}" th:text="${thirdl}"></a>
+								<input type="hidden" id="spec3" value="" />
+							</li>
 						</ul>
 						<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="${goods.marketPrice}">NT$1350</span></p>
 						<p class="row"></p>
@@ -105,15 +121,52 @@
 			</div>
 		</div>
 	</body>
+	<!-- Facebook Pixel Code -->
+	<script type="text/javascript">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '485087101840922');
+        fbq('track', 'PageView');
+	</script>
+	<!-- End Facebook Pixel Code -->
 </html>
 <script type="text/javascript">
-	$(document).ready(function(){ 
-		$(".sku_ul a").bind("click",function(){
+	$(document).ready(function(){
+	    var spec = "";
+        $("#spec").val("");
+        $("#spec2").val("");
+        $("#spec3").val("");
+		$("#first-li a").bind("click",function(){
 			var o = $(this);
-			$(".sku_cur").removeClass("sku_cur");
+			$("#first-li a").removeClass("sku_cur");
 			o.addClass("sku_cur");
-			$("#spec").val(o.html());
+			spec = $("#first-level").val() + " " + o.html();
+			$("#spec").val(spec);
 		});
+
+        $("#second-li a").bind("click",function(){
+            var o = $(this);
+            $("#second-li a").removeClass("sku_cur");
+            o.addClass("sku_cur");
+			spec = $("#second-level").val() + " " + o.html();
+
+            $("#spec2").val(spec);
+        });
+
+        $("#third-li a").bind("click",function(){
+            var o = $(this);
+            $("#third-li a").removeClass("sku_cur");
+            o.addClass("sku_cur");
+			spec = $("#third-level").val() + " " + o.html();
+
+            $("#spec3").val(spec);
+        });
 	});
 	function checkSearch(){
         var search = $("#order_search").val();
@@ -129,11 +182,32 @@
             alert("請輸入購買商品數量！");
             return false;
         }
+
         var spec = $("#spec").val();
-        if('' == num){
+        if('' == spec){
             alert("請選擇規格！！");
             return false;
         }
+
+        var secondLevel = $("#second-level").val();
+        if(typeof(secondLevel) != "undefined"){
+            var spec2 = $("#spec2").val();
+            if('' == spec2){
+                alert("請選擇規格！！");
+                return false;
+			}
+			spec += "," + spec2;
+		}
+        var thirdLevel = $("#third-level").val();
+        if(typeof(thirdLevel) != "undefined"){
+            var spec3 = $("#spec3").val();
+            if('' == spec3){
+                alert("請選擇規格！！");
+                return false;
+			}
+            spec += "," + spec3;
+		}
+        $("#spec").val(spec);
         return true;
 	}
 </script>
