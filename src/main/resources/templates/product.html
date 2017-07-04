@@ -23,7 +23,7 @@
 		</div>
 		<div class="price-item">
 			<div class="price-tab">
-				<em th:text="${goods.marketPrice}">1350</em>
+				<em style="font-size:30px;" th:text="'NT$' + ${goods.marketPrice}">1350</em>
 				<span>
 					<label>原價</label>
 					<label id="old_price" th:text="${goods.primePrice}">3749</label>
@@ -34,7 +34,7 @@
 				</span>
 				<span>
 					<label>節省</label>
-					<label id="dec_price" th:text="${retrenchPrice}">2399</label>
+					<label id="dec_price" th:text="${retrenchPrice}">NT$2399</label>
 				</span>
 			</div>        
 			<div class="btn-tab">
@@ -42,14 +42,14 @@
 			</div>
 		</div>
 		<div id="detail-pic" class="page-item detail-item">
-			<h2>【测试商品】</h2>	
+			<h2 th:text="${goods.name}">【测试商品】</h2>
 			<p class="detail-pic"></p>
 			<div id="buyinfoCount" class="buyinfo">
 				<div class="buyinfo_price">
                     <span id="priceTitle" class="buyinfo_price_tit">活動價：</span>
-                    <span id="priceSale" class="buyinfo_price_now"><span th:text="${goods.marketPrice}">NT$1350</span></span>
+                    <span id="priceSale" class="buyinfo_price_now"><span th:text="'NT$' + ${goods.marketPrice}">NT$1350</span></span>
                     <span class="buyinfo_price_count"> /件</span>
-                    <del class="buyinfo_price_old"><em color="#ccc" id="priceMarket"><span th:text="${goods.primePrice}">NT$3749</span></em></del>
+                    <del class="buyinfo_price_old"><em color="#ccc" id="priceMarket"><span th:text="'NT$' + ${goods.primePrice}">NT$3749</span></em></del>
 					<br/>
                 </div>
 				<div class="buyinfo_sale">
@@ -94,65 +94,27 @@
 			<h2>搶購描述</h2>
 			<div style="clear:both"></div>
 			<br style="clear:both"/>
-			<div style="padding:10px;line-height:25px;max-width:100%;font-family: 微软雅黑; line-height: 24px; background-color: rgb(249, 249, 249);font-size: 1em;">
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; 
-						text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; 
-						line-height: 1.75em;">
-					<span style="color: rgb(255, 0, 0); font-size: 20px;"><strong>本款產品為廠家直供，臺灣唯一代理</strong></span>
+			<div class="buyInfo_div">
+				<p th:each="buyInfo:${buyInformation}" class="buyInfo_p">
+					<span th:text="${buyInfo}" class="buyInfo_span"></span>
 				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; 
-						text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; 
-						line-height: 1.75em;">
-					<span style="color: rgb(255, 0, 0); font-size: 20px;"><strong>數量有限！</strong></span>
+
+				<p class="kindly_reminder_p"><br/></p>
+
+				<p class="kindly_reminder_p">
+					<span class="font_size_18">溫馨提示：&nbsp;</span>
 				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; 
-						text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; 
-						line-height: 1.75em;">
-					<span style="color: rgb(255, 0, 0); font-size: 20px;"><strong>貨到再付款，驗貨再收貨，15天的超長鑒賞期！！ &nbsp;</strong></span>
+				<p class="kindly_reminder_p">
+					<span class="font_size_18">1、送貨時間一般是5-7個工作日，客人比較多，也請您耐心等候。&nbsp;</span>
 				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; 
-						text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; 
-						line-height: 1.75em;">
-					<span style="color: rgb(255, 0, 0); font-size: 20px;"><strong>讓您無後顧之憂，還在等什麼呢？&nbsp;</strong></span>
+				<p class="kindly_reminder_p">
+					<span class="font_size_18">2、訂單問題是由我們的客服進行處理，如果有任何訂單問題請及時通過產品頁面下方郵箱，及時跟我們的客服聯繫。&nbsp;</span>
 				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 24px; orphans: auto; 
-						text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; 
-						-webkit-text-stroke-width: 0px;">
-					<br/>
+				<p class="kindly_reminder_p">
+					<span class="font_size_18">3、產品優質，特價，客人比較多，有任何怠慢之處，也歡迎您對我們的工作提出意見。</span>
 				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; 
-						text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; 
-						line-height: 1.75em;">
-					<span style="font-size: 18px;">溫馨提示：&nbsp;</span>
-				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; 
-						text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; 
-						line-height: 1.75em;">
-					<span style="font-size: 18px;">1、送貨時間一般是5-7個工作日，客人比較多，也請您耐心等候。&nbsp;</span>
-				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; 
-						text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; 
-						line-height: 1.75em;">
-					<span style="font-size: 18px;">2、訂單問題是由我們的客服進行處理，如果有任何訂單問題請及時通過產品頁面下方郵箱，及時跟我們的客服聯繫。&nbsp;</span>
-				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma, Arial, Helvetica, sans-serif, 宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; 
-						text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; 
-						line-height: 1.75em;">
-					<span style="font-size: 18px;">3、產品優質，特價，客人比較多，有任何怠慢之處，也歡迎您對我們的工作提出意見。</span>
-				</p>
-				<p style="margin: 0px; padding: 0px; font-family: Tahoma,Arial,Helvetica,sans-serif,宋体; color: rgb(51, 51, 51); font-size: 16px; 
-						font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; 
-						text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; line-height: 1.75em;">
-					<span style="font-size: 18px;">4、贈品顏色隨機發放，您可備註，我們會盡量滿足您的需求。具體贈送品顏色最終以發貨為準，敬請諒解。</span>
+				<p class="kindly_reminder_p">
+					<span class="font_size_18">4、贈品顏色隨機發放，您可備註，我們會盡量滿足您的需求。具體贈送品顏色最終以發貨為準，敬請諒解。</span>
 				</p>                
 			</div>
 			<br style="clear:both" />
@@ -163,7 +125,7 @@
 				<form id="form" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
 					<p class="row">
 						<label style="width:20%;float:left">查詢信息 </label>
-						<input style="width:60%;" type="text" required="" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
+						<input style="width:75%;" type="text" required="" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
 						<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
 					</p>
 				</form>
@@ -185,7 +147,7 @@
 			<br/><hr/>
 			<span class="STYLE1" style="color: #ff0000 !important;">
 				<div style="text-align:center;width: 100%; padding: 10px 0;color: #ff0000;font-size: 14px;">
-					如有問題，請隨時聯繫:<a href="mailto:azonebuy@bszmail.com"><font color="red">basissonline@bszmail.com</font></a>。
+					如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
 					同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！                     
 				</div>
 			</span>
@@ -195,7 +157,7 @@
 			<div align="left"><br/></div>
 		</div>
 	</div>
-	<a href="/goods/1" class="totop"></a>
+	<a href="/goods/1" th:href="@{'/goods/'+ ${goods.id}}" class="totop"></a>
 	<div class="btn-item btn-buy">
 		<a href="/order/placeOrder/1" th:href="@{'/order/placeOrder/'+ ${goods.id}}">立即購買</a>
 	</div>

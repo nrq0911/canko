@@ -31,11 +31,13 @@ public class GoodsController {
     public String getGoods(@PathVariable int goodsId, Model model){
         Goods goods = goodsService.getGoodsById(goodsId);
         String goodsInformation = goods.getGoodsInformation();
-        String[] informations = goodsInformation.split(",");
+        String[] information = goodsInformation.split(",");
+        String[] buyInformation = goods.getBuyInformation().split(",");
         String jsonUrl = goods.getGoodsImages();
         Map<String,String> map = JSON.parseObject(jsonUrl,new TypeReference<Map<String,String>>(){});
         double retrenchPrice = goods.getPrimePrice() - goods.getMarketPrice();
-        model.addAttribute("informations",informations);   //商品描述
+        model.addAttribute("informations",information);   //商品描述
+        model.addAttribute("buyInformation",buyInformation); //抢购描述
         model.addAttribute("retrenchPrice",retrenchPrice); //节约资金
         model.addAttribute("goodsImage",map);   //图片url
         model.addAttribute("goods",goods);

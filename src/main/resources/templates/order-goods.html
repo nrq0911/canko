@@ -45,7 +45,7 @@
 				text-align: center;
 				width: 100%;
 			}	
-			@media screen and (max-width:768px){.sku_ul li{width:46% !important;}}
+			@media screen and (max-width:768px){.sku_ul li{width:96% !important;}}
 		</style>
 	</head>
 	<body style=" background: #856d35 none repeat scroll 0 0;">
@@ -76,27 +76,27 @@
 						</table>
 						<ul class="sku_ul">
 							<li id="first-li">
-								<span th:text="${goods.firstLevelName}">型號</span>&nbsp;
+								<span style="" th:text="${goods.firstLevelName}">型號</span>&nbsp;<br/>
 								<input type="hidden" id="first-level" th:value="${goods.firstLevelName}" />
 								<a style="text-align:center" th:each="firstl:${firstLevel}" th:text="${firstl}"></a>
 								<input type="hidden" id="spec" name="spec" value="" />
 							</li>
 							<br/>
 							<li id="second-li" th:if="${goods.secondLevelName != null}">
-								<span th:text="${goods.secondLevelName}"></span>&nbsp;
+								<span th:text="${goods.secondLevelName}"></span>&nbsp;<br/>
 								<input type="hidden" id="second-level" th:value="${goods.secondLevelName}" />
 								<a style="text-align:center" th:each="secondl:${secondLevel}" th:text="${secondl}"></a>
 								<input type="hidden" id="spec2" value="" />
 							</li>
 							<br/>
 							<li id="third-li" th:if="${goods.thirdLevelName != null}">
-								<span th:text="${goods.thirdLevelName}"></span>&nbsp;
+								<span th:text="${goods.thirdLevelName} + ':'"></span>&nbsp;<br/>
 								<input type="hidden" id="third-level" th:value="${goods.thirdLevelName}" />
 								<a style="text-align:center" th:each="thirdl:${thirdLevel}" th:text="${thirdl}"></a>
 								<input type="hidden" id="spec3" value="" />
 							</li>
 						</ul>
-						<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="${goods.marketPrice}">NT$1350</span></p>
+						<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="'NT$'+${goods.marketPrice}">NT$1350</span></p>
 						<p class="row"></p>
 						<p class="row">
 							<label>數　量</label>
@@ -116,7 +116,7 @@
 			</form>
 			<span class="STYLE1"></span>
 			<div style="text-align:center;width: 100%; padding: 10px 0;">
-				如有問題，請隨時聯繫:<a href="mailto:basissonline@bszmail.com"><font color="red">basissonline@bszmail.com</font></a>。
+				如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
 				同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！
 			</div>
 		</div>
