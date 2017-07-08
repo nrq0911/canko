@@ -77,7 +77,7 @@
 			<p>訂單留言:<span th:text="${order.member.remark}"></span></p>
 			<p>訂單手機號:<span th:text="${order.member.mobilephone}"></span></p>
 			<p>貨物到達時間為5-7個工作日,有問題請諮詢客服</p>            
-			<p><a style="background:#0C3;color:#fff;" class="btn-style" href="/goods/2" th:href="@{/goods/${goodsId}}">返回首頁</a></p>
+			<p><a style="background:#0C3;color:#fff;" class="btn-style" href="/goods/2" th:href="@{'/goods/' + ${goodsId}}">返回首頁</a></p>
         </div>
     </div>
 </body>

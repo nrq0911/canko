@@ -32,9 +32,16 @@
                 <td th:text="${order.order.goods.name}"></td>
                 <td th:text="'http://azonebuy.com/goods/'+ ${order.goods.id}"></td>
                 <td th:text="${order.member}"></td>
-                <td th:text="${order.orderState}"></td>
-                <td th:text="${order.orderInformation}"></td>
-                <td></td>
+                <td th:text="${order.orderState}">
+                    <select name="orderState">
+                        <option value="notShipped">未发货</option>
+                        <option value="Shipping">发货中</option>
+                        <option value="checkedOrder">已验收</option>
+                        <option value="returnOrder">未验收</option>
+                    </select>
+                </td>
+                <td><input type="text" name="orderInformation" th:value="${order.orderInformation}" /></td>
+                <td><a th:href="" >更新状态</a> <a th:href="" >更新物流信息</a> </td>
             </tr>
         </tbody>
     </table>

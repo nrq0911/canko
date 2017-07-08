@@ -20,10 +20,10 @@ public class Goods {
     private String goodsUrl;
 
     /**原价*/
-    private double primePrice;
+    private long primePrice;
 
     /**销售价*/
-    private double marketPrice;
+    private long marketPrice;
 
     /**折扣*/
     private double discount;
@@ -95,7 +95,7 @@ public class Goods {
         return primePrice;
     }
 
-    public void setPrimePrice(double primePrice) {
+    public void setPrimePrice(long primePrice) {
         this.primePrice = primePrice;
     }
 
@@ -103,7 +103,7 @@ public class Goods {
         return marketPrice;
     }
 
-    public void setMarketPrice(double marketPrice) {
+    public void setMarketPrice(long marketPrice) {
         this.marketPrice = marketPrice;
     }
 

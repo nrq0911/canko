@@ -110,8 +110,7 @@ public class OrderController {
         order.setCreateTime(new Date());
         order.setGoods(goods);
         order.setGoodsSpec(spec);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        String displayId = sdf.format(new Date()) + getRandomString(6);
+        String displayId = System.currentTimeMillis() + getRandomString(6);
         order.setDisplayId(displayId);
         order.setNum(number);
         order.setOrderState(OrderState.placeOrder.getCode());
