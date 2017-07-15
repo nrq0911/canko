@@ -34,10 +34,16 @@ public class GoodsController {
      * 根据商品id获取商品信息
      * */
     @RequestMapping(value="/goods/{goodsId}",method = RequestMethod.GET)
-    public String getGoods(@PathVariable int goodsId, Model model){
-        Goods goods = goodsService.getGoodsById(goodsId);
+    public String getGoods(@PathVariable String goodsId, Model model){
+        int id = 0;
+        try{
+            id = Integer.valueOf(goodsId);
+        }catch (Exception e){
+            logger.info(e);
+        }
+        Goods goods = goodsService.getGoodsById(id);
         if(goods == null){
-            return "404";
+            return "error_page/404";
         }
         String goodsInformation = goods.getGoodsInformation();
         String[] information = goodsInformation.split(";");
@@ -55,7 +61,7 @@ public class GoodsController {
 
     @RequestMapping(value="/goods/addGoods",method = RequestMethod.GET)
     public String addGoods(){
-        return "/addGoods";
+        return "addGoods";
     }
 
     /**
@@ -67,50 +73,50 @@ public class GoodsController {
         if(StringUtils.isBlank(goods.getName())){
             String msg = "商品名称不能为空！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
 
         if(StringUtils.isBlank(goods.getGoodsUrl())){
             String msg = "商品大图地址不能为空！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
 
         if(goods.getPrimePrice() <= 100 || goods.getMarketPrice() <= 100 ){
             String msg = "商品原价和活动价不能低于100！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
 
         if(goods.getPrimePrice() < goods.getMarketPrice()){
             String msg = "商品原价不能低于活动价！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
 
         if(goods.getSalesVolume() < 0 || goods.getStock() < 0){
             String msg = "商品销售量和活动价不能小于0！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
 
         if(StringUtils.isBlank(goods.getGoodsInformation())){
             String msg = "商品描述不能为空！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
         goods.setGoodsInformation(goods.getGoodsInformation().trim().replace("&",";"));
 
         if(goodsImg == null || StringUtils.isBlank(goodsImg[0])){
             String msg = "商品图片地址不能为空！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
 
         if(StringUtils.isBlank(goods.getFirstLevelName()) || StringUtils.isBlank(goods.getFirstLevel())){
             String msg = "商品一级菜单及属性不能为空！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
         goods.setFirstLevel(goods.getFirstLevel().trim().replace("&",";"));
 
@@ -118,7 +124,7 @@ public class GoodsController {
             if(StringUtils.isBlank(goods.getSecondLevel())){
                 String msg = "商品二级菜单属性不能为空！";
                 model.addAttribute("msg",msg);
-                return "/addGoods";
+                return "addGoods";
             }else{
                 goods.setSecondLevel(goods.getSecondLevel().trim().replace("&",";"));
             }
@@ -128,7 +134,7 @@ public class GoodsController {
             if(StringUtils.isBlank(goods.getThirdLevel())){
                 String msg = "商品三级菜单属性不能为空！";
                 model.addAttribute("msg",msg);
-                return "/addGoods";
+                return "addGoods";
             }else{
                 goods.setThirdLevel(goods.getThirdLevel().trim().replace("&",";"));
             }
@@ -137,7 +143,7 @@ public class GoodsController {
         if(StringUtils.isBlank(goods.getBuyInformation())){
             String msg = "商品抢购描述不能为空！";
             model.addAttribute("msg",msg);
-            return "/addGoods";
+            return "addGoods";
         }
         goods.setBuyInformation(goods.getBuyInformation().trim().replace("&",";"));
 

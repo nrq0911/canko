@@ -67,8 +67,17 @@ public class OrderController {
      * 用户下单,挑选产品规格
      * */
     @RequestMapping(value="/order/placeOrder/{goodsId}",method = RequestMethod.GET)
-    public String placeOrder(@PathVariable int goodsId, Model model){
-        Goods goods = goodsService.getGoodsById(goodsId);
+    public String placeOrder(@PathVariable String goodsId, Model model){
+        int id = 0;
+        try{
+            id = Integer.valueOf(goodsId);
+        }catch (Exception e){
+            logger.info(e);
+        }
+        Goods goods = goodsService.getGoodsById(id);
+        if(goods == null){
+            return "error_page/404";
+        }
         String [] firstLevel = goods.getFirstLevel().split(";");
         if(StringUtils.isNotBlank(goods.getSecondLevel()) && StringUtils.isNotBlank(goods.getSecondLevelName())){
             String [] secondLevel = goods.getSecondLevel().split(";");
