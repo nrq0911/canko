@@ -43,7 +43,7 @@ public class GoodsController {
         String[] information = goodsInformation.split(";");
         String[] buyInformation = goods.getBuyInformation().split(";");
         String jsonUrl = goods.getGoodsImages();
-        Map<String,String> map = JSON.parseObject(jsonUrl,new TypeReference<Map<String,String>>(){});
+        Map<Integer,String> map = JSON.parseObject(jsonUrl,new TypeReference<Map<Integer,String>>(){});
         double retrenchPrice = goods.getPrimePrice() - goods.getMarketPrice();
         model.addAttribute("informations",information);   //商品描述
         model.addAttribute("buyInformation",buyInformation); //抢购描述

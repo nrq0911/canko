@@ -1,12 +1,12 @@
 package com.canko.controller;
 
-import com.canko.common.StringUtils;
 import com.canko.domain.Goods;
 import com.canko.domain.GoodsOrder;
 import com.canko.domain.Member;
 import com.canko.domain.enumerate.OrderState;
 import com.canko.service.GoodsService;
 import com.canko.service.OrderService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -43,7 +41,7 @@ public class OrderController {
      * */
     @RequestMapping(value = "/order/searchOrder",method = RequestMethod.POST)
     public String searchOrder(Model model, String orderSearch){
-        if(StringUtils.isEmpty(orderSearch)){
+        if(StringUtils.isBlank(orderSearch)){
             return "query-result";
         }
         GoodsOrder order = orderService.getOrderBy(orderSearch.trim());
@@ -71,12 +69,12 @@ public class OrderController {
     @RequestMapping(value="/order/placeOrder/{goodsId}",method = RequestMethod.GET)
     public String placeOrder(@PathVariable int goodsId, Model model){
         Goods goods = goodsService.getGoodsById(goodsId);
-        String [] firstLevel = goods.getFirstLevel().split(",");
-        if(StringUtils.isNotEmpty(goods.getSecondLevel()) && StringUtils.isNotEmpty(goods.getSecondLevelName())){
-            String [] secondLevel = goods.getSecondLevel().split(",");
+        String [] firstLevel = goods.getFirstLevel().split(";");
+        if(StringUtils.isNotBlank(goods.getSecondLevel()) && StringUtils.isNotBlank(goods.getSecondLevelName())){
+            String [] secondLevel = goods.getSecondLevel().split(";");
             model.addAttribute("secondLevel",secondLevel);
-            if(StringUtils.isNotEmpty(goods.getThirdLevel()) && StringUtils.isNotEmpty(goods.getThirdLevelName())) {
-                String[] thirdLevel = goods.getThirdLevel().split(",");
+            if(StringUtils.isNotBlank(goods.getThirdLevel()) && StringUtils.isNotBlank(goods.getThirdLevelName())) {
+                String[] thirdLevel = goods.getThirdLevel().split(";");
                 model.addAttribute("thirdLevel", thirdLevel);
             }
         }
@@ -141,28 +139,28 @@ public class OrderController {
             return "order-center";
         }
         Member member = new Member();
-        if(StringUtils.isEmpty(province) || StringUtils.isEmpty(city)){
+        if(StringUtils.isBlank(province) || StringUtils.isBlank(city)){
             model.addAttribute("order",order);
             model.addAttribute("msg","地區填寫錯誤，請重新填寫！");
             return "order-center";
         }
         member.setRegion(province + city);
 
-        if(StringUtils.isEmpty(tel)){
+        if(StringUtils.isBlank(tel)){
             model.addAttribute("order",order);
             model.addAttribute("msg","電話號碼錯誤，請重新填寫！");
             return "order-center";
         }
         member.setMobilephone(tel);
 
-        if(StringUtils.isEmpty(address)){
+        if(StringUtils.isBlank(address)){
             model.addAttribute("order",order);
             model.addAttribute("msg","詳細錯誤，請重新填寫！");
             return "order-center";
         }
         member.setAddress(province + city + address);
 
-        if(StringUtils.isEmpty(email) || StringUtils.isEmpty(name)){
+        if(StringUtils.isBlank(email) || StringUtils.isBlank(name)){
             model.addAttribute("order",order);
             model.addAttribute("msg","郵箱和收件人姓名不能爲空，請重新填寫！");
             return "order-center";
