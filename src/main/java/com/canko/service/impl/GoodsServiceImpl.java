@@ -32,8 +32,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getGoodsListBy() {
-        return null;
+    public List<Goods> getGoodsListByName(String goodsName) {
+        return goodsMapper.getGoodsByName(goodsName);
     }
 
     @Override

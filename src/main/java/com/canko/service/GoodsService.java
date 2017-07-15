@@ -15,6 +15,6 @@ public interface GoodsService {
 
     void updateGoods(Goods goods);
 
-    List<Goods> getGoodsListBy();
+    List<Goods> getGoodsListByName(String goodsName);
 
 }

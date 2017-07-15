@@ -229,8 +229,9 @@ public class Goods {
 
     @Override
     public String toString() {
-        return "GoodsMapper{" +
-                "id=" + id + ",name=" + name +
+        return "Goods{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", displayId='" + displayId + '\'' +
                 ", goodsUrl='" + goodsUrl + '\'' +
                 ", primePrice=" + primePrice +
@@ -241,6 +242,12 @@ public class Goods {
                 ", stock=" + stock +
                 ", goodsInformation='" + goodsInformation + '\'' +
                 ", goodsImages='" + goodsImages + '\'' +
+                ", firstLevelName='" + firstLevelName + '\'' +
+                ", firstLevel='" + firstLevel + '\'' +
+                ", secondLevelName='" + secondLevelName + '\'' +
+                ", secondLevel='" + secondLevel + '\'' +
+                ", thirdLevelName='" + thirdLevelName + '\'' +
+                ", thirdLevel='" + thirdLevel + '\'' +
                 ", buyInformation='" + buyInformation + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';

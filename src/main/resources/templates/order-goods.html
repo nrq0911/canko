@@ -25,7 +25,7 @@
             })();
 		</script>
 		<!-- Facebook Pixel Code -->
-		<script type="text/javascript">
+		<script>
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -94,6 +94,7 @@
 			</form> 
 			<p class="comment-title">在線訂購，請輸入您的收貨資料</p>
 			<form class="registerform" id="form" name="form" action="/order/buyProduct" method="post" onsubmit="return checkBuy()">
+				<script>fbq('track', 'AddToCart');</script>
 				<input type="hidden" name="goodsId" value="1" th:value="${goods.id}" />
 				<section class="item_sec">
 					<div class="item_wrap rel">

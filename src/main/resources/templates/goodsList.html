@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>商品列表</title>
+    <meta charset="UTF-8" />
+    <link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
+    <style type="text/css">
+        .tabfont01 {
+            font-family: "宋体";
+            font-size: 9px;
+            color: #555555;
+            text-decoration: none;
+            text-align: center;
+        }
+        .font051 {font-family: "宋体";
+            font-size: 12px;
+            color: #333333;
+            text-decoration: none;
+            line-height: 20px;
+        }
+        .font201 {font-family: "宋体";
+            font-size: 12px;
+            color: #FF0000;
+            text-decoration: none;
+        }
+        .button {
+            font-family: "宋体";
+            font-size: 14px;
+            height: 37px;
+        }
+        .bg{background-color:#fffde0}
+        .bg1{background-color:#f2f2f2}
+        .bg00{background-color:#fffde0}
+        .bg01{background-color:#ffffff}
+        .baise{ background-color:#ffffff}
+        .huise{ background-color:#f2f2f2}
+    </style>
+    <link href="/static/css/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/skin.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <!--头部-->
+    <tr>
+        <td width="17" valign="top" background="/static/images/mail_leftbg.gif">
+            <img src="/static/images/left-top-right.gif" width="17" height="29" />
+        </td>
+        <td valign="top" background="/static/images/content-bg.gif">
+            <div  class="left_topbg" id="table2">
+                <span class="titlebt">
+                    <a href="/goods/goodsList">商品管理</a>&emsp;&emsp;&emsp;
+                    <a href="/order/orderList">订单管理</a>
+                </span>
+                <span class="titlebt"></span>
+            </div>
+        </td>
+        <td width="16" valign="top" background="/static/images/mail_rightbg.gif">
+            <img src="/static/images/nav-right-bg.gif" width="16" height="29" />
+        </td>
+    </tr>
+    <!--中间部分-->
+    <tr>
+        <td height="71" valign="middle" background="/static/images/mail_leftbg.gif">&nbsp;</td>
+        <!--搜索-->
+        <td valign="top" bgcolor="#F7F8F9">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td  style=" padding-top:20px; padding-bottom:10px">
+                        <form action="/goods/goodsList" method="post">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td width="10"></td>
+                                    <td width="" class="TablePanel">
+                                        商品名称：<input name="name" class="span2" value="" th:value="${name}"/>
+                                        <input name="Submit4" type="submit" value="查询" />
+                                        <input name="Submit4" type="reset" value="重置" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <div style="width:100%; border-bottom:1px solid #ccc; height:20px;">&nbsp;</div>
+                    </td>
+                </tr>
+                <!--表格-->
+                <tr>
+                    <td>
+                        <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" id="subtree1">
+                            <tr>
+                                <td height="20">
+                                    <input type="button" value="添加商品" onclick="location.href ='/goods/addGoods'"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="40" class="font42">
+                                    <table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#cccccc" class="newfont03" >
+                                        <tr bgcolor="#e1e5ee"  style=" font-weight:bold;" >
+                                            <td width="8%">商品名称</td>
+                                            <td width="10%">大图地址</td>
+                                            <td width="5%">原价</td>
+                                            <td width="5%">活动价</td>
+                                            <td width="5%">销售量</td>
+                                            <td width="5%">库存</td>
+                                            <td width="10%">商品描述</td>
+                                            <td width="10%">图片地址</td>
+                                            <td width="10%">商品规格</td>
+                                            <td width="10%">抢购信息</td>
+                                            <td width="8%">备注</td>
+                                            <td width="8%">操作</td>
+                                        </tr>
+
+                                        <tr th:each="goods:${goodsList}" class="huise" onmouseover="this.className='bg'" onmouseout="this.className='bg1'">
+                                            <td th:text="${goods.name}"></td>
+                                            <td ><a target="_blank" th:href="@{${goods.goodsUrl}}">查看</a></td>
+                                            <td th:text="${goods.primePrice}"></td>
+                                            <td th:text="${goods.marketPrice}"></td>
+                                            <td th:text="${goods.salesVolume}"></td>
+                                            <td th:text="${goods.stock}"></td>
+                                            <td th:text="${goods.goodsInformation}"></td>
+                                            <td ><a th:href="@{'/goods/' + ${goods.id} }">预览</a></td>
+                                            <td >
+                                                <span th:text="${goods.firstLevelName} + ':' + ${goods.firstLevel}"></span><br/>
+                                                <span th:text="${goods.secondLevelName} + ':' + ${goods.secondLevel}"></span><br/>
+                                                <span th:text="${goods.thirdLevelName} + ':' + ${goods.thirdLevel}"></span>
+                                            </td>
+                                            <td th:text="${goods.buyInformation}"></td>
+                                            <td th:text="${goods.remark}"></td>
+                                            <td><a th:href="@{'/goods/update/' + ${goods.id} }">修改 </a></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--翻页-->
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td background="/static/images/mail_rightbg.gif">&nbsp;</td>
+    </tr>
+
+    <!--底部-->
+    <tr>
+        <td valign="bottom" background="/static/images/mail_leftbg.gif"><img src="/static/images/buttom_left2.gif" width="17" height="17" /></td>
+        <td  width="100%" background="/static/images/buttom_bgs.gif" ><img src="/static/images/buttom_bgs.gif" width="17" height="17" /></td>
+        <td valign="bottom" background="/static/images/mail_rightbg.gif"><img src="/static/images/buttom_right2.gif" width="16" height="17" /></td>
+    </tr>
+</table>
+</body>
+</html>
