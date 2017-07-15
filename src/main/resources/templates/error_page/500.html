@@ -1,15 +1,51 @@
 <!DOCTYPE>
 <html>
 <head>
-    <title>500 error</title>
+    <title>出點兒小錯...</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
+    <style type="text/css">
+        body {
+            background: none repeat scroll 0 0 #F9FEE8;
+            color: #666666;
+            font-family: 微软雅黑;
+            font-size: 14px;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .error_page {
+            margin: auto;
+            padding: 50px;
+            width: 600px;
+        }
+        .error_page h1 {
+            margin: 20px 0 0;
+        }
+        .error_page p {
+            margin: 10px 0;
+            padding: 0;
+        }
+        a {
+            color: #9CAA6D;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #9CAA6D;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-<div id="main">
-    <h1>500 error </h1>
+
+<div class="error_page">
+    <img alt="你訪問的頁面出錯啦！" src="http://canko.oss-cn-shenzhen.aliyuncs.com/face_sad.gif">
+    <h1>很抱歉...</h1>
+    <p>你訪問的頁面出現了錯誤。<a href="/">返回首頁</a></p>
+    <p><a href="javascript:history.back(-1)">返回上一頁</a></p>
 </div>
 </body>
+</html>
 </html>
