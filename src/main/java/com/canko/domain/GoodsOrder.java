@@ -19,10 +19,6 @@ public class GoodsOrder {
     /**商品规格*/
     private String goodsSpec;
 
-    private String color;
-
-    private String size;
-
     /**商品数量*/
     private int num;
 
@@ -172,22 +168,6 @@ public class GoodsOrder {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     @Override

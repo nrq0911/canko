@@ -84,14 +84,12 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", mobilephone='" + mobilephone + '\'' +
-                ", email='" + email + '\'' +
-                ", region='" + region + '\'' +
-                ", address='" + address + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
+        return "收件人{" +
+                "  姓名:'" + name + '\'' +
+                ", 电话:'" + mobilephone + '\'' +
+                ", 邮箱:'" + email + '\'' +
+                ", 地区:'" + region + '\'' +
+                ", 地址:'" + address + '\'' +
+                ", 备注:'" + remark + '\'' +'}';
     }
 }

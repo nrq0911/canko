@@ -13,6 +13,26 @@
         from goods_order o left join member m on o.member_id = m.id
         where (o.display_id = #{str} or m.name = #{str} or m.mobilephone = #{str}) and o.order_state >= 12
     </select>
+    <select id="getOrderListBy" resultType="com.canko.domain.GoodsOrder" parameterType="map">
+        select o.*
+        from goods_order o left join member m on o.member_id = m.id
+        where o.order_state >= 12
+        <if test="memberName != null and memberName != ''">
+          and m.name = #{memberName}
+        </if>
+        <if test="tel != null and tel != ''">
+          and m.mobilephone = #{tel}
+        </if>
+        <if test="displayId != null and displayId != ''">
+          and o.display_id = #{displayId}
+        </if>
+        <if test="startTime != null ">
+            and create_time <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test="endTime != null ">
+            and create_time <![CDATA[ <= ]]> #{endTime}
+        </if>
+    </select>
     <insert id="addOrder" parameterType="com.canko.domain.GoodsOrder">
         <selectKey order="AFTER" resultType="java.lang.Integer" keyProperty="id">
             select LAST_INSERT_ID()

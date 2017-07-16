@@ -28,6 +28,6 @@ public interface OrderService {
 
     void updateOrderInformation(int id ,String information);
 
-    List<GoodsOrder> getGoodsOrderList();
+    List<GoodsOrder> getGoodsOrderList(String memberName,String tel,String displayId,String startTime,String endTime);
 
 }

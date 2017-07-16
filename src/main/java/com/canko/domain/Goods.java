@@ -91,7 +91,7 @@ public class Goods {
         this.goodsUrl = goodsUrl;
     }
 
-    public double getPrimePrice() {
+    public long getPrimePrice() {
         return primePrice;
     }
 
@@ -99,7 +99,7 @@ public class Goods {
         this.primePrice = primePrice;
     }
 
-    public double getMarketPrice() {
+    public long getMarketPrice() {
         return marketPrice;
     }
 

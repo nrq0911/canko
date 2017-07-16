@@ -4,6 +4,9 @@ import com.canko.domain.GoodsOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by nrq on 2017/6/17.
  */
@@ -15,6 +18,12 @@ public interface OrderMapper {
     GoodsOrder getOrderByDisplayId(@Param("displayId") String displayId);
 
     GoodsOrder getOrderBy(@Param("str") String searchString);
+
+    List<GoodsOrder> getOrderListBy(@Param("memberName")String memberName,
+                                    @Param("tel")String tel,
+                                    @Param("displayId")String displayId,
+                                    @Param("startTime")Date startDate,
+                                    @Param("endTime")Date endDate);
 
     void addOrder(GoodsOrder order);
 

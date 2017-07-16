@@ -11,10 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -234,46 +231,60 @@ public class OrderController {
 
     @RequestMapping(value = "/order/orderList",method = RequestMethod.GET)
     public String orderList(){
-        return "orderList";
+        return "order/orderList";
     }
 
     @RequestMapping(value = "/order/orderList",method = RequestMethod.POST)
-    public String orderList(Model model){
-        List<GoodsOrder> orderList = orderService.getGoodsOrderList();
+    public String orderList(Model model,HttpServletRequest request,
+                            @RequestParam("name")String memberName,
+                            @RequestParam("tel")String tel,
+                            @RequestParam("displayId")String displayId){
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+        List<GoodsOrder> orderList = orderService.getGoodsOrderList(memberName,tel,displayId,startTime,endTime);
         model.addAttribute("orderList",orderList);
-        return "orderList";
+        model.addAttribute("displayId",displayId);
+        model.addAttribute("name",memberName);
+        model.addAttribute("tel",tel);
+        model.addAttribute("startTime",startTime);
+        model.addAttribute("endTime",endTime);
+        return "order/orderList";
     }
 
     /**
      * 更新订单状态
      * */
-    @RequestMapping(value = "/order/updateStatus",method = RequestMethod.GET)
-    public String updateStatus(RedirectAttributes redirect,
-            @RequestParam(value="id")int id,
-            @RequestParam("status")int status){
+    @ResponseBody
+    @RequestMapping(value = "/order/update/status",method = RequestMethod.GET)
+    public boolean updateStatus(@RequestParam(value="id")int id,
+            @RequestParam(value = "status",defaultValue = "0")int status){
         GoodsOrder order = orderService.getOrderById(id);
         if(order == null){
-            return "redirect:/goodsList";
+            return false;
+        }
+        if(status == 0){
+            return false;
         }
         orderService.updateOrderState(id,status);
-        redirect.addAttribute("id",id);
-        return "redirect:/orderList";
+        return true;
     }
 
     /**
      * 更新物流信息
      * */
-    @RequestMapping(value = "/order/updateInformation",method = RequestMethod.GET)
-    public String updateInformation(RedirectAttributes redirect,
-            @RequestParam(value="id")int id,
+    @ResponseBody
+    @RequestMapping(value = "/order/update/information",method = RequestMethod.GET)
+    public boolean updateInformation(@RequestParam(value="id")int id,
             @RequestParam(value="information")String information){
         GoodsOrder order = orderService.getOrderById(id);
         if(order == null){
-            return "redirect:/order/orderList";
+            return false;
+        }
+        if(StringUtils.isBlank(information)){
+            return false;
         }
         orderService.updateOrderInformation(id,information);
-        redirect.addAttribute("id",id);
-        return "redirect:/order/orderList";
+        return true;
     }
 
     private String getRandomString(int n){

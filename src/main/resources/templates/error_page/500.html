@@ -1,51 +1,79 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
     <title>出點兒小錯...</title>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(
+        hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
-    <meta http-equiv="Content-Style-Type" content="text/css" />
     <style type="text/css">
-        body {
-            background: none repeat scroll 0 0 #F9FEE8;
-            color: #666666;
-            font-family: 微软雅黑;
-            font-size: 14px;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
+        body{font-family: 'Courgette', cursive;}
+        body{background:#f3f3e1;}
+        .wrap{width:100%;}
+        .logo h1{
+            font-size:120px;
+            color:#8F8E8C;
+            text-align:center;
+            margin:70px 0 0 0;
+            text-shadow:1px 1px 6px #fff;
         }
-        .error_page {
-            margin: auto;
-            padding: 50px;
-            width: 600px;
+        .logo p{
+            color:rgb(228, 146, 162);
+            font-size:15px;
+            margin-top:1px;
+            text-align:center;
         }
-        .error_page h1 {
-            margin: 20px 0 0;
+        .logo p span{
+            color:lightgreen;
         }
-        .error_page p {
-            margin: 10px 0;
-            padding: 0;
+        .sub a{
+            color:white;
+            background:#8F8E8C;
+            text-decoration:none;
+            padding:5px 80px;
+            font-size:13px;
+            font-family: arial, serif;
+            font-weight:bold;
+            -webkit-border-radius:3em;
+            -moz-border-radius:.1em;
+            -border-radius:.1em;
         }
-        a {
-            color: #9CAA6D;
-            text-decoration: none;
+        .footer{
+            color:#8F8E8C;
+            position:absolute;
+            right:10px;
+            bottom:2px;
         }
-        a:hover {
-            color: #9CAA6D;
-            text-decoration: none;
+        .footer a{
+            color:rgb(228, 146, 162);
+        }
+        @font-face {
+            font-family: 'Courgette';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Courgette Regular'), local('Courgette-Regular'), url(http://fonts.gstatic.com/s/courgette/v4/Gkr63O-aJXf4Mv4t7cBUchJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: 'Courgette';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Courgette Regular'), local('Courgette-Regular'), url(http://fonts.gstatic.com/s/courgette/v4/BHG8ZtTfO0yYnp02--QxqltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
         }
     </style>
 </head>
 
 <body>
-
-<div class="error_page">
-    <img alt="你訪問的頁面出錯啦！" src="http://canko.oss-cn-shenzhen.aliyuncs.com/face_sad.gif">
-    <h1>很抱歉...</h1>
-    <p>你訪問的頁面出現了錯誤。<a href="/">返回首頁</a></p>
-    <p><a href="javascript:history.back(-1)">返回上一頁</a></p>
-</div>
+    <div class="wrap">
+        <div class="logo">
+            <h1>500</h1>
+            <p>There was an error in the page you visited.</p>
+            <div class="sub">
+                <p><a href="javascript:history.back(-1)">Back</a></p>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
 </html>

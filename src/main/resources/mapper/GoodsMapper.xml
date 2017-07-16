@@ -20,10 +20,11 @@
           #{secondLevel},#{thirdLevelName},#{thirdLevel},#{goodsImages},#{buyInformation},#{remark})
     </insert>
     <update id="updateGoods" parameterType="com.canko.domain.Goods">
-        update goods set goods_url = #{goodsUrl},prime_price = #{primePrice},market_price = #{marketPrice},
-        discount = #{discount},deadline_time = #{deadlineTime},sales_volume = #{salesVolume},stock = {stock},
-        goods_information = #{goodsInformation},goods_images = #{goodsImages},buy_information = #{buyInformation},
-        remark = #{remark}
+        update goods set name = #{name},goods_url = #{goodsUrl},prime_price = #{primePrice},market_price = #{marketPrice},
+        discount = #{discount},deadline_time = #{deadlineTime},sales_volume = #{salesVolume},stock = #{stock},
+        goods_information = #{goodsInformation},first_level_name = #{firstLevelName},first_level = #{firstLevel},
+        second_level_name = #{secondLevelName},second_level = #{secondLevel},third_level_name = #{thirdLevelName},
+        third_level = #{thirdLevel},goods_images = #{goodsImages},buy_information = #{buyInformation},remark = #{remark}
         where id = #{id}
     </update>
 </mapper>

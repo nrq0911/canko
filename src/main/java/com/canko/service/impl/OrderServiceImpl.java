@@ -1,16 +1,21 @@
 package com.canko.service.impl;
 
+import com.canko.common.CalendarUtil;
 import com.canko.domain.GoodsOrder;
 import com.canko.domain.Member;
+import com.canko.mapper.GoodsMapper;
 import com.canko.mapper.MemberMapper;
 import com.canko.mapper.OrderMapper;
 import com.canko.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,14 +30,32 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private MemberMapper memberMapper;
 
+    @Autowired
+    private GoodsMapper goodsMapper;
+
+    private transient final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Override
     public GoodsOrder getOrderByDisplayId(String displayId) {
         return orderMapper.getOrderByDisplayId(displayId);
     }
 
     @Override
-    public List<GoodsOrder> getGoodsOrderList() {
-        return null;
+    public List<GoodsOrder> getGoodsOrderList(String memberName,String tel,
+                                              String displayId,String startTime,String endTime) {
+        Date startDate = CalendarUtil.parseDate(startTime);
+        Date endDate = CalendarUtil.parseDate(endTime);
+        List<GoodsOrder> list = null ;
+        try{
+           list =  orderMapper.getOrderListBy(memberName,tel,displayId,startDate,endDate);
+           for(GoodsOrder order : list){
+               order.setMember(memberMapper.getMemberById(order.getMemberId()));
+               order.setGoods(goodsMapper.getGoodsById(order.getGoodsId()));
+           }
+        }catch (Exception e){
+            logger.info("query order List error" + e);
+        }
+        return list;
     }
 
     @Override
