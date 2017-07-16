@@ -162,7 +162,7 @@
     function updateStatus(id,count){
         var status = document.getElementsByName('status'+count)[0].value;
         $.ajax({
-            type:"GET",
+            type:"POST",
             url:"/order/update/status",
             data:{"id":id,"status":status},
             dataType:"json",
@@ -182,7 +182,7 @@
         console.log(id + count);
         var information = document.getElementsByName('information'+count)[0].value;
         $.ajax({
-            type:"GET",
+            type:"POST",
             url:"/order/update/information",
             data:{"id":id,"information":information},
             dataType:"json",

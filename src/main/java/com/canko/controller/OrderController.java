@@ -255,7 +255,7 @@ public class OrderController {
      * 更新订单状态
      * */
     @ResponseBody
-    @RequestMapping(value = "/order/update/status",method = RequestMethod.GET)
+    @RequestMapping(value = "/order/update/status",method = RequestMethod.POST)
     public boolean updateStatus(@RequestParam(value="id")int id,
             @RequestParam(value = "status",defaultValue = "0")int status){
         GoodsOrder order = orderService.getOrderById(id);
@@ -273,7 +273,7 @@ public class OrderController {
      * 更新物流信息
      * */
     @ResponseBody
-    @RequestMapping(value = "/order/update/information",method = RequestMethod.GET)
+    @RequestMapping(value = "/order/update/information",method = RequestMethod.POST)
     public boolean updateInformation(@RequestParam(value="id")int id,
             @RequestParam(value="information")String information){
         GoodsOrder order = orderService.getOrderById(id);

@@ -6,7 +6,7 @@
         select * from goods where id = #{id}
     </select>
     <select id="getGoodsByName" parameterType="map" resultType="com.canko.domain.Goods">
-        select * from goods where name like '%'||#{name}||'%'
+        select * from goods where name like '%'||#{name}||'%' order by id desc limit 0,15
     </select>
     <insert id="addGoods" parameterType="com.canko.domain.Goods">
         <selectKey order="AFTER" resultType="java.lang.Integer" keyProperty="id">
