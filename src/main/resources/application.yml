@@ -21,8 +21,18 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     initialize: true
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    database: 0
+    pool:
+      max-active: 200
+      max-idle: 100
+      max-wait: -1
+      min-idle: 8
 logging:
-  path: /home/azonebuy/logs
   file: azonebuy.log
-  level: INFO
+  level: info
+  path: /home/azonebuy
 

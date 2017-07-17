@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by nrq on 2017/6/17.
@@ -161,7 +163,7 @@ public class OrderController {
 
         if(StringUtils.isBlank(address)){
             model.addAttribute("order",order);
-            model.addAttribute("msg","詳細錯誤，請重新填寫！");
+            model.addAttribute("msg","詳細地址錯誤，請重新填寫！");
             return "order-center";
         }
         member.setAddress(province + city + address);
@@ -169,6 +171,15 @@ public class OrderController {
         if(StringUtils.isBlank(email) || StringUtils.isBlank(name)){
             model.addAttribute("order",order);
             model.addAttribute("msg","郵箱和收件人姓名不能爲空，請重新填寫！");
+            return "order-center";
+        }
+
+        String regex = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if(!matcher.matches()){
+            model.addAttribute("order",order);
+            model.addAttribute("msg","請輸入正確的郵箱，請重新填寫！");
             return "order-center";
         }
 

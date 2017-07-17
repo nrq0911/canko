@@ -3,6 +3,7 @@ package com.canko.service.impl;
 import com.canko.domain.Goods;
 import com.canko.mapper.GoodsMapper;
 import com.canko.service.GoodsService;
+import com.canko.service.RedisSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,9 +20,18 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Autowired
+    private RedisSevice redisSevice;
+
     @Override
     public Goods getGoodsById(int id) {
-        return goodsMapper.getGoodsById(id);
+        String key = createGoodsKey(id);
+        Goods goods = redisSevice.get(key,Goods.class);
+        if(goods == null){
+            goods = goodsMapper.getGoodsById(id);
+            redisSevice.set(key,goods);
+        }
+        return goods;
     }
 
     @Override
@@ -40,5 +50,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updateGoods(Goods goods) {
         goodsMapper.updateGoods(goods);
+        String key = createGoodsKey(goods.getId());
+        redisSevice.set(key,goods);
     }
+
+    private String createGoodsKey(int id){
+        return "online.goods."+ id;
+    }
+
 }
