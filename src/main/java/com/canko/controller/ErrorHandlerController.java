@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ErrorHandlerController implements ErrorController {
 
-    private static final String ERROR_PATH = "/error";
-
-    @RequestMapping(value=ERROR_PATH)
+    @RequestMapping("/error")
     public String handleError(){
-        return "error_page/error";
+        return "error_page/500";
     }
 
     @RequestMapping("/error/400")
@@ -39,6 +37,6 @@ public class ErrorHandlerController implements ErrorController {
 
     @Override
     public String getErrorPath() {
-        return ERROR_PATH;
+        return "error";
     }
 }
