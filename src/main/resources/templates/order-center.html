@@ -19,23 +19,6 @@
 				margin: 0 10px 10px 0;
 				width: 100%;
 			}
-			#pagess{
-				background: #f9f9f9 none repeat scroll 0 0;
-				margin: 0 auto;
-				max-width: 650px;
-				padding: 0 0 50px;
-				width: 100%;
-				}
-			.size {
-				/*border: 1px solid rgb(217, 217, 217);*/
-				font-size: 14px;
-				height: 30px;
-				line-height: 30px;
-				text-indent: 6px;
-				vertical-align: middle;
-				width: 100%;
-			}
-
 			.comment-title {
 				background-color: #e8373c;
 				color: #ffffff;
@@ -51,7 +34,7 @@
 		<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
 		<style type="text/css">
 			body {
-				background: #856d35 none repeat scroll 0 0;
+				background: #d8f0fa none repeat scroll 0 0;
 				font-family: Helvetica,Arial,san-serif;
 				font-size: 16px;
 				margin: 0;
@@ -68,7 +51,7 @@
 			}
 			@media (min-width:767px){#page {max-width: 650px;}}
 			@media screen and (max-width:767px){#page {max-width: 100% !important;}}
-			h1{text-align:center;background:#000;color:#fff;font-size:18px;padding:10px;}
+			h1{text-align:center;background:#e8373c;color:#fff;font-size:18px;padding:10px;}
 
 			h2 {
 				clear: both;
@@ -145,7 +128,7 @@
 	<hr/>
     <div style="width:100%;">
 		<div style="float:left;padding:5px;">
-			<a class="btn btn-primary" href="/goods/1" th:href="@{'/goods/'+${goods.id}}">繼續購物</a>
+			<a class="btn" style="background: #ff0036;color: #fff;" href="/goods/1" th:href="@{'/goods/'+${goods.id}}">繼續購物</a>
 		</div>
 		<div style="float:right;padding:5px;">總價:NT$<span th:text="${order.orderPrice}">0</span></div>
 	</div>

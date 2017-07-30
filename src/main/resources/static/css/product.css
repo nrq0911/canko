@@ -86,7 +86,6 @@
 }
 .price-item .price-tab {
 	height: 90px;
-	border-bottom: 2px dotted #000;
 	text-align: right;
 }
 .price-item .price-tab em {
@@ -134,7 +133,7 @@
 }
 .price-item .btn-tab a {
 	display: block;
-	background: #FF6F20;
+	background: #ff0036;
 	line-height: 40px;
 	height: 40px;
 	border-radius: 5px;
@@ -170,7 +169,7 @@ a.totop {
 }
 .btn-item {
 	height: 50px;
-	background: #FF6F20 url(../images/btn-totop.png) 18px 18px no-repeat;
+	background: #ff0036 url(../images/btn-totop.png) 18px 18px no-repeat;
 	background-size: 15px;
 	bottom: 0;
 	position: fixed;
