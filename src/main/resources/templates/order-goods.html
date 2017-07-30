@@ -90,23 +90,7 @@
 	</head>
 	<body style=" background: #d8f0fa none repeat scroll 0 0;">
 		<div id="pagess">
-			<p class="comment-title">訂單信息查詢</p>
-			<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
-				<section class="item_sec">
-					<div class="item_wrap add">
-                        <p class="row">
-                            <label style="float:left">查詢信息 </label>
-                            <input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
-                        </p>
-					</div>
-				</section>                    
-                <footer style="text-align:center;">
-					<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
-                </footer>
-			   <br style="clear:both"/>  
-			   <br style="clear:both"/>  
-			</form> 
-			<p class="comment-title">在線訂購，請輸入您的收貨資料</p>
+			<p class="comment-title">在線訂購，請選擇商品規格以及數量</p>
 			<form class="registerform" id="form" name="form" action="/order/buyProduct" method="post" onsubmit="return checkBuy()">
 				<script>fbq('track', 'AddToCart');</script>
 				<input type="hidden" name="goodsId" value="1" th:value="${goods.id}" />
@@ -150,12 +134,27 @@
 				<footer style="text-align:center;">
 					<button type="submit" class="c_txt orange_bg" id="buy_now">加入購物車</button>
 					<br style="clear:both" />
-					<div class="c_txt orange_bg" id="buy_now" style="margin:5px 0;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
-						<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
-					</div>
 				</footer>
 			</form>
-			<span class="STYLE1"></span>
+			<br style="clear:both" />
+			<p class="comment-title">訂單信息查詢</p>
+			<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
+				<section class="item_sec">
+					<div class="item_wrap add">
+						<p class="row">
+							<label style="float:left">查詢信息 </label>
+							<input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
+						</p>
+					</div>
+				</section>
+				<footer style="text-align:center;">
+					<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
+				</footer>
+				<br style="clear:both"/>
+			</form>
+			<div class="c_txt orange_bg" id="buy_now" style="width:95%;margin:5px auto;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
+				<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
+			</div>
 			<div style="text-align:center;width: 100%; padding: 10px 0;">
 				如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
 				同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！

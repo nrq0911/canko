@@ -34,6 +34,10 @@
     width: 100%;
 }
 
+#buy_now {
+	border-radius: 4px; border: 0px currentColor; width: 100%; color: rgb(255, 255, 255);background: #ff0036; line-height: 40px; font-size: 16px; box-shadow: inset 0px -1px 0px 0px #ff0036;
+}
+
 .btn-style {
     background-color: rgb(153, 222, 44);
     border: 0 none currentcolor;
