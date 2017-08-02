@@ -104,7 +104,7 @@ public class GoodsController {
         }
 
         goods.setDeadlineTime(new Date());
-        goods.setDiscount(goods.getMarketPrice()/goods.getPrimePrice());
+        goods.setDiscount((goods.getMarketPrice()*10)/Double.valueOf(goods.getPrimePrice()));
         goods.setDisplayId(String.valueOf(System.currentTimeMillis()));
 
         goods.setGoodsImages(JSON.toJSONString(arrayToMap(goodsImg)));
@@ -113,7 +113,7 @@ public class GoodsController {
 
         try{
             goodsService.addGoods(goods);
-            return "forward:/goods/goodsList";
+            return "redirect:/goods/goodsList";
         }catch (Exception e){
             msg = "后台服务出错错误！";
             logger.info("Add Goods error:" + e);
@@ -220,7 +220,7 @@ public class GoodsController {
         }
 
         dataGoods.setDeadlineTime(new Date());
-        dataGoods.setDiscount(goods.getMarketPrice()/goods.getPrimePrice());
+        dataGoods.setDiscount((goods.getMarketPrice()*10)/Double.valueOf(goods.getPrimePrice()));
         dataGoods.setGoodsImages(JSON.toJSONString(arrayToMap(goodsImg)));
         if(StringUtils.isNotBlank(goods.getRemark())){
             dataGoods.setRemark(goods.getRemark());
@@ -228,7 +228,7 @@ public class GoodsController {
 
         try{
             goodsService.updateGoods(dataGoods);
-            return "forward:/goods/goodsList";
+            return "redirect:/goods/goodsList";
         }catch (Exception e){
             msg = "后台服务出错错误！";
             logger.info("Update Goods error:" + e);
