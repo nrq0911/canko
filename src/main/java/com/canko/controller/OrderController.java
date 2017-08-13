@@ -167,21 +167,22 @@ public class OrderController {
             return "order-center";
         }
         member.setAddress(province + city + address);
-
-        if(StringUtils.isBlank(email) || StringUtils.isBlank(name)){
+        
+        //StringUtils.isBlank(email) || 
+        if(StringUtils.isBlank(name)){
             model.addAttribute("order",order);
-            model.addAttribute("msg","郵箱和收件人姓名不能爲空，請重新填寫！");
+            model.addAttribute("msg","收件人姓名不能爲空，請重新填寫！");
             return "order-center";
         }
 
-        String regex = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        if(!matcher.matches()){
-            model.addAttribute("order",order);
-            model.addAttribute("msg","請輸入正確的郵箱，請重新填寫！");
-            return "order-center";
-        }
+        //String regex = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        //Pattern pattern = Pattern.compile(regex);
+        //Matcher matcher = pattern.matcher(email);
+        //if(!matcher.matches()){
+        //    model.addAttribute("order",order);
+        //    model.addAttribute("msg","請輸入正確的郵箱，請重新填寫！");
+        //    return "order-center";
+        //}
 
         member.setEmail(email);
         member.setName(name);
