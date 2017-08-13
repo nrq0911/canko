@@ -102,11 +102,11 @@ public class OrderController {
                              @RequestParam("number") Integer number){
         HttpSession session = request.getSession();
         Double sessionPrice = (Double) session.getAttribute("price");
-        if(sessionPrice == null){
+        //if(sessionPrice == null){
             sessionPrice = price;
-        }else{
-            sessionPrice += price;
-        }
+       // }else{
+        //    sessionPrice += price;
+        //}
         Goods goods = goodsService.getGoodsById(goodsId);
         session.setAttribute("price",sessionPrice);
         model.addAttribute("spec",spec);
