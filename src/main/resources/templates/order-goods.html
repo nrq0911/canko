@@ -1,165 +1,168 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
-	<head>
-		<title th:text="${goods.name}"></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-		<meta content="telephone=no" name="format-detection" />
-		<meta name="apple-touch-fullscreen" content="yes" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
-		<link th:href="@{/static/css/buy.css}" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
-		<script type="text/javascript" th:src="@{/static/js/not3.js}" ></script>
-		<script type="text/javascript">
-            var _mtac = {};
-            (function() {
-                var mta = document.createElement("script");
-                mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
-                mta.setAttribute("name", "MTAH5");
-                mta.setAttribute("sid", "500485879");
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(mta, s);
-            })();
-		</script>
-		<!-- Facebook Pixel Code -->
-		<script>
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window,document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1878449885504044');
-            fbq('track', 'PageView');
-		</script>
-		<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=1878449885504044&amp;noscript=1&amp;ev=PageView"/></noscript>
-		<!-- End Facebook Pixel Code -->
-		<!-- Facebook Pixel Code -->
-		<script>
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window,document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '923141371159874');
-            fbq('track', 'PageView');
-		</script>
-		<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=923141371159874&amp;noscript=1&amp;ev=PageView"/></noscript>
-		<!-- End Facebook Pixel Code -->
-		<style type="text/css">
-			.item_wrap img {
-				height: auto;
-				margin: 0 10px 10px 0;
-				width: 100%;
-			}
-			#pagess{
-				background: #f9f9f9 none repeat scroll 0 0;
-				margin: 0 auto;
-				max-width: 650px;
-				padding: 0 0 50px;
-				width: 100%;	
-				}
-			.size {
-				/*border: 1px solid rgb(217, 217, 217);*/
-				font-size: 14px;
-				height: 30px;
-				line-height: 30px;
-				text-indent: 6px;
-				vertical-align: middle;
-				width: 100%;
-			}
+<head>
+	<title th:text="${goods.name}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="/static/images/favicon.ico" type="image/x-icon" rel="icon" />
+	<link th:href="@{/static/css/buy.css}" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/not3.js}" ></script>
+	<script type="text/javascript">
+        var _mtac = {};
+        (function() {
+            var mta = document.createElement("script");
+            mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+            mta.setAttribute("name", "MTAH5");
+            mta.setAttribute("sid", "500485879");
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(mta, s);
+        })();
+	</script>
+	<!-- Facebook Pixel Code -->
+	<script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1878449885504044');
+        fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=1878449885504044&amp;noscript=1&amp;ev=PageView"/></noscript>
+	<!-- End Facebook Pixel Code -->
+	<!-- Facebook Pixel Code -->
+	<script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '923141371159874');
+        fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=923141371159874&amp;noscript=1&amp;ev=PageView"/></noscript>
+	<!-- End Facebook Pixel Code -->
+	<style type="text/css">
+		.item_wrap img {
+			height: auto;
+			margin: 0 10px 10px 0;
+			width: 100%;
+		}
+		#pagess{
+			background: #f9f9f9 none repeat scroll 0 0;
+			margin: 0 auto;
+			max-width: 650px;
+			padding: 0 0 50px;
+			width: 100%;
+		}
+		.size {
+			/*border: 1px solid rgb(217, 217, 217);*/
+			font-size: 14px;
+			height: 30px;
+			line-height: 30px;
+			text-indent: 6px;
+			vertical-align: middle;
+			width: 100%;
+		}
 
-			.comment-title {
-				background-color: #ec3d3d;
-				color: #ffffff;
-				font-size: 14px;
-				height: 32px;
-				line-height: 32px;
-				text-align: center;
-				width: 100%;
-			}	
-			@media screen and (max-width:768px){.sku_ul li{width:96% !important;}}
-		</style>
-	</head>
-	<body style=" background: #d8f0fa none repeat scroll 0 0;">
-		<div id="pagess">
-			<p class="comment-title">在線訂購，請選擇商品規格以及數量</p>
-			<form class="registerform" id="form" name="form" action="/order/buyProduct" method="post" onsubmit="return checkBuy()">
-				<script>fbq('track', 'AddToCart');</script>
-				<input type="hidden" name="goodsId" value="1" th:value="${goods.id}" />
-				<section class="item_sec">
-					<div class="item_wrap rel">
-						<table width="100%" border="0">
-						  <tbody><tr><td width="100%"><p><strong th:text="${goods.name}">【戶外野營外折疊刀 限時特惠！/買大贈小】</strong></p><p></p></td></tr></tbody>
-						</table>
-						<ul class="sku_ul">
-							<li id="first-li">
-								<span style="" th:text="${goods.firstLevelName}">型號</span>&nbsp;<br/>
-								<input type="hidden" id="first-level" th:value="${goods.firstLevelName}" />
-								<a style="text-align:center" th:each="firstl:${firstLevel}" th:text="${firstl}"></a>
-								<input type="hidden" id="spec" name="spec" value="" />
-							</li>
-							<br/>
-							<li id="second-li" th:if="${goods.secondLevelName != null}">
-								<span th:text="${goods.secondLevelName}"></span>&nbsp;<br/>
-								<input type="hidden" id="second-level" th:value="${goods.secondLevelName}" />
-								<a style="text-align:center" th:each="secondl:${secondLevel}" th:text="${secondl}"></a>
-								<input type="hidden" id="spec2" value="" />
-							</li>
-							<br/>
-							<li id="third-li" th:if="${goods.thirdLevelName != null}">
-								<span th:text="${goods.thirdLevelName} + ':'"></span>&nbsp;<br/>
-								<input type="hidden" id="third-level" th:value="${goods.thirdLevelName}" />
-								<a style="text-align:center" th:each="thirdl:${thirdLevel}" th:text="${thirdl}"></a>
-								<input type="hidden" id="spec3" value="" />
-							</li>
-						</ul>
-						<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="'NT$'+${goods.marketPrice}">NT$1350</span></p>
-						<p class="row"></p>
-						<p class="row">
-							<label>數　量</label>
-							<input id="item_num" class="block input" type="tel" value="1" maxlength="3" name="number" required="required" />
-						</p>
-						<input id="price" name="price" tabindex="7" type="hidden" value="1350" th:value="${goods.marketPrice}"  />
-						<input id="currency" name="currency" tabindex="7" type="hidden" value="NT$" />
-					</div>
-				</section>
-				<footer style="text-align:center;">
-					<button type="submit" class="c_txt orange_bg" id="buy_now">加入購物車</button>
-					<br style="clear:both" />
-				</footer>
-			</form>
+		.comment-title {
+			background-color: #ec3d3d;
+			color: #ffffff;
+			font-size: 14px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			width: 100%;
+		}
+		#first-li a{
+			margin-bottom: 10px;
+		}
+		@media screen and (max-width:768px){.sku_ul li{width:96% !important;}}
+	</style>
+</head>
+<body style=" background: #d8f0fa none repeat scroll 0 0;">
+<div id="pagess">
+	<p class="comment-title">在線訂購，請選擇商品規格以及數量</p>
+	<form class="registerform" id="form" name="form" action="/order/buyProduct" method="post" onsubmit="return checkBuy()">
+		<script>fbq('track', 'AddToCart');</script>
+		<input type="hidden" name="goodsId" value="1" th:value="${goods.id}" />
+		<section class="item_sec">
+			<div class="item_wrap rel">
+				<table width="100%" border="0">
+					<tbody><tr><td width="100%"><p><strong th:text="${goods.name}">【戶外野營外折疊刀 限時特惠！/買大贈小】</strong></p><p></p></td></tr></tbody>
+				</table>
+				<ul class="sku_ul">
+					<li id="first-li">
+						<span style="" th:text="${goods.firstLevelName}">型號</span>&nbsp;<br/>
+						<input type="hidden" id="first-level" th:value="${goods.firstLevelName}" />
+						<a style="text-align:center" th:each="firstl:${firstLevel}" th:text="${firstl}"></a>
+						<input type="hidden" id="spec" name="spec" value="" />
+					</li>
+					<br/>
+					<li id="second-li" th:if="${goods.secondLevelName != null}">
+						<span th:text="${goods.secondLevelName}"></span>&nbsp;<br/>
+						<input type="hidden" id="second-level" th:value="${goods.secondLevelName}" />
+						<a style="text-align:center" th:each="secondl:${secondLevel}" th:text="${secondl}"></a>
+						<input type="hidden" id="spec2" value="" />
+					</li>
+					<br/>
+					<li id="third-li" th:if="${goods.thirdLevelName != null}">
+						<span th:text="${goods.thirdLevelName} + ':'"></span>&nbsp;<br/>
+						<input type="hidden" id="third-level" th:value="${goods.thirdLevelName}" />
+						<a style="text-align:center" th:each="thirdl:${thirdLevel}" th:text="${thirdl}"></a>
+						<input type="hidden" id="spec3" value="" />
+					</li>
+				</ul>
+				<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="'NT$'+${goods.marketPrice}">NT$1350</span></p>
+				<p class="row"></p>
+				<p class="row">
+					<label>數　量</label>
+					<input id="item_num" class="block input" type="tel" value="1" maxlength="3" name="number" required="required" />
+				</p>
+				<input id="price" name="price" tabindex="7" type="hidden" value="1350" th:value="${goods.marketPrice}"  />
+				<input id="currency" name="currency" tabindex="7" type="hidden" value="NT$" />
+			</div>
+		</section>
+		<footer style="text-align:center;">
+			<button type="submit" class="c_txt orange_bg" id="buy_now">加入購物車</button>
 			<br style="clear:both" />
-			<p class="comment-title">訂單信息查詢</p>
-			<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
-				<section class="item_sec">
-					<div class="item_wrap add">
-						<p class="row">
-							<label style="float:left">查詢信息 </label>
-							<input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
-						</p>
-					</div>
-				</section>
-				<footer style="text-align:center;">
-					<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
-				</footer>
-				<br style="clear:both"/>
-			</form>
-			<div class="c_txt orange_bg" id="buy_now" style="width:95%;margin:5px auto;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
-				<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
+		</footer>
+	</form>
+	<br style="clear:both" />
+	<p class="comment-title">訂單信息查詢</p>
+	<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
+		<section class="item_sec">
+			<div class="item_wrap add">
+				<p class="row">
+					<label style="float:left">查詢信息 </label>
+					<input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
+				</p>
 			</div>
-			<div style="text-align:center;width: 100%; padding: 10px 0;">
-				如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
-				同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！
-			</div>
-		</div>
-	</body>
+		</section>
+		<footer style="text-align:center;">
+			<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
+		</footer>
+		<br style="clear:both"/>
+	</form>
+	<div class="c_txt orange_bg" id="buy_now" style="width:95%;margin:5px auto;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
+		<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
+	</div>
+	<div style="text-align:center;width: 100%; padding: 10px 0;">
+		如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
+		同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！
+	</div>
+</div>
+</body>
 </html>
 <script type="text/javascript" src="/static/js/order.js"></script>
