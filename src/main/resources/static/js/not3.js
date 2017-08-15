@@ -49,11 +49,11 @@ function checkPost(){
     catch(ex){
     }
 	try{
-		if (document.form.email.value==""){
+		/*if (document.form.email.value==""){
 			alert('請輸入E-MAIL號碼！');
 			document.form.email.focus();
 			return false;
-		}
+		}*/
 		var form = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
 		if (!form.test(document.form.email.value)){
 			alert('E-mail號碼格式不正確，請重新填寫！');
