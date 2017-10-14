@@ -57,13 +57,13 @@ public class GoodsController {
         return "product";
     }
 
-    @RequestMapping(value="/goods/addGoods",method = RequestMethod.GET)
+    @RequestMapping(value="/admin/goods/addGoods",method = RequestMethod.GET)
     public String addGoods(){
         return "goods/addGoods";
     }
 
     /** 新增货物信息*/
-    @RequestMapping(value="/goods/addGoods",method = RequestMethod.POST)
+    @RequestMapping(value="/admin/goods/addGoods",method = RequestMethod.POST)
     public String addGoods(Goods goods,Model model,
                            @RequestParam(value = "goodsImg")String[] goodsImg){
 
@@ -113,7 +113,7 @@ public class GoodsController {
 
         try{
             goodsService.addGoods(goods);
-            return "redirect:/goods/goodsList";
+            return "redirect:/admin/goods/goodsList";
         }catch (Exception e){
             msg = "后台服务出错错误！";
             logger.info("Add Goods error:" + e);
@@ -123,13 +123,13 @@ public class GoodsController {
 
     }
 
-    @RequestMapping(value = "/goods/goodsList",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/goods/goodsList",method = RequestMethod.GET)
     public String goodsList(){
         return "goods/goodsList";
     }
 
     /** 货物列表 */
-    @RequestMapping(value = "/goods/goodsList",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/goods/goodsList",method = RequestMethod.POST)
     public String goodsList(Model model,@RequestParam(value = "name",defaultValue = "") String goodsName){
         List<Goods> goodsList = goodsService.getGoodsListByName(goodsName);
         model.addAttribute("goodsList",goodsList);
@@ -137,7 +137,7 @@ public class GoodsController {
         return "goods/goodsList";
     }
 
-    @RequestMapping(value = "/goods/update/{goodsId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/goods/update/{goodsId}",method = RequestMethod.GET)
     public String updateGoods(@PathVariable String goodsId,Model model){
         int id = 0;
         try{
@@ -165,7 +165,7 @@ public class GoodsController {
     }
 
     /** 修改货物信息*/
-    @RequestMapping(value = "/goods/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/goods/update",method = RequestMethod.POST)
     public String updateGoods(Goods goods,Model model,
                               @RequestParam(value = "goodsImg")String[] goodsImg){
         Goods dataGoods = goodsService.getGoodsById(goods.getId());
@@ -228,12 +228,12 @@ public class GoodsController {
 
         try{
             goodsService.updateGoods(dataGoods);
-            return "redirect:/goods/goodsList";
+            return "redirect:/admin/goods/goodsList";
         }catch (Exception e){
             msg = "后台服务出错错误！";
             logger.info("Update Goods error:" + e);
             model.addAttribute("msg",msg);
-            return "forward:/goods/update/" + goods.getId();
+            return "redirect:/admin/goods/update/" + goods.getId();
         }
 
     }

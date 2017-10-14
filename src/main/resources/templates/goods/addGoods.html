@@ -19,8 +19,8 @@
         <td valign="top" background="/static/images/content-bg.gif">
             <div  class="left_topbg" id="table2">
                 <span class="titlebt">&emsp;
-                    <a href="/goods/goodsList">商品管理</a>&emsp;&emsp;
-                    <a href="/order/orderList">订单管理</a>
+                    <a href="/admin/goods/goodsList">商品管理</a>&emsp;&emsp;
+                    <a href="/admin/order/orderList">订单管理</a>
                 </span>
             </div>
         </td>
@@ -37,7 +37,7 @@
                 <!--表格-->
                 <tr>
                     <td>
-                        <form action="/goods/addGoods" method="post" onsubmit="return checkPost()">
+                        <form action="/admin/goods/addGoods" method="post" onsubmit="return checkPost()">
                         <table width="95%" border="0" align="center" cellpadding="3" cellspacing="3">
                             <tr><td colspan="2" style="color:red;" th:text="${msg}">&emsp;</td></tr>
                             <tr>

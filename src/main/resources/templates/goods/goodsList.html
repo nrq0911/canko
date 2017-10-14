@@ -49,8 +49,8 @@
         <td valign="top" background="/static/images/content-bg.gif">
             <div  class="left_topbg" id="table2">
                 <span class="titlebt">&emsp;
-                    <a href="/goods/goodsList">商品管理</a>&emsp;&emsp;
-                    <a href="/order/orderList">订单管理</a>
+                    <a href="/admin/goods/goodsList">商品管理</a>&emsp;&emsp;
+                    <a href="/admin/order/orderList">订单管理</a>
                 </span>
                 <span class="titlebt"></span>
             </div>
@@ -67,7 +67,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td  style=" padding-top:20px; padding-bottom:10px">
-                        <form action="/goods/goodsList" method="post">
+                        <form action="/admin/goods/goodsList" method="post">
                             <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td width="10"></td>
@@ -88,7 +88,7 @@
                         <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" id="subtree1">
                             <tr>
                                 <td height="20">
-                                    <input type="button" value="添加商品" onclick="location.href ='/goods/addGoods'"/>
+                                    <input type="button" value="添加商品" onclick="location.href ='/admin/goods/addGoods'"/>
                                 </td>
                             </tr>
                             <tr>
@@ -125,7 +125,7 @@
                                             </td>
                                             <td th:text="${goods.buyInformation}"></td>
                                             <td th:text="${goods.remark}"></td>
-                                            <td><a th:href="@{'/goods/update/' + ${goods.id} }">修改 </a></td>
+                                            <td><a th:href="@{'/admin/goods/update/' + ${goods.id} }">修改 </a></td>
                                         </tr>
                                     </table>
                                 </td>

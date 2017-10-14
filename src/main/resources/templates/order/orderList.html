@@ -49,8 +49,8 @@
         <td valign="top" background="/static/images/content-bg.gif">
             <div  class="left_topbg" id="table2">
                 <span class="titlebt">&emsp;
-                    <a href="/order/orderList">订单管理</a>&emsp;&emsp;
-                    <a href="/goods/goodsList">商品管理</a>
+                    <a href="/admin/order/orderList">订单管理</a>&emsp;&emsp;
+                    <a href="/admin/goods/goodsList">商品管理</a>
                 </span>
                 <span class="titlebt"></span>
             </div>
@@ -67,7 +67,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td  style=" padding-top:20px; padding-bottom:10px">
-                        <form action="/order/orderList" method="post" name="listForm">
+                        <form action="/admin/order/orderList" method="post" name="listForm">
                             <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td width="10"></td>
@@ -165,7 +165,7 @@
         var status = document.getElementsByName('status'+count)[0].value;
         $.ajax({
             type:"POST",
-            url:"/order/update/status",
+            url:"/admin/order/update/status",
             data:{"id":id,"status":status},
             dataType:"json",
             success:function(data){
@@ -185,7 +185,7 @@
         var information = document.getElementsByName('information'+count)[0].value;
         $.ajax({
             type:"POST",
-            url:"/order/update/information",
+            url:"/admin/order/update/information",
             data:{"id":id,"information":information},
             dataType:"json",
             success:function(data){
