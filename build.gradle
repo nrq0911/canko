@@ -21,7 +21,6 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenLocal()
-	maven { url "http://120.76.223.75:8081/nexus/repository/xhb-public/" }
 	maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
 	mavenCentral()
 }

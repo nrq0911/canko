@@ -12,17 +12,6 @@
 	<link th:href="@{/static/css/buy.css}" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/static/js/not3.js}" ></script>
-	<script type="text/javascript">
-        var _mtac = {};
-        (function() {
-            var mta = document.createElement("script");
-            mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
-            mta.setAttribute("name", "MTAH5");
-            mta.setAttribute("sid", "500485879");
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(mta, s);
-        })();
-	</script>
 	<!-- Facebook Pixel Code -->
 	<script>
         !function(f,b,e,v,n,t,s)
@@ -33,25 +22,10 @@
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window,document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1878449885504044');
+        fbq('init', '#pixelid#');
         fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=1878449885504044&amp;noscript=1&amp;ev=PageView"/></noscript>
-	<!-- End Facebook Pixel Code -->
-	<!-- Facebook Pixel Code -->
-	<script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window,document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '923141371159874');
-        fbq('track', 'PageView');
-	</script>
-	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=923141371159874&amp;noscript=1&amp;ev=PageView"/></noscript>
+	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=#pixelid#&amp;noscript=1&amp;ev=PageView"/></noscript>
 	<!-- End Facebook Pixel Code -->
 	<style type="text/css">
 		.item_wrap img {
