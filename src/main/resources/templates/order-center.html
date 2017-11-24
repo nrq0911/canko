@@ -122,7 +122,7 @@
 						<input type="image" th:src="@{/static/images/button_update_cart.gif}" />
                     </form>
 				</td>
-                <td>NT$<span th:text="${goods.marketPrice}"></span></td>
+                <td>$<span th:text="${goods.marketPrice}"></span></td>
                 <td><a href="/order/delete/1" th:href="@{'/order/delete/'+ ${order.displayId}}" ><img th:src="@{/static/images/small_delete.gif}" /></a></td>
             </tr>
         </tbody>
@@ -132,7 +132,7 @@
 		<div style="float:left;padding:5px;">
 			<a class="btn" style="background: #ff0036;color: #fff;" href="/goods/1" th:href="@{'/goods/'+${goods.id}}">繼續購物</a>
 		</div>
-		<div style="float:right;padding:5px;">總價:NT$<span th:text="${order.orderPrice}">0</span></div>
+		<div style="float:right;padding:5px;">總價:$<span th:text="${order.orderPrice}">0</span></div>
 	</div>
 	<br style="clear:both"/>
     <p class="comment-title">在線訂購，請輸入您的收貨資料</p>
@@ -196,7 +196,7 @@
             <div class="item_wrap add">
 				<p style="color:#ff0000;">
 					說明:黑貓宅配到府（送貨需要3－7日）
-					註：以下區域需要NT$ 300 運費
+					註：以下區域需要$ 300 運費
 					宜蘭縣-釣魚台列嶼(全)，高雄市-東沙(全)、南沙(全)，澎湖縣-馬公(虎井島、桶盤島)、望安(全)、
 					七美(全)、白沙(大倉嶼、員貝嶼、鳥嶼、吉貝嶼)，金門縣-烈嶼(大膽島、二膽島)、烏坵(全)、
 					台東縣-蘭嶼(全)

@@ -98,14 +98,14 @@
 						<input type="hidden" id="spec3" value="" />
 					</li>
 				</ul>
-				<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="'NT$'+${goods.marketPrice}">NT$1350</span></p>
+				<p class="row">今日特價： <span class="i_pri" id="item_price" th:text="'$'+${goods.marketPrice}">$1350</span></p>
 				<p class="row"></p>
 				<p class="row">
 					<label>數　量</label>
 					<input id="item_num" class="block input" type="tel" value="1" maxlength="3" name="number" required="required" />
 				</p>
 				<input id="price" name="price" tabindex="7" type="hidden" value="1350" th:value="${goods.marketPrice}"  />
-				<input id="currency" name="currency" tabindex="7" type="hidden" value="NT$" />
+				<input id="currency" name="currency" tabindex="7" type="hidden" value="$" />
 			</div>
 		</section>
 		<footer style="text-align:center;">
@@ -133,7 +133,7 @@
 		<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
 	</div>
 	<div style="text-align:center;width: 100%; padding: 10px 0;">
-		如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
+		如有問題，請隨時聯繫:<a href="mailto:service@azonebuy.com‍"><font color="red">service@azonebuy.com‍</font></a>。
 		同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！
 	</div>
 </div>

@@ -53,7 +53,7 @@
 		</div>
 		<div class="price-item">
 			<div class="price-tab">
-				<em style="font-size:30px;" th:text="'NT$' + ${goods.marketPrice}">1350</em>
+				<em style="font-size:30px;" th:text="'$' + ${goods.marketPrice}">1350</em>
 				<span>
 					<label>原價</label>
 					<label id="old_price" th:text="${goods.primePrice}">3749</label>
@@ -64,7 +64,7 @@
 				</span>
 				<span>
 					<label>節省</label>
-					<label id="dec_price" th:text="${retrenchPrice}">NT$2399</label>
+					<label id="dec_price" th:text="${retrenchPrice}">$2399</label>
 				</span>
 			</div>        
 			<div class="btn-tab">
@@ -78,9 +78,9 @@
 			<div id="buyinfoCount" class="buyinfo">
 				<div class="buyinfo_price">
                     <span id="priceTitle" class="buyinfo_price_tit">活動價：</span>
-                    <span id="priceSale" class="buyinfo_price_now"><span th:text="'NT$' + ${goods.marketPrice}">NT$1350</span></span>
+                    <span id="priceSale" class="buyinfo_price_now"><span th:text="'$' + ${goods.marketPrice}">$1350</span></span>
                     <span class="buyinfo_price_count"> /件</span>
-                    <del class="buyinfo_price_old"><em color="#ccc" id="priceMarket"><span th:text="'NT$' + ${goods.primePrice}">NT$3749</span></em></del>
+                    <del class="buyinfo_price_old"><em color="#ccc" id="priceMarket"><span th:text="'$' + ${goods.primePrice}">$3749</span></em></del>
 					<br/>
                 </div>
 				<div class="buyinfo_sale">
@@ -180,7 +180,7 @@
 			<hr/>
 			<span class="STYLE1" style="color: #ff0000 !important;">
 				<div style="text-align:center;width: 100%; padding: 10px 0;color: #ff0000;font-size: 14px;">
-					如有問題，請隨時聯繫:<a href="mailto:saleazone@gmail.com"><font color="red">saleazone@gmail.com</font></a>。
+					如有問題，請隨時聯繫:<a href="mailto:service@azonebuy.com‍"><font color="red">service@azonebuy.com‍</font></a>。
 					同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！                     
 				</div>
 			</span>
