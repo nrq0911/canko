@@ -91,6 +91,9 @@ public class GoodsController {
             }else{
                 goods.setSecondLevel(goods.getSecondLevel().trim().replace("&",";"));
             }
+        }else{
+            goods.setSecondLevelName(null);
+            goods.setSecondLevel(null);
         }
 
         if(StringUtils.isNotBlank(goods.getThirdLevelName())){
@@ -101,6 +104,9 @@ public class GoodsController {
             }else{
                 goods.setThirdLevel(goods.getThirdLevel().trim().replace("&",";"));
             }
+        }else{
+            goods.setThirdLevel(null);
+            goods.setThirdLevelName(null);
         }
 
         goods.setDeadlineTime(new Date());
@@ -206,6 +212,9 @@ public class GoodsController {
                 dataGoods.setSecondLevelName(goods.getSecondLevelName());
                 dataGoods.setSecondLevel(goods.getSecondLevel().trim().replace("&",";"));
             }
+        }else{
+            dataGoods.setSecondLevelName(null);
+            dataGoods.setSecondLevel(null);
         }
 
         if(StringUtils.isNotBlank(goods.getThirdLevelName())){
@@ -217,6 +226,9 @@ public class GoodsController {
                 dataGoods.setThirdLevelName(goods.getThirdLevelName());
                 dataGoods.setThirdLevel(goods.getThirdLevel().trim().replace("&",";"));
             }
+        }else{
+            dataGoods.setSecondLevelName(null);
+            dataGoods.setSecondLevel(null);
         }
 
         dataGoods.setDeadlineTime(new Date());

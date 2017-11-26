@@ -27,7 +27,6 @@ public class CalendarUtil {
             result.setTime(DateUtils.parseDate(string, parsePatterns));
             return result;
         } catch (Exception e) {
-            logger.info("parse " + string + "to Calender error " + e );
             return  null;
         }
     }
