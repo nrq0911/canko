@@ -129,9 +129,9 @@
     </table>
 	<hr/>
     <div style="width:100%;">
-		<div style="float:left;padding:5px;">
-			<a class="btn" style="background: #ff0036;color: #fff;" href="/goods/1" th:href="@{'/goods/'+${goods.id}}">繼續購物</a>
-		</div>
+		<!--<div style="float:left;padding:5px;">-->
+			<!--<a class="btn" style="background: #ff0036;color: #fff;" href="/goods/1" th:href="@{'/goods/'+${goods.id}}">繼續購物</a>-->
+		<!--</div>-->
 		<div style="float:right;padding:5px;">總價:$<span th:text="${order.orderPrice}">0</span></div>
 	</div>
 	<br style="clear:both"/>
@@ -207,9 +207,9 @@
         <footer style="text-align:center;">
             <button type="submit" class="c_txt orange_bg" id="buy_now">提  交</button>
             <br style="clear:both"/>
-            <div class="c_txt orange_bg" id="buy_now" style="margin:5px 0;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
-				<a href="/goods/1" th:href="@{'/goods/'+ ${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
-            </div>
+            <!--<div class="c_txt orange_bg" id="buy_now" style="margin:5px 0;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">-->
+				<!--<a href="/goods/1" th:href="@{'/goods/'+ ${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>-->
+            <!--</div>-->
         </footer>
 	</form>
 </div>
