@@ -155,7 +155,7 @@
 				</p>
 				<p class="row" style="margin-left: 0px; margin-right: 0px;">
 					<label for="province">選擇地區</label>
-					<select name="province" class="select" required="required">
+					<select id="province" name="province" class="select" required="required">
 						<option value="">選擇縣市</option>
 						<option value="基隆市">基隆市</option>
 						<option value="台北市">台北市</option>
@@ -193,15 +193,7 @@
 					<input id="guest" name="remark" class="block input" tabindex="7" type="text" value="" placeholder="重要 如果您有其它要求請留言！" />
 				</p>
             </div>
-            <div class="item_wrap add">
-				<p style="color:#ff0000;">
-					說明:黑貓宅配到府（送貨需要3－7日）
-					註：以下區域需要$ 300 運費
-					宜蘭縣-釣魚台列嶼(全)，高雄市-東沙(全)、南沙(全)，澎湖縣-馬公(虎井島、桶盤島)、望安(全)、
-					七美(全)、白沙(大倉嶼、員貝嶼、鳥嶼、吉貝嶼)，金門縣-烈嶼(大膽島、二膽島)、烏坵(全)、
-					台東縣-蘭嶼(全)
-				</p>
-            </div>
+
         </section>
 
         <footer style="text-align:center;">
@@ -211,6 +203,16 @@
 				<!--<a href="/goods/1" th:href="@{'/goods/'+ ${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>-->
             <!--</div>-->
         </footer>
+		<br/>
+		<div class="item_wrap add">
+			<p style="color:#ff0000;font-size: 14px;">
+				說明:黑貓宅配到府（送貨需要3－7日）
+				註：以下區域需要$ 300 運費
+				宜蘭縣-釣魚台列嶼(全)，高雄市-東沙(全)、南沙(全)，澎湖縣-馬公(虎井島、桶盤島)、望安(全)、
+				七美(全)、白沙(大倉嶼、員貝嶼、鳥嶼、吉貝嶼)，金門縣-烈嶼(大膽島、二膽島)、烏坵(全)、
+				台東縣-蘭嶼(全)
+			</p>
+		</div>
 	</form>
 </div>
 <script th:src="@{/static/js/not3.js}" type="text/javascript"></script>

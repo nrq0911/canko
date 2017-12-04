@@ -27,6 +27,21 @@
 	</script>
 	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=2019547141622863&amp;noscript=1&amp;ev=PageView"/></noscript>
 	<!-- End Facebook Pixel Code -->
+	<!-- Facebook Pixel Code -->
+	<script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '142417946312654');
+        fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none;" src="https://www.facebook.com/tr?id=142417946312654&amp;noscript=1&amp;ev=PageView"/></noscript>
+	<!-- End Facebook Pixel Code -->
 	<style type="text/css">
 		.item_wrap img {
 			height: auto;
@@ -113,25 +128,25 @@
 			<br style="clear:both" />
 		</footer>
 	</form>
-	<br style="clear:both" />
-	<p class="comment-title">訂單信息查詢</p>
-	<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">
-		<section class="item_sec">
-			<div class="item_wrap add">
-				<p class="row">
-					<label style="float:left">查詢信息 </label>
-					<input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />
-				</p>
-			</div>
-		</section>
-		<footer style="text-align:center;">
-			<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>
-		</footer>
-		<br style="clear:both"/>
-	</form>
-	<div class="c_txt orange_bg" id="buy_now" style="width:95%;margin:5px auto;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">
-		<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>
-	</div>
+	<!--<br style="clear:both" />-->
+	<!--<p class="comment-title">訂單信息查詢</p>-->
+	<!--<form id="fom" class="registerform" onsubmit="return checkSearch()" target="_blank" method="post" action="/order/searchOrder" name="form">-->
+		<!--<section class="item_sec">-->
+			<!--<div class="item_wrap add">-->
+				<!--<p class="row">-->
+					<!--<label style="float:left">查詢信息 </label>-->
+					<!--<input style="width:100%;" type="text" name="orderSearch" value="" placeholder="請輸入訂單號或者訂單姓名或手機號" class="block input" id="order_search" />-->
+				<!--</p>-->
+			<!--</div>-->
+		<!--</section>-->
+		<!--<footer style="text-align:center;">-->
+			<!--<button style="float:right" id="buy_now" class="c_txt orange_bg" type="submit">查詢</button>-->
+		<!--</footer>-->
+		<!--<br style="clear:both"/>-->
+	<!--</form>-->
+	<!--<div class="c_txt orange_bg" id="buy_now" style="width:95%;margin:5px auto;background-color: #5cb85c !important;border-color: #4cae4c !important;box-shadow: 0 -1px 0 0 #4cae4c inset;">-->
+		<!--<a href="/goods/1" th:src="@{/goods/${goods.id}}" style="width:100% !important;height:40px;text-align:center;padding: 6px 12px;vertical-align: middle;border-color: #4cae4c;color: #fff;">上一頁</a>-->
+	<!--</div>-->
 	<div style="text-align:center;width: 100%; padding: 10px 0;">
 		如有問題，請隨時聯繫:<a href="mailto:service@azonebuy.com‍"><font color="red">service@azonebuy.com‍</font></a>。
 		同時,請附上您的姓名及聯繫方式在郵件當中，以便我們能快速的給您及時處理，購物愉快！！！
