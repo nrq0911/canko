@@ -49,6 +49,9 @@ public class Goods {
     /**一级菜单属性*/
     private String firstLevel;
 
+    /**一级商品属性对应的图片*/
+    private String firstLevelPicture;
+
     /**二级菜单名称*/
     private String secondLevelName;
 
@@ -63,6 +66,12 @@ public class Goods {
 
     /**抢购描述*/
     private String buyInformation;
+
+    /**轮播图地址*/
+    private String carouselUrl;
+
+    /**商品视频地址*/
+    private String video;
 
     /**备注*/
     private String remark;
@@ -227,6 +236,30 @@ public class Goods {
         this.thirdLevel = thirdLevel;
     }
 
+    public String getFirstLevelPicture() {
+        return firstLevelPicture;
+    }
+
+    public void setFirstLevelPicture(String firstLevelPicture) {
+        this.firstLevelPicture = firstLevelPicture;
+    }
+
+    public String getCarouselUrl() {
+        return carouselUrl;
+    }
+
+    public void setCarouselUrl(String carouselUrl) {
+        this.carouselUrl = carouselUrl;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -244,12 +277,16 @@ public class Goods {
                 ", goodsImages='" + goodsImages + '\'' +
                 ", firstLevelName='" + firstLevelName + '\'' +
                 ", firstLevel='" + firstLevel + '\'' +
+                ", firstLevelPicture='" + firstLevelPicture + '\'' +
                 ", secondLevelName='" + secondLevelName + '\'' +
                 ", secondLevel='" + secondLevel + '\'' +
                 ", thirdLevelName='" + thirdLevelName + '\'' +
                 ", thirdLevel='" + thirdLevel + '\'' +
                 ", buyInformation='" + buyInformation + '\'' +
+                ", carouselUrl='" + carouselUrl + '\'' +
+                ", video='" + video + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }
+
 }

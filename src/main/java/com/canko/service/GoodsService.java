@@ -11,6 +11,8 @@ public interface GoodsService {
 
     Goods getGoodsById(int id);
 
+    Goods getGoodsByDisplayId(String displayId);
+
     int addGoods(Goods goods);
 
     void updateGoods(Goods goods);

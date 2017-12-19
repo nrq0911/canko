@@ -5,6 +5,9 @@
     <select id="getGoodsById" resultType="com.canko.domain.Goods">
         select * from goods where id = #{id}
     </select>
+    <select id="getGoodsByDisplayId" resultType="com.canko.domain.Goods">
+        select * from goods where display_id = #{displayId}
+    </select>
     <select id="getGoodsByName" parameterType="map" resultType="com.canko.domain.Goods">
         select * from goods where name like '%'||#{name}||'%' order by id desc limit 0,15
     </select>

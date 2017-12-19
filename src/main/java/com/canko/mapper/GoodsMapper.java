@@ -14,6 +14,8 @@ public interface GoodsMapper {
 
     Goods getGoodsById(@Param("id")int id);
 
+    Goods getGoodsByDisplayId(@Param("displayId") String displayId);
+
     List<Goods> getGoodsByName(@Param("name") String goodsName);
 
     void addGoods(Goods goods);

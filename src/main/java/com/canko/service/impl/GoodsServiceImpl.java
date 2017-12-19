@@ -35,6 +35,17 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public Goods getGoodsByDisplayId(String displayId) {
+        String key = "goods." + displayId;
+        Goods goods = redisSevice.get(key,Goods.class);
+        if(goods == null){
+            goods = goodsMapper.getGoodsByDisplayId(displayId);
+            redisSevice.set(key,goods);
+        }
+        return goods;
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int addGoods(Goods goods) {
         goodsMapper.addGoods(goods);
