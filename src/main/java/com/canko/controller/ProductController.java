@@ -47,7 +47,7 @@ public class ProductController {
             Goods goods = goodsService.getGoodsByDisplayId(displayId);
             if (goods == null) {
                 response.put("code", "404");
-                response.put("msg", "Goods do not exist！");
+                response.put("msg", "商品不存在！");
             } else {
                 response.put("code", "200");
                 response.put("msg", "success");
@@ -72,12 +72,12 @@ public class ProductController {
         Map<String, Object> response = new LinkedHashMap<>();
         if(StringUtils.isNoneBlank(model.getGoodsId(), model.getSpec()) ){
             response.put("code", "400");
-            response.put("msg", "goodsId and spec can't be empty!");
+            response.put("msg", "商品ID和規格不能為空！");
             return response;
         }
         if(model.getNum() < 1 || model.getMoney() < 100 ){
             response.put("code", "400");
-            response.put("msg", "num or money of input error! ");
+            response.put("msg", "商品數量或金額錯誤！");
             return response;
         }
         try {
@@ -117,6 +117,7 @@ public class ProductController {
             response.put("code", "400");
             GoodsOrder order = orderService.getOrderByDisplayId(model.getOrderId());
             if(order == null){
+                response.put("code", "404");
                 response.put("msg","訂單不存在，請刷新！");
                 return  response;
             }
@@ -178,8 +179,5 @@ public class ProductController {
         }
         return response;
     }
-
-
-
 
 }
