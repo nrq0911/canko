@@ -1,10 +1,12 @@
 package com.canko.model;
 
+import com.alibaba.fastjson.JSON;
 import com.canko.domain.Goods;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ProductVO {
 
@@ -36,7 +38,7 @@ public class ProductVO {
     private List<String> goodsInformation;
 
     /**商品图片*/
-    private String goodsImages;
+    private Map<Integer,String> goodsImages;
 
     /**一级菜单名称*/
     private String firstLevelName;
@@ -45,7 +47,7 @@ public class ProductVO {
     private List<String> firstLevel;
 
     /**一级商品属性对应的图片*/
-    private List<String> firstLevelPicture;
+    private Map<String,String> firstLevelPicture;
 
     /**二级菜单名称*/
     private String secondLevelName;
@@ -85,18 +87,13 @@ public class ProductVO {
         for(String str : goods.getGoodsInformation().split(";")){
             this.goodsInformation.add(str);
         }
-        this.goodsImages = goods.getGoodsImages();
+        this.goodsImages = JSON.parseObject(goods.getGoodsImages(), Map.class);
         this.firstLevelName = goods.getFirstLevelName();
         this.firstLevel = new ArrayList<>();
         for(String str : goods.getFirstLevel().split(";")){
             this.firstLevel.add(str);
         }
-        this.firstLevelPicture = new ArrayList<>();
-        if(StringUtils.isNotBlank(goods.getFirstLevelPicture())){
-            for(String str : goods.getFirstLevelPicture().split(";")){
-                this.firstLevelPicture.add(str);
-            }
-        }
+        this.firstLevelPicture = JSON.parseObject(goods.getFirstLevelPicture(), Map.class);
         this.secondLevelName = goods.getSecondLevelName();
         this.secondLevel = new ArrayList<>();
         if(StringUtils.isNotBlank(goods.getSecondLevel())){
@@ -197,11 +194,11 @@ public class ProductVO {
         this.goodsInformation = goodsInformation;
     }
 
-    public String getGoodsImages() {
+    public Map<Integer,String> getGoodsImages() {
         return goodsImages;
     }
 
-    public void setGoodsImages(String goodsImages) {
+    public void setGoodsImages(Map<Integer,String> goodsImages) {
         this.goodsImages = goodsImages;
     }
 
@@ -221,11 +218,11 @@ public class ProductVO {
         this.firstLevel = firstLevel;
     }
 
-    public List<String> getFirstLevelPicture() {
+    public Map<String,String> getFirstLevelPicture() {
         return firstLevelPicture;
     }
 
-    public void setFirstLevelPicture(List<String> firstLevelPicture) {
+    public void setFirstLevelPicture(Map<String,String> firstLevelPicture) {
         this.firstLevelPicture = firstLevelPicture;
     }
 

@@ -22,4 +22,16 @@ public class HomeController {
         return JSON.toJSONString(Thread.getAllStackTraces());
     }
 
+    @ResponseBody
+    @RequestMapping("/login.do")
+    public String login(){
+        return "";
+    }
+
+    @ResponseBody
+    @RequestMapping("/logout.do")
+    public String logout(){
+        return "";
+    }
+
 }
