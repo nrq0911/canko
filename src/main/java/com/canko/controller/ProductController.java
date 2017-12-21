@@ -70,7 +70,7 @@ public class ProductController {
     @RequestMapping(value = "/choseSpec")
     public Map<String, Object> choseSpec(SpecModel model) {
         Map<String, Object> response = new LinkedHashMap<>();
-        if(StringUtils.isNoneBlank(model.getGoodsId(), model.getSpec()) ){
+        if(StringUtils.isAnyBlank(model.getGoodsId(), model.getSpec()) ){
             response.put("code", "400");
             response.put("msg", "goodsId and spec can't be empty!");
             return response;
@@ -160,7 +160,7 @@ public class ProductController {
             Member member = new Member();
             member.setRegion(model.getPostcode());
             member.setMobilephone(model.getTel());
-            member.setAddress(model.getEmail());
+            member.setAddress(model.getAddress());
             member.setEmail(model.getEmail());
             member.setName(model.getName());
             member.setRemark(model.getRemark());
