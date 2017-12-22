@@ -1,10 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Redis 缓存</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../../img/logo.png" />
+    <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/style.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/toastr/toastr.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/sweetalert/sweetalert.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/layer/layer.css" />
+    <style type="text/css">.fixed-table-pagination{height: 23px;}</style>
 </head>
 <body>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div id="toolbar" class="input-group">
+                    <input placeholder="商品名称" id="keyQuery" class="search form-control" style="width:300px"  />
+                    <button type="button" class="btn btn-primary" onclick="tableReload()"> <i class="fa fa-search"></i> 搜索</button>&nbsp;
+                </div>
+                <br/>
+                <table id="tableList"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/content.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/layer/layer.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-full-width",
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1000",
+        "timeOut": "7000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
+    var limit = "1";
+    var offset = "20";
+
+    $(document).ready(function() {
+        updateTable();
+        addEventListener();
+    });
+
+    function addEventListener() {
+        // esc 关闭弹窗
+        $(window).keydown(function (event) {
+            if (event.keyCode == 27) {
+                layer.close(layer.index);
+            }
+        });
+    }
+
+    function updateTable(){
+        $('#tableList').bootstrapTable({
+            method: 'post',
+            url: basePath + '/cache/redis/getPage.action',
+            height: "auto",
+            dataType: "json",
+            sortable: true,
+            pagination: true,
+            contentType: "application/x-www-form-urlencoded",
+            singleSelect: false,
+            pageSize: 20,
+            pageNumber:1,
+            search: false,
+            columns: [
+                {field : 'id', title : '序号', width : 80, align : 'center'},
+                {field : 'key', title : '商品名称', width : 320, align : 'left'},
+                {field : 'dataType', title : '原价', width : 120, align : 'center'},
+                {field : 'dataType', title : '活动价', width : 120, align : 'center'},
+                {field : 'dataType', title : '销售量', width : 120, align : 'center'},
+                {field : 'dataType', title : '库存', width : 120, align : 'center'},
+                {field : 'dataType', title : '商品描述', width : 120, align : 'center'},
+                {field : 'goods', title : '商品地址', width : 120, align : 'center',
+                    formatter : function(value,row,index){
+                        return '<a href="javascript:void(0);" style="text-decoration: none;">查看</a>';
+                    }
+                },
+                {field : 'timeToLive', title : '商品规格', width : 150, align : 'center'},
+                {field : 'timeToLive', title : '抢购信息', width : 150, align : 'center'},
+                {field : 'timeToLive', title : '备注', width : 150, align : 'center'},
+                {field : 'operation', title : '操作', width : 245, align : 'center',
+                    formatter : function(value, row, index) {
+                        var html = '<a href="javascript:void(0);" onClick="updateGoods(\''+row.id+'\')">修改</a>';
+                        return html;
+                    }
+                }
+            ],
+            showColumns: false, //不显示下拉框（选择显示的列）
+            sidePagination: "server", //服务端请求
+            queryParams: queryParams,
+            responseHandler: responseHandler
+        });
+    }
+
+    //ajax返回的数据处理
+    function responseHandler(res) {
+        return {
+            "rows": res.rows,
+            "total": res.total
+        };
+    }
+    //传递的参数
+    function queryParams(params) {
+        var page = params.offset/params.limit + 1;
+        return {
+            rows: params.limit,/* 页面大小 */
+            page: page,
+            key: createKey
+        };
+    }
+
+    function createKey(){
+        var module = $.trim($('#module').val());
+        var domain = $.trim($('#domain').val());
+        var pattern = $.trim($('#pattern').val());
+        var key = '';
+        if('' != module){
+            key = module + '.';
+        }
+        if('' != domain){
+            key += domain + ".";
+        }
+        key += $.trim($("#keyQuery").val());
+        if('' != pattern){
+            key += pattern;
+        }
+        return key;
+    }
+
+    //刷新
+    function tableReload(){/* 刷新表格数据 */
+        $('#tableList').bootstrapTable('refresh');
+    }
+
+</script>
 </body>
 </html>
