@@ -53,8 +53,13 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getGoodsListByName(String goodsName) {
-        return goodsMapper.getGoodsByName(goodsName);
+    public List<Goods> getGoodsListByName(String goodsName, int page, int rows) {
+        return goodsMapper.getGoodsByName(goodsName, page, rows);
+    }
+
+    @Override
+    public int countGoodsByName(String goodsName){
+        return goodsMapper.countGoodsByName(goodsName);
     }
 
     @Override

@@ -9,7 +9,10 @@
         select * from goods where display_id = #{displayId}
     </select>
     <select id="getGoodsByName" parameterType="map" resultType="com.canko.domain.Goods">
-        select * from goods where name like '%'||#{name}||'%' order by id desc limit 0,15
+        select * from goods where name like '%'||#{name}||'%' order by id desc limit #{page},#{rows}
+    </select>
+    <select id="countGoodsByName" parameterType="map" resultType="java.lang.Integer">
+        select count(*) from goods where name like '%'||#{name}||'%'
     </select>
     <insert id="addGoods" parameterType="com.canko.domain.Goods">
         <selectKey order="AFTER" resultType="java.lang.Integer" keyProperty="id">

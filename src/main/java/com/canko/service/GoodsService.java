@@ -17,6 +17,8 @@ public interface GoodsService {
 
     void updateGoods(Goods goods);
 
-    List<Goods> getGoodsListByName(String goodsName);
+    List<Goods> getGoodsListByName(String goodsName, int page, int rows);
+
+    int countGoodsByName(String goodsName);
 
 }

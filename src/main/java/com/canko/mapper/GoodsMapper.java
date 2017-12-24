@@ -16,7 +16,9 @@ public interface GoodsMapper {
 
     Goods getGoodsByDisplayId(@Param("displayId") String displayId);
 
-    List<Goods> getGoodsByName(@Param("name") String goodsName);
+    List<Goods> getGoodsByName(@Param("name") String goodsName, @Param("page") int page, @Param("rows") int rows);
+
+    int countGoodsByName(@Param("name") String goodsName);
 
     void addGoods(Goods goods);
 

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redis 缓存</title>
+    <title>商品列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/png" sizes="32x32" href="../../img/logo.png" />
     <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="../../css/font-awesome.min.css" />
@@ -19,7 +20,7 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div id="toolbar" class="input-group">
-                    <input placeholder="商品名称" id="keyQuery" class="search form-control" style="width:300px"  />
+                    <input placeholder="商品名称" id="name" class="search form-control" style="width:300px"  />
                     <button type="button" class="btn btn-primary" onclick="tableReload()"> <i class="fa fa-search"></i> 搜索</button>&nbsp;
                 </div>
                 <br/>
@@ -75,7 +76,7 @@
     function updateTable(){
         $('#tableList').bootstrapTable({
             method: 'post',
-            url: basePath + '/cache/redis/getPage.action',
+            url: '/page/goods/list',
             height: "auto",
             dataType: "json",
             sortable: true,
@@ -133,21 +134,8 @@
     }
 
     function createKey(){
-        var module = $.trim($('#module').val());
-        var domain = $.trim($('#domain').val());
-        var pattern = $.trim($('#pattern').val());
-        var key = '';
-        if('' != module){
-            key = module + '.';
-        }
-        if('' != domain){
-            key += domain + ".";
-        }
-        key += $.trim($("#keyQuery").val());
-        if('' != pattern){
-            key += pattern;
-        }
-        return key;
+        var name = $.trim($('#name').val());
+        return name;
     }
 
     //刷新
