@@ -137,7 +137,7 @@ public class GoodsController {
     /** 货物列表 */
     @RequestMapping(value = "/admin/goods/goodsList",method = RequestMethod.POST)
     public String goodsList(Model model,@RequestParam(value = "name",defaultValue = "") String goodsName){
-        List<Goods> goodsList = goodsService.getGoodsListByName(goodsName, 0 , 15 );
+        List<Goods> goodsList = goodsService.getGoodsListByName(goodsName, 1 , 15 );
         model.addAttribute("goodsList",goodsList);
         model.addAttribute("name",goodsName);
         return "goods/goodsList";

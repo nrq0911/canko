@@ -22,6 +22,7 @@
                 <div id="toolbar" class="input-group">
                     <input placeholder="商品名称" id="name" class="search form-control" style="width:300px"  />
                     <button type="button" class="btn btn-primary" onclick="tableReload()"> <i class="fa fa-search"></i> 搜索</button>&nbsp;
+                    <button type="button" class="btn btn-primary" onclick="addGoods()">新增</button>
                 </div>
                 <br/>
                 <table id="tableList"></table>
@@ -87,22 +88,41 @@
             pageNumber:1,
             search: false,
             columns: [
-                {field : 'id', title : '序号', width : 80, align : 'center'},
-                {field : 'key', title : '商品名称', width : 320, align : 'left'},
-                {field : 'dataType', title : '原价', width : 120, align : 'center'},
-                {field : 'dataType', title : '活动价', width : 120, align : 'center'},
-                {field : 'dataType', title : '销售量', width : 120, align : 'center'},
-                {field : 'dataType', title : '库存', width : 120, align : 'center'},
-                {field : 'dataType', title : '商品描述', width : 120, align : 'center'},
-                {field : 'goods', title : '商品地址', width : 120, align : 'center',
+                {field : 'id', title : '序号', width : 60, align : 'center'},
+                {field : 'name', title : '商品名称', width : 120, align : 'center'},
+                {field : 'primePrice', title : '原价', width : 80, align : 'center'},
+                {field : 'marketPrice', title : '活动价', width : 80, align : 'center'},
+                {field : 'salesVolume', title : '销售量', width : 80, align : 'center'},
+                {field : 'stock', title : '库存', width : 80, align : 'center'},
+                {field : 'goodsInformation', title : '商品描述', width : 200, align : 'center',
                     formatter : function(value,row,index){
-                        return '<a href="javascript:void(0);" style="text-decoration: none;">查看</a>';
+                        return value.replace(";", "<br/>");
                     }
                 },
-                {field : 'timeToLive', title : '商品规格', width : 150, align : 'center'},
-                {field : 'timeToLive', title : '抢购信息', width : 150, align : 'center'},
-                {field : 'timeToLive', title : '备注', width : 150, align : 'center'},
-                {field : 'operation', title : '操作', width : 245, align : 'center',
+                {field : 'api', title : '商品地址', width : 100, align : 'center',
+                    formatter : function(value,row,index){
+                        return '<a target="_blank" href="http://canko09.com/product/'+ row.displayId +'" style="text-decoration: none;">查看</a>';
+                    }
+                },
+                {field : 'spec', title : '商品规格', width : 250, align : 'center',
+                    formatter : function(value,row,index){
+                        var html = row.firstLevelName + ':' + row.firstLevel;
+                        if(!isBlank(row.secondLevelName)){
+                            html += '<br/>' + row.secondLevelName + ':' + row.secondLevel;
+                        }
+                        if(!isBlank(row.thirdLevelName)){
+                            html += '<br/>' + row.thirdLevelName + ':' + row.thirdLevel;
+                        }
+                        return html;
+                    }
+                },
+                {field : 'buyInformation', title : '抢购信息', width : 250, align : 'center',
+                    formatter : function(value,row,index){
+                        return value.replace(";", "<br/>");
+                    }
+                },
+                {field : 'remark', title : '备注', width : 150, align : 'center'},
+                {field : 'operation', title : '操作', width : 80, align : 'center',
                     formatter : function(value, row, index) {
                         var html = '<a href="javascript:void(0);" onClick="updateGoods(\''+row.id+'\')">修改</a>';
                         return html;
@@ -142,6 +162,390 @@
     function tableReload(){/* 刷新表格数据 */
         $('#tableList').bootstrapTable('refresh');
     }
+
+    function openWindows(title){
+        var html = '<div id="editWindow">\n' +
+            '    <div class="ibox float-e-margins">\n' +
+            '        <div class="ibox-content">\n' +
+            '            <form class="form-horizontal m-t" id="commentForm">\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">商品名称：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="name" name="name" minlength="2" type="text" class="form-control" required="请输入商品名称！" aria-required="true" />\n' +
+            '                        <input id="operate" type="hidden" value="add" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">轮播图地址：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="carouselUrl" name="carouselUrl" minlength="2" type="text" class="form-control" required="请输入轮播图片地址！" aria-required="true"  />\n' +
+            '                        <input name="carouselUrl" minlength="2" type="text" class="form-control" />\n' +
+            '                        <input name="carouselUrl" minlength="2" type="text" class="form-control" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">原价：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="primePrice" name="primePrice" minlength="2" type="number" class="form-control" required="" aria-required="true" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">销售价：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="marketPrice" name="marketPrice" minlength="2" type="number" class="form-control" required="" aria-required="true" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">销售量：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="salesVolume" name="salesVolume" minlength="1" type="number" class="form-control" required="" aria-required="true" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">库存：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="stock" name="stock" minlength="1" type="number" class="form-control" required="" aria-required="true" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">商品描述：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="goodsInformation" name="goodsInformation" type="text" class="form-control" style="width: 90%;display: inline-block;" />\n' +
+            '                        <span title="新增一行" style="font-size: 25px;" onclick="addLine(\'#goodsInformationLine\', \'goodsInformation\')">&nbsp;<i class="fa fa-plus"></i></span>\n' +
+            '                        <br id="goodsInformationLine"/>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">图片地址：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="goodsImages" name="goodsImages" type="text" class="form-control" style="width: 90%;display: inline-block;" />\n' +
+            '                        <span title="新增一行" style="font-size: 25px;" onclick="addLine(\'#goodsImagesLine\', \'goodsImages\')">&nbsp;<i class="fa fa-plus"></i></span>\n' +
+            '                        <br id="goodsImagesLine"/>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">视频地址：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="video" name="video" minlength="1" type="text" class="form-control" required="" aria-required="true" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">一级属性：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="firstLevelName" name="firstLevelName" minlength="1" type="text" class="form-control" required="请输入一级属性名称" aria-required="true" />\n' +
+            '                        <span style="font-weight: bold;">属性:&nbsp;</span>\n' +
+            '                        <input id="firstLevel" name="firstLevel" type="text" class="form-control" style="width: 40%;display: inline-block;" />\n' +
+            '                        <span style="font-weight: bold;">地址:&nbsp;</span>\n' +
+            '                        <input id="firstLevelPicture" name="firstLevelPicture" type="text" class="form-control" style="width: 40%;display: inline-block;" />\n' +
+            '                        <span title="新增一行" style="font-size: 25px;" onclick="addLevelLine()">&nbsp;<i class="fa fa-plus"></i></span>\n' +
+            '                        <br id="firstLevelNameLine"/>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">二级属性：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="secondLevelName" name="secondLevelName" minlength="1" type="text" class="form-control" />\n' +
+            '                        <span style="font-weight: bold;">属性:&nbsp;</span>\n' +
+            '                        <input id="secondLevel" name="secondLevel" type="text" placeholder="二级属性用\';\'分割属性，例如：S;M;L;XL" class="form-control" style="width: 90%;display: inline-block;" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">三级属性：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="thirdLevelName" name="thirdLevelName" type="text" class="form-control" />\n' +
+            '                        <span style="font-weight: bold;">属性:&nbsp;</span>\n' +
+            '                        <input id="thirdLevel" name="thirdLevel" type="text" placeholder="三级属性用\';\'分割属性，例如：36;37;38;39;40" class="form-control" style="width: 90%;display: inline-block;" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">抢购描述：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="buyInformation" name="buyInformation" type="text" class="form-control" style="width: 90%;display: inline-block;" required="" aria-required="true" />\n' +
+            '                        <span title="新增一行" style="font-size: 25px;" onclick="addLine(\'#buyInformationLine\', \'buyInformation\')">&nbsp;<i class="fa fa-plus"></i></span>\n' +
+            '                        <br id="buyInformationLine"/>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">备注：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input name="carouselUrl" minlength="1" type="text" class="form-control" />\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '\n' +
+            '                <div class="form-group">\n' +
+            '                    <div class="col-sm-4 col-sm-offset-3">\n' +
+            '                        <button class="btn btn-primary" type="button" onclick="submitForm()">提交</button>\n' +
+            '                        <button class="btn btn-primary" type="reset" >重置</button>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </form>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '</div>\n';
+        //在这里面输入任何合法的js语句
+        layer.open({
+            type: 1, //Page层类型
+            area: ['800px', '600px'],
+            title: title,
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 0, //0-6的动画形式，-1不开启
+            content: html
+        });
+    }
+    
+    function addGoods() {
+        openWindows('新增商品');
+        $("#operate").val('add');
+    }
+
+    function updateGoods(id) {
+        openWindows('修改商品');
+        $("#operate").val('update');
+        $.ajax({
+            type : "post",
+            url : '/page/goods/' + id,
+            data : {},
+            async : false,
+            dataType : "json",
+            success : function(rs) {
+                if (rs.code != '200') {
+                    layer.alert(rs.msg, {icon: 0});
+                }else{
+                    $('#tableList').bootstrapTable('refresh');
+                }
+            },
+            error:function(){
+                layer.alert('操作失败！', {icon: 0});
+            }
+        });
+    }
+
+    var index = 0;
+    var model = {};
+    var specArray = [];
+    function addLine(br, attribute) {
+        var html = '<span id="span' + (index) + '"><input name="'+ attribute +'" type="text" class="form-control" style="width: 90%;display: inline-block;" />' +
+            '<span title="删除一行" style="font-size: 25px;" onclick="deleteLine(\'#span'+ (index++) +'\')">&nbsp;<i class="fa fa-remove"></i></span></span>';
+        $(br).after(html);
+    }
+
+    function addLevelLine() {
+        var html = '<span id="span' + (index) + '">' +
+            '<span style="font-weight: bold;">属性:&nbsp;&nbsp;</span>' +
+            '<input id="firstLevel'+ index +'" type="text" class="form-control" style="width: 40%;display: inline-block;" />' +
+            '<span style="font-weight: bold;">&nbsp;地址:&nbsp;&nbsp;</span>' +
+            '<input id="firstLevelPicture'+ index +'" type="text" class="form-control" style="width: 40%;display: inline-block;" />' +
+            '<span title="新增一行" style="font-size: 25px;" onclick="deleteLevelLine(\'' + (index++) + '\')">&nbsp;<i class="fa fa-remove"></i></span>' +
+            '<br/></span>' ;
+        $("#firstLevelNameLine").after(html);
+        specArray[(index-1)] = (index -1);
+    }
+
+    function deleteLevelLine(line){
+        $("#span" + line).remove();
+        delete specArray[line];
+    }
+
+    function deleteLine(line){
+        $(line).remove();
+    }
+
+    function createJson() {
+        var name = $("#name").val();
+        if(isBlank(name)){
+            layer.alert('商品名称不能为空！', {icon: 0});
+            return;
+        }
+        model.name = name;
+
+        var carouselUrl = $("#carouselUrl").val();
+        if(isBlank(carouselUrl)){
+            layer.alert('商品轮播图不能为空！', {icon: 0});
+            return;
+        }
+        var carousel = document.getElementsByName("carouselUrl");
+        carouselUrl = '';
+        for(var i in carousel){
+            if(!isBlank(carousel[i])){
+                carouselUrl = carousel[i] + ';'
+            }
+        }
+        model.carouselUrl = carouselUrl;
+
+        var primePrice = $("#primePrice").val();
+        if(isBlank(primePrice) || primePrice < 0){
+            layer.alert('请输入正确的价格！', {icon: 0});
+            return;
+        }
+        model.primePrice = primePrice;
+
+        var marketPrice = $("#marketPrice").val();
+        if(isBlank(marketPrice) || marketPrice < 0){
+            layer.alert('请输入正确的价格！', {icon: 0});
+            return;
+        }
+        model.marketPrice = marketPrice;
+
+        var salesVolume = $("#salesVolume").val();
+        if(isBlank(salesVolume) || salesVolume < 0){
+            layer.alert('请输入正确的销量！', {icon: 0});
+            return;
+        }
+        model.salesVolume = salesVolume;
+
+        var stock = $("#stock").val();
+        if(isBlank(stock) || stock < 0){
+            layer.alert('请输入正确的库存！', {icon: 0});
+            return;
+        }
+        model.stock = stock;
+
+        var goodsInformation = $('#goodsInformation').val();
+        if(isBlank(goodsInformation)){
+            layer.alert('商品描述不能为空！', {icon: 0});
+            return;
+        }
+        var arr = document.getElementsByName("goodsInformation");
+        goodsInformation = '';
+        for(var i in arr){
+            if(!isBlank(arr[i])){
+                goodsInformation = arr[i] + ';'
+            }
+        }
+        model.goodsInformation = goodsInformation;
+
+        var goodsImages = $('#goodsImages').val();
+        if(isBlank(goodsImages)){
+            layer.alert('图片地址不能为空！', {icon: 0});
+            return;
+        }
+        arr = document.getElementsByName("goodsImages");
+        var map = {};
+        for(var i in arr){
+            if(!isBlank(arr[i])){
+                map.i = arr[i];
+            }
+        }
+        model.goodsImages = JSON.stringify(map);
+
+        var video = $("#video").val();
+        if(isBlank(video)){
+            layer.alert('商品视频地址不能为空！', {icon: 0});
+            return;
+        }
+        model.video = video;
+
+        var firstLevelName = $('#firstLevelName').val();
+        if(isBlank(firstLevelName)){
+            layer.alert('一级属性名称不能为空！', {icon: 0});
+            return;
+        }
+        model.firstLevelName = firstLevelName;
+
+        var firstLevel = $('#firstLevel').val();
+        if(isBlank(firstLevel)){
+            layer.alert('一级属性不能为空！', {icon: 0});
+            return;
+        }
+        var firstLevelPicture = $('#firstLevelPicture').val();
+        if(isBlank(firstLevelPicture)){
+            layer.alert('一级属性图片不能为空！', {icon: 0});
+            return;
+        }
+        var spec = {};
+        spec[firstLevel] = firstLevelPicture;
+        for(var i in specArray){
+            var attr = $('#firstLevel' + specArray[i]).val();
+            if(isBlank(attr)){
+                layer.alert('一级属性不能为空！', {icon: 0});
+                return;
+            }
+            var picture = $('#firstLevelPicture' + specArray[i]).val();
+            if(isBlank(picture)){
+                layer.alert('一级属性图片不能为空！', {icon: 0});
+                return;
+            }
+            firstLevel += ';' + attr;
+            spec[attr] = picture;
+        }
+        model.firstLevel = firstLevel;
+        model.firstLevelPicture = JSON.stringify(spec);
+
+        var secondLevelName = $('#secondLevelName').val();
+        if(!isBlank(secondLevelName)){
+            var secondLevel = $('#secondLevel').val();
+            if(isBlank(secondLevel)){
+                layer.alert('二级属性不能为空！', {icon: 0});
+                return;
+            }
+            model.secondLevelName = secondLevelName;
+            model.secondLevel = secondLevel;
+        }
+
+        var thirdLevelName = $('#thirdLevelName').val();
+        if(!isBlank(thirdLevelName)){
+            var thirdLevel = $('#thirdLevel').val();
+            if(isBlank(thirdLevel)){
+                layer.alert('三级属性不能为空！', {icon: 0});
+                return;
+            }
+            model.thirdLevelName = thirdLevelName;
+            model.thirdLevel = thirdLevel;
+        }
+
+        var buyInformation = $('#buyInformation').val();
+        if(isBlank(buyInformation)){
+            layer.alert('抢购描述不能为空！', {icon: 0});
+            return;
+        }
+        arr = document.getElementsByName("buyInformation");
+        buyInformation = '';
+        for(var i in arr){
+            if(!isBlank(arr[i])){
+                buyInformation = arr[i] + ';'
+            }
+        }
+        model.buyInformation = buyInformation;
+
+        var remark = $('#remark').val();
+        if(!isBlank(remark)){
+            model.remark = remark;
+        }
+    }
+
+    function submitForm() {
+        var operate = $('#operate').val();
+        var url = operate == 'update' ? '/page/goods/add' : '/page/goods/update';
+        createJson();
+        $.ajax({
+            type : "post",
+            url : url,
+            data : model,
+            async : false,
+            dataType : "json",
+            success : function(rs) {
+                if (rs.code != '200') {
+                    layer.alert(rs.msg, {icon: 0});
+                }else{
+                    $('#tableList').bootstrapTable('refresh');
+                }
+            },
+            error:function(){
+                layer.alert('操作失败！', {icon: 0});
+            }
+        });
+    }
+
+
 
 </script>
 </body>

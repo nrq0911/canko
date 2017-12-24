@@ -6,13 +6,11 @@ import com.canko.service.GoodsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
 @RequestMapping("/page")
@@ -40,10 +38,40 @@ public class PageController {
     }
 
     @ResponseBody
+    @RequestMapping("/goods/{id}")
+    public Map<String, Object> getGoods(@PathVariable int id){
+        Map<String, Object> result = new HashMap<>();
+        try {
+            Goods goods = goodsService.getGoodsById(id);
+            if(Objects.isNull(goods)) {
+                result.put("code", 404);
+                result.put("msg", "Goods not exist!");
+            }else{
+                result.put("code", 200);
+                result.put("msg", "success!");
+                result.put("info", goods);
+            }
+        }catch (Exception e){
+            log.error("Get goods {id=" + id + "} info error due to " + e );
+            result.put("code", 500);
+            result.put("msg", "Get goods info error!");
+        }
+        return result;
+    }
+
+    @ResponseBody
     @RequestMapping(value="/goods/add")
     public boolean addGoods(Goods goods){
-
-        return true;
+        try{
+            goods.setDeadlineTime(new Date());
+            goods.setDiscount((goods.getMarketPrice()*10)/Double.valueOf(goods.getPrimePrice()));
+            goods.setDisplayId(String.valueOf(System.currentTimeMillis()));
+            goodsService.addGoods(goods);
+            return true;
+        }catch (Exception e){
+            log.error("add goods " + goods + " error due to " + e);
+            return false;
+        }
     }
 
     @ResponseBody

@@ -54,7 +54,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<Goods> getGoodsListByName(String goodsName, int page, int rows) {
-        return goodsMapper.getGoodsByName(goodsName, page, rows);
+        int offset = (page -1)*rows;
+        return goodsMapper.getGoodsByName(goodsName, offset, rows);
     }
 
     @Override

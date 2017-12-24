@@ -16,7 +16,7 @@ public interface GoodsMapper {
 
     Goods getGoodsByDisplayId(@Param("displayId") String displayId);
 
-    List<Goods> getGoodsByName(@Param("name") String goodsName, @Param("page") int page, @Param("rows") int rows);
+    List<Goods> getGoodsByName(@Param("name") String goodsName, @Param("offset") int offset, @Param("rows") int rows);
 
     int countGoodsByName(@Param("name") String goodsName);
 
