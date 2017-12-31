@@ -69,6 +69,8 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.updateGoods(goods);
         String key = createGoodsKey(goods.getId());
         redisSevice.set(key,goods);
+        key = "goods." + goods.getDisplayId();
+        redisSevice.set(key,goods);
     }
 
     private String createGoodsKey(int id){

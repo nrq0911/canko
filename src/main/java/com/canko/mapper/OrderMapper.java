@@ -19,11 +19,19 @@ public interface OrderMapper {
 
     GoodsOrder getOrderBy(@Param("str") String searchString);
 
+    int countOrderBy(@Param("memberName")String memberName,
+                     @Param("tel")String tel,
+                     @Param("displayId")String displayId,
+                     @Param("startTime")Date startDate,
+                     @Param("endTime")Date endDate);
+
     List<GoodsOrder> getOrderListBy(@Param("memberName")String memberName,
                                     @Param("tel")String tel,
                                     @Param("displayId")String displayId,
                                     @Param("startTime")Date startDate,
-                                    @Param("endTime")Date endDate);
+                                    @Param("endTime")Date endDate,
+                                    @Param("offset")int offset,
+                                    @Param("rows")int rows);
 
     void addOrder(GoodsOrder order);
 

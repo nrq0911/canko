@@ -1,15 +1,15 @@
 package com.canko.controller;
 
 import com.canko.domain.Goods;
-import com.canko.domain.GoodsOrder;
 import com.canko.service.GoodsService;
+import com.canko.service.OrderService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Controller
@@ -19,22 +19,32 @@ public class PageController {
     @Autowired
     private GoodsService goodsService;
 
+    @Autowired
+    private OrderService orderService;
+
     private static final Logger log = Logger.getLogger(PageController.class);
 
     @ResponseBody
     @RequestMapping(value="/goods/list")
     public Map<String, Object> getGoodsList(String name, Integer page, Integer rows){
-        if(Objects.isNull(page) || page < 0){
-            page = 0;
+        if(Objects.isNull(page) || page < 1){
+            page = 1;
         }
         if(Objects.isNull(rows) || rows < 20){
             rows = 20;
         }
         Map<String, Object> result = new LinkedHashMap<>();
-        result.put("total", goodsService.countGoodsByName(name));
-        result.put("rows", goodsService.getGoodsListByName(name, page, rows));
+        try{
+            result.put("total", goodsService.countGoodsByName(name));
+            result.put("rows", goodsService.getGoodsListByName(name, page, rows));
+            return result;
+        }catch (Exception e){
+            result.put("msg", "Server error!");
+            result.put("total", 0);
+            result.put("rows", null);
+            return result;
+        }
 
-        return result;
     }
 
     @ResponseBody
@@ -60,30 +70,139 @@ public class PageController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/goods/add")
-    public boolean addGoods(Goods goods){
+    @RequestMapping(value="/goods/add", method = RequestMethod.POST, consumes="application/json")
+    public Map<String, Object> addGoods(@RequestBody Goods goods){
+        Map<String,Object> result = new HashMap<>();
+        result.put("code", 400);
+        String msg = checkGoodsProperties(goods);
+        if(StringUtils.isNotBlank(msg)){
+            result.put("msg",msg);
+            return result;
+        }
         try{
             goods.setDeadlineTime(new Date());
-            goods.setDiscount((goods.getMarketPrice()*10)/Double.valueOf(goods.getPrimePrice()));
+            double discount = (goods.getMarketPrice()*10)/Double.valueOf(goods.getPrimePrice());
+            goods.setDiscount(new BigDecimal(discount).setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue());
             goods.setDisplayId(String.valueOf(System.currentTimeMillis()));
             goodsService.addGoods(goods);
-            return true;
+            result.put("code", 200);
+            result.put("msg", "success!");
+            return result;
         }catch (Exception e){
             log.error("add goods " + goods + " error due to " + e);
-            return false;
+            result.put("code", 500);
+            result.put("msg", "Server error!");
+            return result;
         }
     }
 
     @ResponseBody
-    @RequestMapping(value="/goods/update")
-    public boolean updateGoods(Goods goods){
+    @RequestMapping(value="/goods/update", method = RequestMethod.POST, consumes="application/json")
+    public Map<String, Object> updateGoods(@RequestBody Goods goods){
+        Map<String,Object> result = new HashMap<>();
+        result.put("code", 400);
+        String msg = checkGoodsProperties(goods);
+        if(StringUtils.isNotBlank(msg)){
+            result.put("msg",msg);
+            return result;
+        }
 
-        return true;
+        try{
+            Goods dataGoods = goodsService.getGoodsByDisplayId(goods.getDisplayId());
+            if(dataGoods == null){
+                result.put("msg","您要修改的商品不存在！");
+                return result;
+            }
+            goods.setId(dataGoods.getId());
+            double discount = (goods.getMarketPrice()*10)/Double.valueOf(goods.getPrimePrice());
+            goods.setDiscount(new BigDecimal(discount).setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue());
+            goodsService.updateGoods(goods);
+            result.put("code", 200);
+            result.put("msg", "success!");
+            return result;
+        }catch (Exception e){
+            log.error("update goods " + goods + "error due to " + e);
+            result.put("code", 500);
+            result.put("msg", "Server error!");
+            return result;
+        }
     }
 
     @ResponseBody
     @RequestMapping(value="/order/list")
-    public List<GoodsOrder> getOrderList(){
+    public Map<String, Object> getOrderList(String name,String tel,String displayId,
+                                            String startTime,String endTime,Integer page, Integer rows){
+        if(Objects.isNull(page) || page < 1){
+            page = 1;
+        }
+        if(Objects.isNull(rows) || rows < 20){
+            rows = 20;
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        try{
+            result.put("total", orderService.countGoodsOrderBy(name,tel,displayId,startTime,endTime));
+            result.put("rows", orderService.getGoodsOrderList(name,tel,displayId,startTime,endTime,page,rows));
+            return result;
+        }catch (Exception e){
+            result.put("total", 0);
+            result.put("rows", null);
+            result.put("msg","Server error!");
+            return result;
+        }
+    }
+
+    private String checkGoodsProperties(Goods goods){
+        if(StringUtils.isBlank(goods.getName())){
+            return "商品名称不能为空！";
+        }
+
+        if(StringUtils.isBlank(goods.getGoodsUrl())){
+            return "商品大图地址不能为空！";
+        }
+
+        if(StringUtils.isBlank(goods.getCarouselUrl())){
+            return "商品轮播图地址不能为空！";
+        }
+
+        if(goods.getPrimePrice() <= 100 || goods.getMarketPrice() <= 100 ){
+            return "商品原价和活动价不能低于100！";
+        }
+
+        if(goods.getPrimePrice() < goods.getMarketPrice()){
+            return "商品原价不能低于活动价！";
+        }
+
+        if(goods.getSalesVolume() < 0 || goods.getStock() < 0){
+            return "商品销售量和活动价不能小于0！";
+        }
+
+        if(StringUtils.isBlank(goods.getGoodsImages())) {
+            return "商品图片地址不能为空！";
+        }
+
+        if(StringUtils.isBlank(goods.getGoodsInformation())){
+            return "商品描述不能为空！";
+        }
+        if(StringUtils.isBlank(goods.getFirstLevelName()) || StringUtils.isBlank(goods.getFirstLevel())){
+            return "商品一级菜单及属性不能为空！";
+        }
+
+        if(StringUtils.isNotBlank(goods.getSecondLevelName())){
+            if(StringUtils.isBlank(goods.getSecondLevel())){
+                return "商品二级属性不能为空！";
+            }
+        }
+
+        if(StringUtils.isNotBlank(goods.getThirdLevelName())){
+            if(StringUtils.isBlank(goods.getThirdLevel())){
+                return "商品三级属性不能为空！";
+            }
+        }
+
+        if(StringUtils.isBlank(goods.getBuyInformation())){
+            return "商品抢购描述不能为空！";
+        }
+
 
         return null;
     }

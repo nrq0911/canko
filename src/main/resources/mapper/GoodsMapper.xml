@@ -19,18 +19,70 @@
             select LAST_INSERT_ID()
         </selectKey>
         insert into goods(name,display_id,goods_url,prime_price,market_price,discount,deadline_time,
-        sales_volume,stock,goods_information,first_level_name,first_level,second_level_name,
-        second_level,third_level_name,third_level,goods_images,buy_information,remark)
+        sales_volume,stock,goods_information,first_level_name,first_level,
+        <if test="firstLevelPicture != null and firstLevelPicture != ''">
+            first_level_picture,
+        </if>
+        <if test="secondLevelName != null and secondLevelName != ''">
+            second_level_name,second_level,
+        </if>
+        <if test="thirdLevelName != null and thirdLevelName != ''">
+            third_level_name,third_level,
+        </if>
+        <if test="carouselUrl != null and carouselUrl != ''">
+            carousel_url,
+        </if>
+        <if test="video != null and video != ''">
+            video,
+        </if>
+        goods_images,buy_information,remark)
         values(#{name},#{displayId},#{goodsUrl},#{primePrice},#{marketPrice}, #{discount},#{deadlineTime},
-          #{salesVolume},#{stock},#{goodsInformation},#{firstLevelName},#{firstLevel},#{secondLevelName},
-          #{secondLevel},#{thirdLevelName},#{thirdLevel},#{goodsImages},#{buyInformation},#{remark})
+         #{salesVolume},#{stock},#{goodsInformation},#{firstLevelName},#{firstLevel},
+         <if test="firstLevelPicture != null and firstLevelPicture != ''">
+            #{firstLevelPicture},
+         </if>
+         <if test="secondLevelName != null and secondLevelName != ''">
+             #{secondLevelName}, #{secondLevel},
+         </if>
+         <if test="thirdLevelName != null and thirdLevelName != ''">
+             #{thirdLevelName},#{thirdLevel},
+         </if>
+         <if test="carouselUrl != null and carouselUrl != ''">
+             #{carouselUrl},
+         </if>
+         <if test="video != null and video != ''">
+             #{video},
+         </if>
+         #{goodsImages},#{buyInformation},#{remark})
     </insert>
     <update id="updateGoods" parameterType="com.canko.domain.Goods">
-        update goods set name = #{name},goods_url = #{goodsUrl},prime_price = #{primePrice},market_price = #{marketPrice},
-        discount = #{discount},deadline_time = #{deadlineTime},sales_volume = #{salesVolume},stock = #{stock},
-        goods_information = #{goodsInformation},first_level_name = #{firstLevelName},first_level = #{firstLevel},
-        second_level_name = #{secondLevelName},second_level = #{secondLevel},third_level_name = #{thirdLevelName},
-        third_level = #{thirdLevel},goods_images = #{goodsImages},buy_information = #{buyInformation},remark = #{remark}
+        update goods set name = #{name},
+        prime_price = #{primePrice},market_price = #{marketPrice},discount = #{discount},
+        sales_volume = #{salesVolume},stock = #{stock},
+        goods_information = #{goodsInformation},goods_images = #{goodsImages},
+        first_level_name = #{firstLevelName},first_level = #{firstLevel},
+        <if test="goodsUrl != null and goodsUrl != ''">
+            goods_url = #{goodsUrl},
+        </if>
+        <if test="carouselUrl != null and carouselUrl != ''">
+            carousel_url = #{carouselUrl},
+        </if>
+        <if test="video != null and video != ''">
+            video = #{video},
+        </if>
+        <if test="firstLevelPicture != null and firstLevelPicture != ''">
+            first_level_picture = #{firstLevelPicture},
+        </if>
+        <if test="secondLevelName != null and secondLevelName != ''">
+            second_level_name = #{secondLevelName},second_level = #{secondLevel},
+        </if>
+        <if test="thirdLevelName != null and thirdLevelName != ''">
+            third_level_name = #{thirdLevelName},third_level = #{thirdLevel},
+        </if>
+        <if test="remark != null and remark != ''">
+            remark = #{remark},
+        </if>
+        buy_information = #{buyInformation}
         where id = #{id}
     </update>
 </mapper>

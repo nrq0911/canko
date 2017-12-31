@@ -41,13 +41,21 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<GoodsOrder> getGoodsOrderList(String memberName,String tel,
-                                              String displayId,String startTime,String endTime) {
+    public int countGoodsOrderBy(String memberName,String tel,String displayId,String startTime,String endTime){
+        Date startDate = CalendarUtil.parseDate(startTime);
+        Date endDate = CalendarUtil.parseDate(endTime);
+        return orderMapper.countOrderBy(memberName,tel,displayId,startDate,endDate);
+    }
+
+    @Override
+    public List<GoodsOrder> getGoodsOrderList(String memberName,String tel,String displayId,
+                                              String startTime,String endTime,int page, int rows) {
         Date startDate = CalendarUtil.parseDate(startTime);
         Date endDate = CalendarUtil.parseDate(endTime);
         List<GoodsOrder> list = null ;
         try{
-           list =  orderMapper.getOrderListBy(memberName,tel,displayId,startDate,endDate);
+            int offset = (page -1)*rows;
+           list =  orderMapper.getOrderListBy(memberName,tel,displayId,startDate,endDate, offset, rows);
            for(GoodsOrder order : list){
                order.setMember(memberMapper.getMemberById(order.getMemberId()));
                order.setGoods(goodsMapper.getGoodsById(order.getGoodsId()));

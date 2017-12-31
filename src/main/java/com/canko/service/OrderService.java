@@ -28,6 +28,8 @@ public interface OrderService {
 
     void updateOrderInformation(int id ,String information);
 
-    List<GoodsOrder> getGoodsOrderList(String memberName,String tel,String displayId,String startTime,String endTime);
+    int countGoodsOrderBy(String memberName,String tel,String displayId,String startTime,String endTime);
+
+    List<GoodsOrder> getGoodsOrderList(String memberName,String tel,String displayId,String startTime,String endTime,int page, int rows);
 
 }

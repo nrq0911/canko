@@ -1,10 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>订单列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../img/logo.png" />
+    <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/style.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/toastr/toastr.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/sweetalert/sweetalert.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/plugins/layer/layer.css" />
+    <style type="text/css">.fixed-table-pagination{height: 23px;}</style>
 </head>
 <body>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div id="toolbar" class="input-group">
+                    <input placeholder="订单号" id="displayId" class="search form-control" style="width:200px"  />
+                    <input placeholder="收货人姓名" id="name" class="search form-control" style="width:200px"  />
+                    <input placeholder="收货人电话" id="tel" class="search form-control" style="width:200px"  />
+                    <button type="button" class="btn btn-primary" onclick="tableReload()"> <i class="fa fa-search"></i> 搜索</button>&nbsp;
+                </div>
+                <br/>
+                <table id="tableList"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/content.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="../../js/plugins/layer/layer.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-full-width",
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1000",
+        "timeOut": "7000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
-</body>
-</html>
+    $(document).ready(function() {
+        updateTable();
+        addEventListener();
+    });
+
+    function addEventListener() {
+        // esc 关闭弹窗
+        $(window).keydown(function (event) {
+            if (event.keyCode == 27) {
+                layer.close(layer.index);
+            }
+        });
+    }
+
+    function updateTable(){
+        $('#tableList').bootstrapTable({
+            method: 'post',
+            url: '/page/order/list',
+            height: "auto",
+            dataType: "json",
+            sortable: true,
+            pagination: true,
+            contentType: "application/x-www-form-urlencoded",
+            singleSelect: false,
+            pageSize: 10,
+            pageNumber:1,
+            search: false,
+            columns: [
+                {field : 'displayId', title : '订单号', width : 80, align : 'center'},
+                {field : 'goods.id', title : '商品ID', width : 60, align : 'center'},
+                {field : 'goods.name', title : '商品名称', width : 120, align : 'center'},
+                {field : 'url', title : '商品链接', width : 60, align : 'center',
+                    formatter : function(value,row,index){
+                        return '<a target="_blank" href="/product/'+ row.goods.displayId +'" style="text-decoration: none;">查看</a>';
+                    }
+                },
+                {field : 'member', title : '收件人信息', width : 200, align : 'center',
+                    formatter : function(value,row,index){
+                        if(isBlank(value)){
+                            return "";
+                        }
+                        var html = '{姓名:' + value.name + ',电话:'+value.mobilephone+',邮箱:'+value.email+',地址:'+value.address+',备注:'+value.remark+'}';
+                        return html;
+                    }
+                },
+                {field : 'orderPrice', title : '订单金额', width : 80, align : 'center'},
+                {field : 'goodsSpec', title : '订单描述', width : 200, align : 'center'},
+                {field : 'num', title : '商品数量', width : 80, align : 'center'},
+                {field : 'createTime', title : '创建时间', width : 100, align : 'center',
+                    formatter : function(value,row,index){
+                         return format(value/1000);
+                    }
+                },
+                {field : 'updateTime', title : '更新时间', width : 100, align : 'center',
+                    formatter : function(value,row,index){
+                        return format(value/1000);
+                    }
+                },
+                {field : 'orderState', title : '订单状态', width : 100, align : 'center',
+                    formatter : function(value,row,index){
+                        var html = '<select id="status'+row.id+'" onchange="changeStatus('+ row.id +')" >' +
+                            '<option value="12" '+ (value == 12 ? 'selected="selected"': '') + ' >待发货</option>' +
+                            '<option value="22" '+ (value == 22 ? 'selected="selected"': '') + '>发货中</option>' +
+                            '<option value="31" '+ (value == 31 ? 'selected="selected"': '') + '>已验收</option>' +
+                            '<option value="32" '+ (value == 32 ? 'selected="selected"': '') + '>未验收</option>' +
+                            '</select>'
+                        return html;
+                    }
+                },
+                {field : 'orderInformation', title : '物流信息', width : 100, align : 'center',
+                    formatter : function(value,row,index){
+                        var html = isBlank(value) ? '<a  href="javascript:void(0)" onclick="addOrderInformation(' + row.id + ')" style="text-decoration: none;">添加</a>' : value;
+                        return html;
+                    }
+                },
+            ],
+            showColumns: false, //不显示下拉框（选择显示的列）
+            sidePagination: "server", //服务端请求
+            queryParams: queryParams,
+            responseHandler: responseHandler
+        });
+    }
+
+    //ajax返回的数据处理
+    function responseHandler(res) {
+        return {
+            "rows": res.rows,
+            "total": res.total
+        };
+    }
+    //传递的参数
+    function queryParams(params) {
+        var page = params.offset/params.limit + 1;
+        var name = $.trim($('#name').val());
+        var tel = $.trim($('#tel').val());
+        var displayId = $.trim($('#displayId').val());
+        return {
+            rows: params.limit,/* 页面大小 */
+            page: page,
+            name: name,
+            tel: tel,
+            displayId:displayId
+        };
+    }
+
+    //刷新
+    function tableReload(){/* 刷新表格数据 */
+        $('#tableList').bootstrapTable('refresh');
+    }
+
+    function changeStatus(orderId){
+        var status = $("#status" + orderId).val();
+        $.ajax({
+            type : "post",
+            url : '/admin/order/update/status',
+            data : {"id":orderId, "status": status},
+            async : false,
+            dataType : "json",
+            success : function(rs) {
+                if (rs != true) {
+                    layer.alert('更新订单状态失败！', {icon: 0});
+                }else{
+                    $('#tableList').bootstrapTable('refresh');
+                }
+            },
+            error:function(){
+                layer.alert('操作失败！', {icon: 0});
+            }
+        });
+    }
+
+    function openWin(){
+        var html = '<div id="editWindow">\n' +
+            '    <div class="ibox float-e-margins">\n' +
+            '        <div class="ibox-content">\n' +
+            '            <form class="form-horizontal m-t" id="commentForm">\n' +
+            '                <div class="form-group">\n' +
+            '                    <label class="col-sm-3 control-label">物流单号：</label>\n' +
+            '                    <div class="col-sm-8">\n' +
+            '                        <input id="information" name="information" minlength="2" type="text" class="form-control" required="请输入订单物流信息！" aria-required="true" />\n' +
+            '                        <input id="modifyOrderId" type="hidden" value="" />\n' +
+            '                    </div>\n' +
+            '                </div>' +
+            '                <div class="form-group">\n' +
+            '                    <div class="col-sm-4 col-sm-offset-3">\n' +
+            '                        <button class="btn btn-primary" type="button" onclick="submitForm()">提交</button>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </form>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+        //在这里面输入任何合法的js语句
+        layer.open({
+            type: 1, //Page层类型
+            area: ['400px', '220px'],
+            title: '更新物流信息',
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 0, //0-6的动画形式，-1不开启
+            content: html
+        });
+    }
+
+    function addOrderInformation(orderId) {
+        openWin();
+        $("#modifyOrderId").val(orderId);
+    }
+    
+    function submitForm() {
+        var orderId = $("#modifyOrderId").val();
+        var information = $("#information").val();
+        $.ajax({
+            type : "post",
+            url : '/admin/order/update/information',
+            data : {"id":orderId,"information":information},
+            async : false,
+            dataType : "json",
+            success : function(rs) {
+                if (rs != true) {
+                    layer.alert('跟新物流信息失败！', {icon: 0});
+                }else{
+                    layer.close(layer.index);
+                    $('#tableList').bootstrapTable('refresh');
+                }
+            },
+            error:function(){
+                layer.alert('操作失败！', {icon: 0});
+            }
+        });
+    }
+
+    function add0(m){return m<10?'0'+m:m }
+    function format(unixTime) {
+        var time = new Date(unixTime);
+        var y = time.getFullYear();
+        var m = time.getMonth()+1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+    }
+
+</script>

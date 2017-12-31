@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.canko.domain.Goods;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductVO {
 
@@ -70,10 +68,12 @@ public class ProductVO {
     /**商品视频地址*/
     private String video;
 
+    /**备注*/
+    private String remark;
+
     public ProductVO(){}
 
-    public ProductVO(Goods goods)
-    {
+    public ProductVO(Goods goods) {
         this.id = goods.getDisplayId();
         this.video = goods.getVideo();
         this.title = goods.getName();
@@ -90,10 +90,17 @@ public class ProductVO {
         this.goodsImages = JSON.parseObject(goods.getGoodsImages(), Map.class);
         this.firstLevelName = goods.getFirstLevelName();
         this.firstLevel = new ArrayList<>();
-        for(String str : goods.getFirstLevel().split(";")){
-            this.firstLevel.add(str);
+        String[] levels = goods.getFirstLevel().split(";");
+        for(String str : levels){
+            this.firstLevel.add(str.replace("\r", "").replace("\n",""));
         }
         this.firstLevelPicture = JSON.parseObject(goods.getFirstLevelPicture(), Map.class);
+        if(Objects.isNull(firstLevelPicture) || firstLevelPicture.isEmpty()){
+            firstLevelPicture = new LinkedHashMap<>();
+            for(String level : firstLevel){
+                firstLevelPicture.put(level, goodsUrl);
+            }
+        }
         this.secondLevelName = goods.getSecondLevelName();
         this.secondLevel = new ArrayList<>();
         if(StringUtils.isNotBlank(goods.getSecondLevel())){
@@ -118,8 +125,11 @@ public class ProductVO {
             for(String str : goods.getCarouselUrl().split(";")){
                 this.carouselUrl.add(str);
             }
+        }else {
+            this.carouselUrl.add(goods.getGoodsUrl());
         }
         this.video = goods.getVideo();
+        this.remark = goods.getRemark();
     }
 
     public String getId() {
@@ -280,6 +290,14 @@ public class ProductVO {
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     @Override
