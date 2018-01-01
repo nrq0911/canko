@@ -68,13 +68,13 @@ function login() {
 	}
     $.ajax({
         type : "post",
-        url : basePath + 'login.action',
+        url :  '/login.do',
         data : json,
         async : false,
         dataType : "json",
         success : function(rs) {
             if (rs.code == '200') {
-                location.href = basePath + 'page/index.do';
+                location.href = '/index.html';
             } else {
                 $(".error").text(rs.msg);
             }
