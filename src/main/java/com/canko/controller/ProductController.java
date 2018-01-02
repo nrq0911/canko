@@ -92,7 +92,7 @@ public class ProductController {
             order.setNum(model.getNum());
             order.setOrderState(OrderState.placeOrder.getCode());
             order.setOrderCurrency(1);
-            order.setOrderPrice(model.getNum());
+            order.setOrderPrice(model.getMoney());
             orderService.addOrder(order);
             response.put("code", "200");
             response.put("msg", "success");
@@ -117,6 +117,11 @@ public class ProductController {
         try {
             response.put("code", "400");
             GoodsOrder order = orderService.getOrderByDisplayId(model.getOrderId());
+            if(order.getOrderState() >= OrderState.confirmOrder.getCode()){
+                response.put("msg","訂單已下單完成！");
+                return  response;
+            }
+
             if(order == null){
                 response.put("code", "404");
                 response.put("msg","訂單不存在，請刷新！");
@@ -131,6 +136,11 @@ public class ProductController {
             if(model.getNum() != order.getNum()){
                 order.setNum(model.getNum());
                 order.setOrderPrice(model.getMoney());
+            }
+
+            double goodsPrice = (goodsService.getGoodsById(order.getGoodsId()).getMarketPrice())*model.getNum();
+            if(Double.valueOf(goodsPrice).intValue() !=  Double.valueOf(model.getMoney()).intValue()){
+                order.setOrderPrice(goodsPrice);
             }
 
             if(StringUtils.isBlank(model.getTel())){
