@@ -6,6 +6,7 @@ import com.canko.domain.GoodsOrder;
 import com.canko.domain.Member;
 import com.canko.domain.enumerate.OrderState;
 import com.canko.model.OrderModel;
+import com.canko.model.OrderVO;
 import com.canko.model.ProductVO;
 import com.canko.model.SpecModel;
 import com.canko.service.GoodsService;
@@ -171,7 +172,7 @@ public class ProductController {
             orderService.confirmOrder(order);
             response.put("code", "200");
             response.put("msg", "success");
-            response.put("orderId",model.getOrderId());
+            response.put("info", new OrderVO(order));
         } catch (Exception e) {
             log.error("Get goods info error model={"+ model +"} due to " + e);
             response.put("code", "500");
