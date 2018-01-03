@@ -31,7 +31,7 @@
 
     <div id="order" style="display: none;">
         <div class="warp">
-            <form id="form" name="form" action="http://canko09.com/order" method="post" onSubmit="return postcheck()">
+            <form id="form" name="form" action="/order" method="post" onSubmit="return postcheck()">
                 <!--  -->
                 <input type="hidden" name="combo_id" value="">
                 <input type="hidden" name="token" value="5fb58bdf1121a6b55f72e7d923ba3c74">
@@ -188,12 +188,11 @@
 <script src="src/js/vue.js"></script>
 <script>
     var config = {
-        api_url: 'http://canko09.com/order'
+        api_url: '/order'
     }
 </script>
 <script type="text/javascript" src="./src/js/checkout.js"></script>
 <!-- 客服系统 -->
-<script language="javascript" src="./src/js/800.js"></script>
 <script src="./src/js/fahuo.js" type="text/javascript"></script>
 <!-- global function -->
 <script type="text/javascript">
