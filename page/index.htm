@@ -119,7 +119,7 @@
                      <source :src="result.video" type="video/mp4">
                   </video>
                </p>
-               <p v-for="(val,index) in result.buyInformation" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: " helvetica="" microsoft="" font-size:="" white-space:="" background-color:="" text-align:="">
+               <p v-for="(val,index) in result.goodsInformation" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: " helvetica="" microsoft="" font-size:="" white-space:="" background-color:="" text-align:="">
                <span style="color: rgb(255, 0, 0); background-color: rgb(255, 255, 0); font-size: 36px;">
                {{val}}
                </span>
@@ -130,18 +130,7 @@
             </div>
             <div class="User_notes">
                <h2 class="notes">用户须知</h2>
-               <div class="note_title">·關於發貨方式</div>
-               <div class="note_text">配送範圍全台灣。</div>
-               <div class="note_title">·關於配送時間</div>
-               <div class="note_text">下單成功之後，我們會按照下單先後順序進行配貨，配貨週期為3個工作日左右，一般到達時間為7個工作日左右。</div>
-               <div class="note_title">·如何申請退換貨</div>
-               <div class="note_text">1.由於個人原因產生的退換貨：至收到商品之日起30天內，在不影響二次銷售的情況下向售後服務中心發送郵件，售後客服會在收到郵件后的1-3個工作日內受理您的請求，退換貨所產生的運費需自行承擔。</div>
-               <div class="note_text">2.由於質量原因產生的退換貨：至收到商品之日起7天內，向售後服務中心發送郵件至<a href="mailto:support@qhobmo.com" style="text-decoration:none;outline:0;color: #b4282d">support@qhobmo.com</a>，客服會在收到郵件后的1-3個工作日內受理您的請求，退換貨所產生的運費由我方承擔。</div>
-               <div class="note_title">3.退換貨流程:</div>
-               <div class="note_text">確認收貨—申請退換貨—客服審核通過—用戶寄回商品—倉庫簽收驗貨—退換貨審核—退款/換貨；</div>
-               <div class="note_title">退換貨請註明：訂單號、姓名、電話。</div>
-               <div class="note_title">·如何取消訂單</div>
-               <div class="note_text">取消訂單需要向售後服務中心發送郵件并注明相关原因，邮件内容应註明您的訂單號、姓名、電話。</div>
+               <div class="note_title" v-for="(val,index) in result.goodsInformation">{{val}}</div>
             </div>
             <!--  -->
             <footer class="footer">
@@ -249,13 +238,18 @@
       <script src="./src/js/swiper-3.4.0.jquery.min.js"></script>
       <script>
          var config = {
-             index_api     : '/product/',
-             order_post_api: '/choseSpec',
-             order_api     : '/order'
+             index_api     : 'http://canko09.com/product/',
+             order_post_api: 'http://canko09.com/choseSpec',
+             order_api     : 'http://canko09.com/order'
          };
       </script>
       <script src="./src/js/index.js"></script>
       <script src="./src/js/guige.js"></script>
       <style>#POP800_INIT_DIV, #POP800_PANEL_DIV, #POP800_LEAVEWORD_DIV { display: none; }</style>
+      <!--  -->
+      <!-- 客服系统 -->
+      <script language="javascript" src="./src/js/800.js"></script>
+      <!-- global function -->
+      <!--  -->
    </body>
 </html>
