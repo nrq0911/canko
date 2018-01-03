@@ -18,6 +18,7 @@ Cjs.url = function(){
     }
     this.getGoodsId = function(){
         var str = window.location.pathname;
+
         return str.substring(str.indexOf('/')+1, str.indexOf('.html'));
     }
     this.getParams = function(names){

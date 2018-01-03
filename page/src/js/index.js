@@ -63,7 +63,7 @@ $(function(){
                                  get.push(key+"="+encodeURI(data[key]));
                              }
 
-                             window.location.href = "./order.htm?"+get.join("&");
+                             window.location.href = "./order.html?"+get.join("&");
                          }
                      });
                  }
