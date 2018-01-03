@@ -1,7 +1,7 @@
 var app;
 $(function(){
-
-     $.getJSON(config.index_api,function (data) {
+	 var goodsId = Cjs.url.getParamByName('goodsId');
+     $.getJSON(config.index_api+goodsId,function (data) {
          console.log(data.result);
          if(data.code!='200'){
              alert("服务器返回数据失败！");

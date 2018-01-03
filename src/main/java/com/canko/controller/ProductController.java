@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
@@ -190,5 +191,28 @@ public class ProductController {
         }
         return response;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/query")
+    public Map<String, Object> order(@RequestParam("id") String orderId) {
+        Map<String, Object> response = new LinkedHashMap<>();
+        try{
+            GoodsOrder order = orderService.getOrderByDisplayId(orderId);
+            if(order == null){
+                response.put("code", "404");
+                response.put("msg","訂單不存在，請重新输入！");
+                return  response;
+            }
+            response.put("code", "200");
+            response.put("msg", "success");
+            response.put("info", new OrderVO(order));
+        }catch (Exception e) {
+            log.error("Get order info error id={"+ orderId +"} due to " + e);
+            response.put("code", "500");
+            response.put("msg", "Server error!");
+        }
+        return response;
+    }
+
 
 }
