@@ -16,6 +16,10 @@ Cjs.url = function(){
         }
         return null;
     }
+    this.getGoodsId = function(){
+        var str = window.location.pathname;
+        return str.substring(str.indexOf('/')+1, str.indexOf('.html'));
+    }
     this.getParams = function(names){
         if( !names.isArray() ){ return null; }
         var value = {};

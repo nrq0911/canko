@@ -202,7 +202,7 @@ function postcheck(){
                 get.push(key+"="+encodeURI(data.info[key]));
             }
 
-            window.location.href = "./pay_success.htm?"+get.join("&");
+            window.location.href = "./pay_success.html?"+get.join("&");
         }
     });
     return false;
