@@ -31,7 +31,7 @@ out/
 ### MacOS
 .DS_Store
 
-### ybd
+### log
 *.log
 doc
 */application-develop.properties
