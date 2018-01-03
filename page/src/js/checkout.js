@@ -199,7 +199,7 @@ function postcheck(){
             data.info.goodImg = app.result.goodImg;
             var get = new Array();
             for (key in data.info){
-                get.push(key+"="+encodeURI(data[key]));
+                get.push(key+"="+encodeURI(data.info[key]));
             }
 
             window.location.href = "./pay_success.htm?"+get.join("&");

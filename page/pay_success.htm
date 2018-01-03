@@ -72,6 +72,9 @@
 
 <script src="src/js/vue.js"></script>
 <script src="./src/js/cjs.js"></script>
+<!-- 客服系统 -->
+<script language="javascript" src="http://api.pop800.com/800.js?n=&s=01&p=l&l=cn"></script>
+<!-- global function -->
 <script>
     app = new Vue({
         el: '#page',
@@ -97,7 +100,7 @@
     function add0(m){return m<10?'0'+m:m }
     function format(shijianchuo)
     {
-        //shijianchuo是整数，否则要parseInt转换
+//shijianchuo是整数，否则要parseInt转换
         var time = new Date();
         var y = time.getFullYear();
         var m = time.getMonth()+1;
