@@ -1,11 +1,14 @@
 var app;
 $(function(){
 	 var goodsId = Cjs.url.getParamByName('goodsId');
-    if(goodsId == null || goodsId == ''){
-        goodsId = Cjs.url.getGoodsId();
-    }
+     if(goodsId == null || goodsId == ''){
+         goodsId = Cjs.url.getGoodsId();
+     }
      $.getJSON(config.index_api+goodsId,function (data) {
          console.log(data.result);
+         if(data.code == 404){
+             window.location.href = "/404";
+         }
          if(data.code!='200'){
              alert("服务器返回数据失败！");
              return false;
