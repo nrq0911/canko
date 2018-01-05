@@ -8,13 +8,11 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="320" name="MobileOptimized" />
     <meta content="telephone=no" name="format-detection" />
-    <title>填寫資料</title>
-    <meta name="keywords" content=" " />
-    <meta name="description" content=" " />
+    <title>Chose Goods spec</title>
     <link rel="stylesheet" href="./src/css/reset.css">
     <script src="./src/js/cjs.js"></script>
     </head>
-<body><!-- resource -->
+<body>
 <link href="./src/css/cart.css" type="text/css" rel="stylesheet"/>
 <script src="./src/js/jquery-2.2.3.min.js" type="text/javascript"></script>
 <!--  -->
@@ -23,7 +21,7 @@
 <div class="g-bd">
     <div class="m-hd">
         <div class="m-topBar">
-            <a class="goback" href="index.html"></a>
+            <a class="goback" href="./index.html"></a>
             <div style="width: 100%;"><div class="title">確認信息</div></div>
         </div>
     </div>
@@ -31,7 +29,7 @@
 
     <div id="order" style="display: none;">
         <div class="warp">
-            <form id="form" name="form" action="/order" method="post" onSubmit="return postcheck()">
+            <form id="form" name="form" action="http://canko09.com/order" method="post" onSubmit="return postcheck()">
                 <!--  -->
                 <input type="hidden" name="combo_id" value="">
                 <input type="hidden" name="token" value="5fb58bdf1121a6b55f72e7d923ba3c74">
@@ -192,9 +190,6 @@
     }
 </script>
 <script type="text/javascript" src="./src/js/checkout.js"></script>
-<!-- 客服系统 -->
-<script src="./src/js/fahuo.js" type="text/javascript"></script>
-<!-- global function -->
 <script type="text/javascript">
     $(function(){
         if( $(".edui-upload-video").length > 0 ){

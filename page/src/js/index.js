@@ -1,9 +1,9 @@
 var app;
 $(function(){
 	 var goodsId = Cjs.url.getParamByName('goodsId');
-	 if(goodsId == null || goodsId == ''){
-	     goodsId = Cjs.url.getGoodsId();
-     }
+    if(goodsId == null || goodsId == ''){
+        goodsId = Cjs.url.getGoodsId();
+    }
      $.getJSON(config.index_api+goodsId,function (data) {
          console.log(data.result);
          if(data.code!='200'){
@@ -79,7 +79,7 @@ $(function(){
          $("#contentPage").show();
 
          if( $(".edui-upload-video").length > 0 ){
-             $(".edui-upload-video").attr("poster", "/public/image/videoPlay.jpg");
+             $(".edui-upload-video").attr("poster", "/src/images/videoPlay.jpg");
              $(".edui-upload-video").click(function(){
                  $(this).get(0).play();
              });
