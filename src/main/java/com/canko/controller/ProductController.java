@@ -15,10 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -69,7 +66,7 @@ public class ProductController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/choseSpec")
+    @RequestMapping(value = "/choseSpec", method = RequestMethod.POST)
     public Map<String, Object> choseSpec(SpecModel model) {
         Map<String, Object> response = new LinkedHashMap<>();
         if(StringUtils.isAnyBlank(model.getGoodsId(), model.getSpec()) ){
@@ -112,7 +109,7 @@ public class ProductController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/order")
+    @RequestMapping(value = "/order",method = RequestMethod.POST)
     public Map<String, Object> order(OrderModel model) {
         Map<String, Object> response = new LinkedHashMap<>();
         try {
@@ -193,7 +190,7 @@ public class ProductController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/query")
+    @RequestMapping(value = "/query", method = RequestMethod.GET)
     public Map<String, Object> order(@RequestParam("id") String orderId) {
         Map<String, Object> response = new LinkedHashMap<>();
         try{

@@ -18,8 +18,8 @@ Cjs.url = function(){
     }
     this.getGoodsId = function(){
         var str = window.location.pathname;
-
-        return str.substring(str.indexOf('/')+1, str.indexOf('.html'));
+        var id = str.substring(str.indexOf('/')+1, str.indexOf('.html'));
+        return id == '/' ? '1501681500511' : id;
     }
     this.getParams = function(names){
         if( !names.isArray() ){ return null; }
