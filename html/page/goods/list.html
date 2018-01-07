@@ -104,7 +104,7 @@
                 },
                 {field : 'api', title : '商品地址', width : 100, align : 'center',
                     formatter : function(value,row,index){
-                        return '<a target="_blank" href="/product/'+ row.displayId +'" style="text-decoration: none;">查看</a>';
+                        return '<a target="_blank" href="https://azonebuy.com/'+ row.displayId +'.html" style="text-decoration: none;">查看</a>';
                     }
                 },
                 {field : 'spec', title : '商品规格', width : 250, align : 'center',
@@ -516,11 +516,9 @@
         model.goodsImages = JSON.stringify(map);
 
         var video = $("#video").val();
-        if(isBlank(video)){
-            layer.alert('商品视频地址不能为空！', {icon: 0});
-            return false;
+        if(!isBlank(video)){
+            model.video = video;
         }
-        model.video = video;
 
         var firstLevelName = $('#firstLevelName').val();
         if(isBlank(firstLevelName)){

@@ -1,6 +1,9 @@
 package com.canko.controller;
 
+import com.canko.common.ExcelData;
+import com.canko.common.ExportExcelUtils;
 import com.canko.domain.Goods;
+import com.canko.service.ExportExcelService;
 import com.canko.service.GoodsService;
 import com.canko.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -22,6 +26,9 @@ public class PageController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ExportExcelService exportExcelService;
 
     private static final Logger log = Logger.getLogger(PageController.class);
 
@@ -40,6 +47,7 @@ public class PageController {
             result.put("rows", goodsService.getGoodsListByName(name, page, rows));
             return result;
         }catch (Exception e){
+            log.error("Get goods list error due to " + e);
             result.put("msg", "Server error!");
             result.put("total", 0);
             result.put("rows", null);
@@ -148,7 +156,17 @@ public class PageController {
             result.put("total", 0);
             result.put("rows", null);
             result.put("msg","Server error!");
+            log.error("Get order list error due to " + e);
             return result;
+        }
+    }
+
+    @RequestMapping(value="/export")
+    public void export(HttpServletResponse response, String startTime, String endTime){
+        try {
+            exportExcelService.exportOrderList(response, "order.xlsx", startTime, endTime);
+        }catch (Exception e){
+            log.error("export order list error due to " + e);
         }
     }
 

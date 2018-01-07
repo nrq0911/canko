@@ -23,6 +23,7 @@
                     <input placeholder="收货人姓名" id="name" class="search form-control" style="width:200px"  />
                     <input placeholder="收货人电话" id="tel" class="search form-control" style="width:200px"  />
                     <button type="button" class="btn btn-primary" onclick="tableReload()"> <i class="fa fa-search"></i> 搜索</button>&nbsp;
+                    <button type="button" class="btn btn-primary" onclick="exportExcel()">导出</button>&nbsp;
                 </div>
                 <br/>
                 <table id="tableList"></table>
@@ -90,7 +91,7 @@
                 {field : 'goods.name', title : '商品名称', width : 120, align : 'center'},
                 {field : 'url', title : '商品链接', width : 60, align : 'center',
                     formatter : function(value,row,index){
-                        return '<a target="_blank" href="/product/'+ row.goods.displayId +'" style="text-decoration: none;">查看</a>';
+                        return '<a target="_blank" href="https://azonebuy.com/'+ row.goods.displayId +'.html" style="text-decoration: none;">查看</a>';
                     }
                 },
                 {field : 'member', title : '收件人信息', width : 200, align : 'center',
@@ -261,4 +262,8 @@
         return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
     }
 
+    function exportExcel() {
+        window.open("/page/export", "_blank");
+    }
+    
 </script>
