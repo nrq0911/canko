@@ -2,6 +2,7 @@ package com.canko.controller;
 
 import com.canko.common.ExcelData;
 import com.canko.common.ExportExcelUtils;
+import com.canko.common.UploadUtils;
 import com.canko.domain.Goods;
 import com.canko.service.ExportExcelService;
 import com.canko.service.GoodsService;
@@ -11,9 +12,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -170,6 +176,29 @@ public class PageController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping(value="/upload")
+    public Map<String, Object>  springUpload(@RequestParam(value = "file[]", required = false) MultipartFile[] files) {
+        Map<String, Object> result = new LinkedHashMap<>();
+        try{
+            Map<String,String> fileNameMap = new LinkedHashMap<>();
+            for(MultipartFile file : files){
+                String fileName = insertUUID(file.getOriginalFilename());
+                if(UploadUtils.upload(fileName, file)){
+                    fileNameMap.put(file.getOriginalFilename(), "http://p26q3xewv.bkt.clouddn.com/" + fileName);
+                }
+            }
+            result.put("code", 200);
+            result.put("msg", "success!");
+            result.put("fileAddress", fileNameMap);
+        }catch (Exception e){
+            log.error("upload file error due to " + e);
+            result.put("code", 500);
+            result.put("msg", "Server error!");
+        }
+        return result;
+    }
+
     private String checkGoodsProperties(Goods goods){
         if(StringUtils.isBlank(goods.getName())){
             return "商品名称不能为空！";
@@ -226,5 +255,10 @@ public class PageController {
         return null;
     }
 
+    private String insertUUID(String fileName){
+        StringBuilder stringBuilder = new StringBuilder(fileName);
+        stringBuilder.insert(fileName.lastIndexOf("."), "_" + UUID.randomUUID().toString().replace("-", ""));
+        return stringBuilder.toString();
+    }
 
 }
