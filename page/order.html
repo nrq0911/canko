@@ -16,12 +16,12 @@
 </head>
 <body>
 
-<input type="hidden" id="_region" value="台灣">
+<input type="hidden" id="_region" value="Indonesia">
 <div class="g-bd">
     <div class="m-hd">
         <div class="m-topBar">
             <a class="goback" href="./index.html"></a>
-            <div style="width: 100%;"><div class="title">確認信息</div></div>
+            <div style="width: 100%;"><div class="title">Informasi konfirmasi</div></div>
         </div>
     </div>
 
@@ -53,7 +53,7 @@
                         </li>
                         <li class="item" style="margin: 10px 0px; padding-bottom:5px;">
                             <div class="u-format">
-                                <div class="tt">數量</div>
+                                <div class="tt">Kuantitas</div>
                                 <div class="con">
                                     <div class="m-selnum dr">
                                         <div class="less z-dis" onclick="minnumber()"></div>
@@ -73,41 +73,41 @@
                     <div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
-                                <div class="cell fixed">姓名</div>
+                                <div class="cell fixed">Nama</div>
                             </div>
                             <div class="cell">
-                                <input required="required" v-model="result.name" placeholder="請輸入姓名，如張三" type="text" name="name" class="inputText">
+                                <input required="required" v-model="result.name" placeholder="Harap masukkan nama seperti Amy" type="text" name="name" class="inputText">
                             </div>
                         </label>
                     </div>
                     <div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
-                                <div class="cell fixed">手機</div>
+                                <div class="cell fixed">Ponsel</div>
                             </div>
                             <div class="cell">
-                                <input required="required" v-model="result.tel" placeholder="請輸入手機號碼" type="text" name="mob" class="inputText">
+                                <input required="required" v-model="result.tel" placeholder="Silakan masukkan nomor telepon" type="text" name="mob" class="inputText">
                             </div>
                         </label>
                     </div>
                     <div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
-                                <div class="cell fixed">郵箱 </div>
+                                <div class="cell fixed">E-mail</div>
                             </div>
                             <div class="cell">
-                                <input placeholder="請輸入常用郵箱地址" v-model="result.email" type="email" name="email" class="inputText">
+                                <input placeholder="Harap masukkan alamat email umum" v-model="result.email" type="email" name="email" class="inputText">
                             </div>
                         </label>
                     </div>
                     <div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
-                                <div class="cell fixed">詳細地址</div>
+                                <div class="cell fixed">Alamat terinci</div>
                             </div>
                             <div class="cell" id="province">
                                 <select name="province">
-                                    <option value="3409" selected> 台灣</option>
+                                    <option value="3409" selected> Indonesia</option>
                                 </select>
                             </div>
                         </label>
@@ -119,21 +119,21 @@
                                 <div class="cell fixed"></div>
                             </div>
                             <div class="cell">
-                                <input v-model="result.address" required="required" type="text" name="address" placeholder="重要 某市+某區+街道門牌信息" class="inputText">
+                                <input v-model="result.address" required="required" type="text" name="address" placeholder="Informasi Penting tentang kota tertentu + nomor kabupaten + jalan tertentu" class="inputText">
                             </div>
                         </label>
                     </div>
                     <div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
-                                <div class="cell fixed">郵編</div>
+                                <div class="cell fixed">kode pos</div>
                             </div>
                             <div class="cell">
                                 <input v-model="result.postcode" type="text" name="postal"  class="inputText">
                             </div>
                         </label>
                     </div>
-                    <div class="buy-single-row label-input">
+                    <!--<div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
                                 <div class="cell fixed">付款方式</div>
@@ -143,11 +143,11 @@
 
                             </div>
                         </label>
-                    </div>
+                    </div>-->
                     <div class="buy-single-row label-input">
                         <label>
                             <div class="input-label">
-                                <div class="cell fixed">留言</div>
+                                <div class="cell fixed">Papan pesan</div>
                             </div>
                             <div class="cell" style="line-height: 18px;">
                                 <textarea v-model="result.remark" placeholder="" name="remark" class="text_area" rows="1" style="padding-top:17px;"></textarea>
@@ -157,7 +157,8 @@
                 </div>
                 <!--  -->
                 <div style="padding: 15px; background: #fff;font-size: 14px;color: #666;text-align: left;margin-top: 10px; margin-bottom: 20px;">
-                    溫馨提示：支持貨到付款+免郵費+7天鑒賞期！收到貨有任何疑問請聯繫我們在線客服! 也可隨時聯繫:<a href="mailto:service@azonebuy.com">service@azonebuy.com</a>。同時請附上您的姓名及聯繫方式及訂單編號在郵件當中，以便我們能快速的給您及時處理，祝您購物愉快！！！
+                    Kiat: Dukung cash on delivery + ongkos kirim gratis + 7 hari periode penghargaan! Jika Anda memiliki pertanyaan tentang menerima barang, silakan hubungi layanan pelanggan online kami! Anda juga dapat menghubungi kapan saja::<a href="mailto:service@azonebuy.com">service@azonebuy.com</a>.
+                    Harap lampirkan nama Anda dan informasi kontak dan nomor pesanan di surat sehingga kami dapat segera menanganinya untuk Anda. Saya harap Anda senang berbelanja! ! !
                 </div>
                 <!--  -->
 
@@ -166,14 +167,14 @@
                 <!--  -->
                 <footer class="m-orderFt">
                     <div class="actualPrice">
-                        <label class="label">商品合計:&nbsp;</label>
+                        <label class="label">Total barang dagangan:&nbsp;</label>
                         <span class="value">
                             <span id="price"></span>
                             <input type="hidden" name="zfbprice" value="20889">
                             <input type="hidden" name="price" value="" readonly="" class="value" style="width:80px;border: none;text-align: center;">{{result.num*result.price}}元<span id="zfbyh"></span>
                         </span>
                     </div>
-                    <button class="btn w-button" type="submit" name="Submit" value="立即購買">立即購買</button>
+                    <button class="btn w-button" type="submit" name="Submit" value="Beli sekarang">Beli sekarang</button>
                 </footer>
             </form>
             <div style="clear:both;"></div>

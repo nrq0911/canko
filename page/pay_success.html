@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>下單完成</title>
+    <title>Penyelesaian pesanan</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html">
@@ -14,17 +14,17 @@
         <div class="m-topBar">
             <a class="goback" href="./index.html"></a>
             <div style="width: 100%;">
-                <div class="title">訂單詳情</div>
+                <div class="title">Detail pesanan</div>
             </div>
         </div>
     </div>
     <div class="m-orderItem">
         <div class="row-1">
             <div>
-                <span class="tips_orderid">訂單時間 :&nbsp;&nbsp;&nbsp;</span>{{result.createTime}}
+                <span class="tips_orderid">Waktu pemesanan:&nbsp;&nbsp;&nbsp;</span>{{result.createTime}}
             </div>
             <div>
-                <span class="tips_orderid">訂單編號 :&nbsp;&nbsp;&nbsp;</span>{{result.id}}
+                <span class="tips_orderid">Waktu pemesanan:&nbsp;&nbsp;&nbsp;</span>{{result.id}}
             </div>
         </div>
         <div class="row-2">
@@ -34,7 +34,7 @@
             <div class="goodInfo f-fl">
                 <div class="goodName" style="width: 350px;">{{result.spec}}</div>
                 <div class="goodNum"></div>
-                <div class="goodName">NT${{result.money}}
+                <div class="goodName">Rp${{result.money}}
                 </div>
             </div>
             <div class="goodStatus f-fr">
@@ -45,27 +45,27 @@
             </div>
         </div>
     </div>
-    <div class="timetips">服務時間 :  09:00 - 22:00</div>
+    <div class="timetips">Waktu pemesanan:  09:00 - 22:00</div>
     <div class="w-tips">
         <a href="javascript:void(0);" class="w-button w-button-block btn-comment kefu">
-            <i class="u-icon u-icon-detail-kefu"></i>在線客服
+            <i class="u-icon u-icon-detail-kefu"></i>Layanan pelanggan online
         </a>
     </div>
     <div class="m-orderItem">
         <div class="row-1">
             <div>{{result.name}}  &nbsp;&nbsp;&nbsp;{{result.tel}}</div>
-            <div>台灣   {{result.address}} </div>
+            <div>Indonesia   {{result.address}} </div>
         </div>
         <div class="row-2">
             <div>
-                <span class="tips">付款方式:  </span>貨到付款</div>
+                <span class="tips">Metode pembayaran:  </span>Uang muka pengiriman</div>
             <div>
-                <span class="tips">商品合計:  </span>NT${{result.money}}</div>
+                <span class="tips">Total barang dagangan:  </span>Rp${{result.money}}</div>
             <div>
-                <span class="tips">運費:  </span>NT$0.00</div>
+                <span class="tips">Pengangkutan:  </span>Rp$0.00</div>
         </div>
         <div class="row-2 red">
-            <span class="tipred">實付: </span>NT${{result.money}}
+            <span class="tipred">Membayar: </span>Rp${{result.money}}
         </div>
     </div>
 </div>

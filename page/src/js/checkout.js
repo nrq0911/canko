@@ -40,12 +40,12 @@ $(document).ready(function(){
     quotes = new Array(Cjs.url.getParamByName('spec'));
 
     marquee = new Array(
-        "<p><span>[最新購買]：</span>張**（095***6831）在1分鐘前訂購了"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
-        "<p><span>[最新購買]：</span>李**（093***1685）在3分鐘前訂購了"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
-        "<p><span>[最新購買]：</span>趙**（091***8603）在5分鐘前訂購了"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
-        "<p><span>[最新購買]：</span>劉**（093***3943）在2分鐘前訂購了"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
-        "<p><span>[最新購買]：</span>張**（098***5500）在4分鐘前訂購了"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
-        "<p><span>[最新購買]：</span>王**（092***0214）在6分鐘前訂購了"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>"
+        "<p><span>[Pembelian terbaru]：</span>A**（095***6831）Dipesan 1 menit yang lalu"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
+        "<p><span>[Pembelian terbaru]：</span>G**（093***1685）Dipesan 3 menit yang lalu"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
+        "<p><span>[Pembelian terbaru]：</span>S**（091***8603）Dipesan 5 menit yang lalu"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
+        "<p><span>[Pembelian terbaru]：</span>Z**（093***3943）Dipesan 2 menit yang lalu"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
+        "<p><span>[Pembelian terbaru]：</span>T**（098***5500）Dipesan 4 menit yang lalu"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>",
+        "<p><span>[Pembelian terbaru]：</span>W**（092***0214）Dipesan 6 menit yang lalu"+quotes[Math.floor((Math.random()*quotes.length))]+" <font color='#FF0000'>√</font></p>"
     );
     wfgdaa = 0;
     wfgdbb = 1;
@@ -114,16 +114,16 @@ function postcheck(){
 
     try{
         if (document.form.name.value==""){
-            alert('請填寫姓名！');
+            alert('Harap isi namamu!');
             document.form.name.focus();
             return false;
         }
-        var name = /^[a-zA-Z\u4e00-\u9fa5\s]{2,}$/;
+        /*var name = /^[a-zA-Z\u4e00-\u9fa5\s]{2,}$/;
         if (!name.test(document.form.name.value)){
             alert('姓名格式不正確，請重新填寫！');
             document.form.name.focus();
             return false;
-        }
+        }*/
     }
     catch(ex){
     }
@@ -143,19 +143,19 @@ function postcheck(){
     }
     try{
         if (document.form.mob.value==""){
-            alert('請填寫手機號碼！');
+            alert('Harap isi nomor ponsel Anda!');
             document.form.mob.focus();
             return false;
         }
         switch(_region){
-            case "台灣":
+            case "a":
                 if (/^09/.test(document.form.mob.value) && !/^\d{10}$/.test(document.form.mob.value)) {
-                    alert('手機號碼格式不正確，請重新填寫！');
+                    alert('Format nomor ponsel salah. Silakan masukkan kembali!');
                     document.form.mob.focus();
                     return false;
                 }
                 if (!/^0\d{6,10}/.test(document.form.mob.value)) {
-                    alert('手機號碼格式不正確，請重新填寫！');
+                    alert('Format nomor ponsel salah. Silakan masukkan kembali!');
                     document.form.mob.focus();
                     return false;
                 }
@@ -169,7 +169,7 @@ function postcheck(){
     }
     try{
         if (document.form.province.value==""){
-            alert('请选择所在地区！');
+            alert('Silakan pilih area Anda!');
             document.form.province.focus();
             return false;
         }
@@ -179,7 +179,7 @@ function postcheck(){
 
     try{
         if (document.form.address.value==""){
-            alert('请填写详细地址！');
+            alert('Silakan isi alamat detailnya!');
             document.form.address.focus();
             return false;
         }
