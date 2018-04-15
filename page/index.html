@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <meta http-equiv="CoRpeRp-Type" coRpeRp="text/html; charset=UTF-8">
-      <meta coRpeRp="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
-      <meta coRpeRp="yes" name="apple-mobile-web-app-capable">
-      <meta coRpeRp="yes" name="apple-touch-fullscreen">
-      <meta coRpeRp="black" name="apple-mobile-web-app-status-bar-style">
-      <meta coRpeRp="320" name="MobileOptimized">
-      <meta coRpeRp="telephone=no" name="format-detection">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+      <meta content="yes" name="apple-mobile-web-app-capable">
+      <meta content="yes" name="apple-touch-fullscreen">
+      <meta content="black" name="apple-mobile-web-app-status-bar-style">
+      <meta content="320" name="MobileOptimized">
+      <meta content="telephone=no" name="format-detection">
       <title>{{result.title}}</title>
-      <meta name="keywords" coRpeRp={{result.title}} />
-      <meta name="description" coRpeRp={{result.title}} />
+      <meta name="keywords" content={{result.title}} />
+      <meta name="description" content={{result.title}} />
       <link rel="stylesheet" href="./src/css/reset.css" />
       <script src="./src/js/cjs.js"></script>
    </head>
@@ -21,9 +21,9 @@
       <script src="./src/js/jquery-2.2.3.min.js"></script>
       <script src="./src/js/jquery.lazyload.js"></script>
       <!--/page-->
-      <div id="coRpeRpPage" style="display: none;">
-         <section id="page-index" class="coRpainer">
-            <div class="swiper-coRpainer swiper-coRpainer-horizoRpal swiper-coRpainer-autoheight">
+      <div id="contentPage" style="display: none;">
+         <section id="page-index" class="container">
+            <div class="swiper-container swiper-container-horizoRpal swiper-container-autoheight">
                <div class="swiper-wrapper" style="height: 477px; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                   <div class="swiper-slide swiper-slide-active" style="width: 375px;" v-for="(val,index) in result.carouselUrl">
                      <img width="100%" :src="val">
@@ -51,7 +51,7 @@
                         <span style="width: 40px;">
                      <label style="width: 40px;">Diskon</label>
                      <label style="width: 40px;">
-                     {{result.discouRp}}
+                     {{result.discount}}
                      </label>
                      </span>
                         <span>
@@ -67,10 +67,10 @@
                      </div>
                      <div class="i-p-b" style="text-align: left;">
                         <span class="soldPart">Volume penjualan<span id="soldNum">{{result.salesVolume}}</span>item</span>
-                        <span class="perceRpBar" :data-value="result.salesVolume">
+                        <span class="percentBar" :data-value="result.salesVolume">
                         <span id="progress" style="width: 90%;"></span>
                         </span>
-                        <span id="perceRpNum">90%</span>
+                        <span id="percentNum">90%</span>
                      </div>
                      <div class="i-p-m buyinfo_post" style="text-align: left;">
                         <span class="flag1">Penjualan kilat</span>
@@ -82,7 +82,7 @@
                   <div class="specSelect">
                      <div class="m-listItem" id="val-sel">
                         <div class="f-vc">
-                           <div class="inner"><span class="it" style="foRp-weight:normal;">Pilih spesifikasi produk</span></div>
+                           <div class="inner"><span class="it" style="font-weight:normal;">Pilih spesifikasi produk</span></div>
                         </div>
                         <i class="icon u-icon u-address-right"></i>
                      </div>
@@ -94,22 +94,22 @@
                <div class="line"></div>
             </div>
             <!--  -->
-            <div class="product-info" style="text-align: ceRper;">
+            <div class="product-info" style="text-align: center;">
                <p v-if="result.video">
-                  <video class="edui-upload-video  vjs-default-skin video-js" coRprols="" preload="none" width="420" height="280" :src="result.video" data-setup="{}" poster="./src/images/videoPlay.jpg">
+                  <video class="edui-upload-video  vjs-default-skin video-js" controls="" preload="none" width="420" height="280" :src="result.video" data-setup="{}" poster="./src/images/videoPlay.jpg">
                      <source :src="result.video" type="video/mp4">
                   </video>
                </p>
-               <p v-for="(val,index) in result.goodsInformation" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); foRp-family: " helvetica="" microsoft="" foRp-size:="" white-space:="" background-color:="" text-align:="">
-               <span style="color: rgb(255, 0, 0); background-color: rgb(255, 255, 0); foRp-size: 36px;">
+               <p v-for="(val,index) in result.goodsInformation" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: " helvetica="" microsoft="" font-size:="" white-space:="" background-color:="" text-align:="">
+               <span style="color: rgb(255, 0, 0); background-color: rgb(255, 255, 0); font-size: 36px;">
                {{val}}
                </span>
                </p>
                <p v-for="(val,index) in result.goodsImages">
                   <img class="lazy" width="100%" height="auto" :data-original="val" :title="result.title" :src="val" style="display: block;">
                </p>
-               <p v-for="(val,index) in result.buyInformation" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); foRp-family: " helvetica="" microsoft="" foRp-size:="" white-space:="" background-color:="" text-align:="">
-               <span style="color: rgb(255, 0, 0); background-color: rgb(255, 255, 0); foRp-size: 36px;">
+               <p v-for="(val,index) in result.buyInformation" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: " helvetica="" microsoft="" font-size:="" white-space:="" background-color:="" text-align:="">
+               <span style="color: rgb(255, 0, 0); background-color: rgb(255, 255, 0); font-size: 36px;">
                {{val}}
                </span>
                </p>
@@ -131,7 +131,7 @@
             </div>
             <!--  -->
             <footer class="footer">
-               <a href="javascript:;" class="left" onclick="documeRp.documeRpElemeRp.scrollTop = 0"></a>
+               <a href="javascript:;" class="left" onclick="document.documentElement.scrollTop = 0"></a>
                <div class="right">
                   <div class="m-table">
                      <div class="tr">
@@ -144,7 +144,7 @@
             </footer>
             <!--  -->
          </section>
-         <section id="page-order" class="coRpainer">
+         <section id="page-order" class="container">
             <div style="margin-bottom: 60px;" id="ui-paramselect">
                <div class="dt-paramselect">
                   <form id="form" name="form" method="post" action="javascript:;" onsubmit="return postcheckGuige()">
@@ -158,7 +158,7 @@
                         <div class="right f-fl">
                            <div class="con" style="padding-top:5px;">
                               <p class="price">
-                                 <span>Harga：</span><span class="money">Rp$ <span curreRpprice="">{{result.marketPrice}}</span></span>
+                                 <span>Harga：</span><span class="money">Rp$ <span currentprice="">{{result.marketPrice}}</span></span>
                               </p>
                               <p class="sku">
                                  <span style="display: inline-block;">Nama produk：</span>
@@ -191,7 +191,7 @@
                      <div id="product_attr">
                         <section data-loopindex="1" style="display: block">
                            <div class="title_ac">
-                              <h5 style="color: #333;foRp-weight: bold;">
+                              <h5 style="color: #333;font-weight: bold;">
                                  <em>*</em>{{firstLevelSpec}},{{secondLevelSpec}}
                               </h5>
                            </div>
@@ -208,7 +208,7 @@
                            <div class="m-selnum dr">
                               <div onclick="minnumber()" class="less z-dis"></div>
                               <div class="textWrap">
-                                 <input type="text" class="text numbertext form-coRprol" value="1" name="num" id="num" onblur="inputnumber();">
+                                 <input type="text" class="text numbertext form-control" value="1" name="num" id="num" onblur="inputnumber();">
                               </div>
                               <div onclick="addnumber()" class="more"></div>
                            </div>
