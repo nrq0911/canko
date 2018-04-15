@@ -113,10 +113,10 @@ li{list-style:none;}
 #POP800_INIT_DIV{display: none}
 #POP800_PANEL_DIV{display: none}
 #POP800_LEAVEWORD_DIV{display: none}
-.tips{color: #999;width: 80px;display: inline-block;}
+.tips{color: #999;width: 190px;display: inline-block;}
 .tips_orderid{color: #999;display: inline-block;margin-right: 10px;}
 .red{color: #b4282d;font-size: 18px;}
-.tipred{display: inline-block;width: 80px;}
+.tipred{display: inline-block;width: 100px;}
 a.kefu{color: #333;background-color: #fff;border:1px solid #d7d7d7;border-radius: 4px;padding: 5px 25px;}
 .w-tips{padding: 10px;background-color: #fff;}
 .w-tips a:link,.w-tips a:visited,.w-tips  a:hover,.w-tips  a:active{background-color: #f4f4f4;border:1px solid #f4f4f4;color: #333;}

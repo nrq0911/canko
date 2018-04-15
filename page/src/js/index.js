@@ -99,7 +99,7 @@ $(function(){
              var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
              var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
              var cc = document.getElementById(divname);
-             cc.innerHTML ="<span id='h'>"+0+hour+"</span>"+"<span class='colon'>時</span>"+"<span id='m'>"+minute+"</span>"+"<span class='colon'>分</span>"+"<span id='s'>"+second+"</span>"+"<span class='colon'>秒</span>";
+             cc.innerHTML ="<span id='h'>"+0+hour+"</span>"+"<span class='colon'>jam</span>"+"<span id='m'>"+minute+"</span>"+"<span class='colon'>menit</span>"+"<span id='s'>"+second+"</span>"+"<span class='colon'>detik</span>";
          }
          window.setInterval(function(){ShowCountDown(2018,4,20,'timer');}, interval)
 
